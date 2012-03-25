@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+<language name="holder for library settings">
+
+</language>
+<language name="Assembly">
+
+</language>
+<language name="GNU C++">
+
+</language>
+<language name="GNU C">
+<includepath>C:\devkitPro\libnds\include</includepath>
+<includepath>C:\devkitPro\devkitARM\arm-eabi\include</includepath>
+
+</language>
+<language name="Fortran">
+
+</language>
+</section>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+<language name="holder for library settings">
+
+</language>
+<language name="Assembly">
+
+</language>
+<language name="GNU C++">
+
+</language>
+<language name="GNU C">
+<macro>
+<name>ARM9</name><value/>
+</macro>
+
+</language>
+<language name="Fortran">
+
+</language>
+</section>
+</cdtprojectproperties>
