@@ -13,7 +13,7 @@ En Window > Preferences > Team > Git > Configuration > Pestaña "User settings",
 > user.email --> [Tu e-mail]
 > github.user --> [Nombre de cuenta GitHub.com]
 > github.token --> [API Token de cuenta GitHub.com] (ver https://github.com/settings/admin)
-Guardar los cambios clickando "Apply"
+Guardar los cambios haciendo click en "Apply"
   
 ### Configuración del proyecto ###
 + Importar el proyecto a Eclipse desde Git, lanzar el "New Project Wizard" y seleccionando Makefile con código existente en C
