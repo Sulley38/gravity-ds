@@ -1,9 +1,7 @@
 
-Gravity DS
-==========
+# Gravity DS #
 
-Proyecto de EC
---------------
+## Proyecto de EC ##
 
 ### Prerrequisitos a instalar ###
 + EGit: http://download.eclipse.org/egit/updates
