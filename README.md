@@ -1,9 +1,7 @@
 
-Gravity DS
-==========
+# Gravity DS #
 
-Proyecto de EC
---------------
+## Proyecto de EC ##
 
 ### Prerrequisitos a instalar ###
 + EGit: http://download.eclipse.org/egit/updates
@@ -11,10 +9,10 @@ Proyecto de EC
 
 ### Configuración de EGit ###
 En Window > Preferences > Team > Git > Configuration > Pestaña "User settings", añadir estas 4 entradas:
-* user.name -> [Nombre Apellido]
-* user.email -> [Tu e-mail]
-* github.user -> [Nombre de cuenta GitHub.com]
-* github.token -> [API Token de cuenta GitHub.com] (ver https://github.com/settings/admin)
+> user.name --> [Nombre Apellido]
+> user.email --> [Tu e-mail]
+> github.user --> [Nombre de cuenta GitHub.com]
+> github.token --> [API Token de cuenta GitHub.com] (ver https://github.com/settings/admin)
 Guardar los cambios clickando "Apply"
   
 ### Configuración del proyecto ###
