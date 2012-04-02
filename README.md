@@ -34,9 +34,9 @@ En Project > Properties > Path and Symbols > Import Settings, seleccionar el arc
 
 ### Trabajar con los repositorios ###
 Como ya sabréis, cada uno de nosotros accede a 2 repositorios: local (en nuestro ordenador, cada uno el suyo) y remoto (en GitHub, común para los tres).  
-Las acciones que vamos a usar son las siguientes:
+Las acciones que vamos a usar son las siguientes:  
 + **Add to index**: Cuando queráis añadir un archivo nuevo al repositorio, lo primero es añadirlo al índice.
 + **Commit**: Es guardar los cambios que has hecho en el repositorio local. Hay que escribir una descripción de lo que se ha hecho. No conviene hacerlo cada 5 minutos, sino cuando terminas de hacer algo.
-+ **Push**: Subir los cambios que has hecho al repositorio remoto, de modo que los demás podamos recibirlos. Hay que asegurarse de que tienes en el local la última versión del remoto, de lo contrario, dará error `non fast forward` y primero habrá que hacer *pull*.
-+ **Pull**: Bajarse los últimos cambios que hayan hecho los demás en el repositorio remoto al local.
++ **Push**: Subir los cambios que has hecho al repositorio remoto, de modo que los demás podamos recibirlos. Hay que asegurarse de que tienes en el local la última versión del remoto, de lo contrario, dará `error: non fast forward` y primero habrá que hacer *pull*.
++ **Pull**: Bajarse los últimos cambios que hayan hecho los demás en el repositorio remoto al local.  
 Todas ellas se realizan desde Eclipse haciendo click con el botón derecho en la carpeta del proyecto > Team.  
