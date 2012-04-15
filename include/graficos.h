@@ -1,5 +1,2 @@
-/* Definir el sistema de vÃ­deo */
+/* Definir el sistema de vídeo */
 extern void initVideo();
-
-
-

@@ -5,24 +5,24 @@ defines.h
 #include <nds.h>
 #include <stdio.h>
 
-//AquÃ­ se definen los registros del gestor de interrupciones
+//Aquí se definen los registros del gestor de interrupciones
 
 #define IME		(*(vuint32*)0x04000208) //Interrupt Master Enable -- Habilita o deshabilita todas las interrupciones
 #define IE		(*(vuint32*)0x04000210) //Interrupt Enable -- Activa o desactiva las interrupciones una a una
-#define IF		(*(vuint32*)0x04000214) //Interrupt Flag -- Guarda las peticiones de interrupciÃ³n
+#define IF		(*(vuint32*)0x04000214) //Interrupt Flag -- Guarda las peticiones de interrupción
 
-// AquÃ­ se definen algunas funciones para el tratamiento de las interrupciones
+// Aquí se definen algunas funciones para el tratamiento de las interrupciones
 #define EnableInts() REG_IME=1 //habilita todas las interrupciones
 #define DisableInts() REG_IME=0 //deshabilita todas las interrupciones
 
-// AquÃ­ se definen los registros del teclado 
+// Aquí se definen los registros del teclado 
 #define TECLAS_DAT	(*(vu16*)0x4000130) //registro de datos del teclado
 #define TECLAS_CNT	(*(vu16*)0x4000132) //registro de control del teclado
 
-// AquÃ­ se definen los registros del temporizador
+// Aquí se definen los registros del temporizador
 #define TIMER0_CNT   (*(vuint16*)0x04000102) //registro de control del temporizador
-// El temporizador se activa poniendo un 1 en el 7Âº bit.
-// El temporizador interrumpirÃ¡ al desbordarse el contador, si hay un 1 en el 6Âº bit.
+// El temporizador se activa poniendo un 1 en el 7º bit.
+// El temporizador interrumpirá al desbordarse el contador, si hay un 1 en el 6º bit.
 // Los dos bits de menos peso indican lo siguiente:
 //			00 frecuencia 33554432 hz
 //			01 frecuencia 33554432/64 hz
@@ -30,9 +30,9 @@ defines.h
 //			11 frecuencia 33554432/1024 hz
 
 #define TIMER0_DAT    (*(vuint16*)0x04000100) //registro de datos del temporizador
-// Se utiliza para indicar a partir de quÃ© valor tiene que empezar a contar
+// Se utiliza para indicar a partir de qué valor tiene que empezar a contar
 
-// Para no liarse con los nÃºmeros a cada teclas se le ha asignado un nombre
+// Para no liarse con los números a cada teclas se le ha asignado un nombre
 
 #define A			0 
 #define B			1
@@ -45,7 +45,7 @@ defines.h
 #define R			8 
 #define L			9
 
-// Para no liarse con los nÃºmeros a cada estado se le puede asignar un nombre
+// Para no liarse con los números a cada estado se le puede asignar un nombre
 
 #define INICIO			0
 //...

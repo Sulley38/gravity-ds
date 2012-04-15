@@ -2,7 +2,7 @@
 temporizadores.c
 -------------------------------------*/
 
-// aÃ±adir los includes que sean necesarios
+// añadir los includes que sean necesarios
 #include <nds.h>
 #include <stdio.h>
 
@@ -22,8 +22,8 @@ void DeshabilitarIntTemp()
 	//Para acabar, se habilitan todas las interrupciones
 }
 
-//Rutina de atenciÃ³n a la interrupciÃ³n del temporizador
+//Rutina de atención a la interrupción del temporizador
 void RutTenp()
 {
 	//...
-}	
+}

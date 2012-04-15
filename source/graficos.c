@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------
-Este cÃ³digo se ha implementado basÃ¡ndose en el ejemplo "Simple sprite demo" de 
+Este código se ha implementado basándose en el ejemplo "Simple sprite demo" de 
 dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
@@ -9,9 +9,9 @@ dovoto y otro de Jaeden Amero
 #include <unistd.h>
 #include "graficos.h"
 
-/* Definir el sistema de vÃ­deo */
+/* Definir el sistema de vídeo */
 void initVideo() {
-    /*  Mapear la memoria VRAM para mostrar grÃ¡ficos en las dos pantallas. */
+    /*  Mapear la memoria VRAM para mostrar gráficos en las dos pantallas. */
 
     vramSetMainBanks(VRAM_A_MAIN_BG_0x06000000,
                      VRAM_B_MAIN_BG_0x06020000,
@@ -21,13 +21,13 @@ void initVideo() {
     vramSetBankE(VRAM_E_MAIN_SPRITE);
     vramSetBankD(VRAM_D_SUB_SPRITE);
 
-    /*  Establecer el modo de vÃ­deo de la pantalla principal. */
-    videoSetMode(MODE_5_2D | // Establecer el modo grÃ¡fico 5
+    /*  Establecer el modo de vídeo de la pantalla principal. */
+    videoSetMode(MODE_5_2D | // Establecer el modo gráfico 5
                  DISPLAY_BG2_ACTIVE | // Activar el fondo 2
                  DISPLAY_BG3_ACTIVE); // Activar el fondo 3
 
-    /*  Establecer el modo de vÃ­deo de la pantalla secundaria. */
-    videoSetModeSub(MODE_5_2D | // Establecer el modo grÃ¡fico 5
+    /*  Establecer el modo de vídeo de la pantalla secundaria. */
+    videoSetModeSub(MODE_5_2D | // Establecer el modo gráfico 5
                     DISPLAY_BG3_ACTIVE); // Activar el fondo 3
 }
 

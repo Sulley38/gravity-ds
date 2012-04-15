@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------
-Este c√≥digo se ha implementado bas√°ndose en el ejemplo "Simple sprite demo" de 
+Este cÛdigo se ha implementado bas·ndose en el ejemplo "Simple sprite demo" de 
 dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
@@ -20,11 +20,11 @@ int main(void) {
 	/* Definir variables */	
 	touchPosition pos_pantalla;
 
-	/*  Poner en marcha el motor gr√°fico 2D. */
+	/*  Poner en marcha el motor gr·fico 2D. */
     powerOn(POWER_ALL_2D);
 
 	/*
-	*  Establecer la pantalla inferior como principal, inicializar el sistema gr√°fico
+	*  Establecer la pantalla inferior como principal, inicializar el sistema gr·fico
 	*  y configurar el sistema de fondos.
 	*/
 	lcdMainOnBottom();
@@ -43,18 +43,18 @@ int main(void) {
 	establecerPaletaPrincipal();
 	establecerPaletaSecundaria();
 
-	/* Para poder imprimir en pantalla (hacer trazas) hay que descomentar esta l√≠nea */
+	/* Para poder imprimir en pantalla (hacer trazas) hay que descomentar esta lÌnea */
 	//consoleDemoInit();
-	/* Una vez descomentada, no se ver√°n los gr√°ficos de la pantalla superior. */	
+	/* Una vez descomentada, no se ver·n los gr·ficos de la pantalla superior. */	
 
 	while(1) {
 
-		/* ¬øQu√© se est√° haciendo aqu√≠? -- Cambiar este texto por la explicaci√≥n */
+		/* øQuÈ se est· haciendo aquÌ? -- Cambiar este texto por la explicaciÛn */
 		touchRead(&pos_pantalla);
 		while(pos_pantalla.px==0 && pos_pantalla.py==0)
 			touchRead(&pos_pantalla);
 
-		/* Cada vez que se quiera mostrar un sprite en pantalla hay que hacer una funci√≥n de estas. */
+		/* Cada vez que se quiera mostrar un sprite en pantalla hay que hacer una funciÛn de estas. */
 	
 		oamSet(&oamMain, //main graphics engine context
 			0,           //oam index (0 to 127)  

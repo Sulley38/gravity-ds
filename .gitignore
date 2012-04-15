@@ -4,4 +4,5 @@
 /*.arm9
 /*.elf
 /*.nds
-build
+/build
+/NO$GBA_2.6a

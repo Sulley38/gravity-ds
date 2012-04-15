@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------
-Este c√≥digo se ha implementado bas√°ndose en el ejemplo "Simple sprite demo" de 
+Este cÛdigo se ha implementado bas·ndose en el ejemplo "Simple sprite demo" de 
 dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
@@ -28,27 +28,27 @@ void initSpriteMem() {
 	gfxSub = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 }
 
-/* Dentro de esta funci√≥n hay que definir el color con el que se mostrar√° cada uno de los 256 
+/* Dentro de esta funciÛn hay que definir el color con el que se mostrar· cada uno de los 256 
  * colores posibles en la pantalla principal. El 0 es transparente y los no definidos son negros.
  */
 void establecerPaletaPrincipal() {
 
-	SPRITE_PALETTE[1] = RGB15(31,0,0); // los pixels a 1 se mostrar√°n rojos
-	SPRITE_PALETTE[2] = RGB15(0,0,31); // los pixels a 2 se mostrar√°n azules
+	SPRITE_PALETTE[1] = RGB15(31,0,0); // los pixels a 1 se mostrar·n rojos
+	SPRITE_PALETTE[2] = RGB15(0,0,31); // los pixels a 2 se mostrar·n azules
 }
 
-/* Dentro de esta funci√≥n hay que definir el color con el que se mostrar√° cada uno de los 256 
+/* Dentro de esta funciÛn hay que definir el color con el que se mostrar· cada uno de los 256 
  * colores posibles en la pantalla secundaria. El 0 es transparente y los no definidos son negros.
  */
 void establecerPaletaSecundaria() {
 
-	SPRITE_PALETTE_SUB[1] = RGB15(0,31,0); // los pixels a 1 se mostrar√°n verdes
+	SPRITE_PALETTE_SUB[1] = RGB15(0,31,0); // los pixels a 1 se mostrar·n verdes
 }
 
 /* Dibujado de un Sprite de 16x16 pixels */
 /* Debido al funcionamiento de los bancos de memoria, las primeras cuatro filas 
  * forman el cuadrante superior izquiero, las siguientes, el cuadrante superior 
- * derecho, las siguientes el cuadrante inferior izquierdo y las √∫ltimas cuatro
+ * derecho, las siguientes el cuadrante inferior izquierdo y las ˙ltimas cuatro
  * filas, el cuadrante inferior derecho, como se muestra al lado.
  */
 u8 rombo[256] = 
