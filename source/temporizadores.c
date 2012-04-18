@@ -16,7 +16,7 @@ void HabilitarIntTemp()
 	DisableInts();
 
 	//Escribir un 1 en el bit correspondiente al temporizador del REG_IE
-	IE |= 1 << 3;
+	IE = IE | 1 << 3;
 
 	//Para acabar, se habilitan todas las interrupciones
 	EnableInts();
@@ -36,33 +36,43 @@ void DeshabilitarIntTemp()
 }
 
 //Establece la frecuencia del temporizador id a la indicada en interrupciones/seg
-void prepararTemporizador(short id, int frecuencia)
+void prepararTemporizador(uint8 id, int frecuencia)
 {
-	int div[4] = {1, 64, 256, 1024};
-	int latch = -1, i = 0;
+	int latch = -1;
 
-	while( latch < 0 ) {
-		if( i == 4 ) return; // Error
-		latch = 65532 - (1/frecuencia)*(33554432/div[i]);
-		i++;
+	latch = 65532 - (1/frecuencia)*33554432;
+	if( latch < 0 ) {
+		latch = 65532 - (1/frecuencia)*(33554432/64);
+		if( latch < 0 ) {
+			latch = 65532 - (1/frecuencia)*(33554432/256);
+			if( latch < 0 ) {
+				latch = 65532 - (1/frecuencia)*(33554432/1024);
+				if( latch < 0 ) {
+					iprintf( "No se puede contar a tan baja frecuencia\n" );
+					latch = 0;
+				}
+			}
+		}
 	}
 
 	TIMER0_DAT = latch;
-	TIMER0_CNT = TIMER0_CNT | 1 << 6 | 1 << 1 | 1 << 0;
+	iprintf( "Latch ajustado a %d\n\n", latch );
+	TIMER0_CNT = 3 | 1 << 6; // bits 0, 1 y 6 encendidos
 }
 
-void iniciarTemporizador(short id)
+void iniciarTemporizador(uint8 id)
 {
-	TIMER0_CNT = TIMER0_CNT | 1 << 7;
+	TIMER0_CNT = TIMER0_CNT | 1 << 7; // enciende bit 7
 }
 
-void pararTemporizador(short id)
+void pararTemporizador(uint8 id)
 {
-	TIMER0_CNT = TIMER0_CNT & ~(1 << 7);
+	TIMER0_CNT = TIMER0_CNT & ~(1 << 7); // apaga bit 7
 }
 
 //Rutina de atención a la interrupción del temporizador
 void intTemporizador()
 {
 	tiempo++;
+	iprintf( "%d ...\n", tiempo );
 }

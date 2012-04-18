@@ -118,6 +118,7 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@ && mkdir -p $(BINARIES) && mkdir -p $(BINARIES)/$(TEST)
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@for i in $(TESTFILES:.c=) ; do \
+		rm $(CURDIR)/$(BINARIES)/$(TEST)/$$i.nds ; \
 		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $$i.o ; \
 		export OFILES="$(subst main.o,$$i.o,$(OFILES))"; \
 		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $(CURDIR)/$(BINARIES)/$(TEST)/$$i.nds ; \
