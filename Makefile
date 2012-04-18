@@ -23,10 +23,12 @@ include $(DEVKITARM)/ds_rules
 #
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
+BINARIES	:=  bin
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	
 INCLUDES	:=	include
+TEST		:=  test
 GRAPHICS	:=	gfx
 AUDIO		:=	audio
 SOUNDBANK_NAME  :=	soundbank
@@ -67,9 +69,10 @@ LIBDIRS	:=	$(LIBNDS)
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
  
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
+export OUTPUT	:=	$(CURDIR)/$(BINARIES)/$(TARGET)
  
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
+			$(foreach dir,$(TEST),$(CURDIR)/$(dir)) \
 			$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
 			$(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir)) \
 			$(foreach dir,$(AUDIO),$(CURDIR)/$(dir))
@@ -77,8 +80,7 @@ export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
-SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
+TESTFILES	:=	$(foreach dir,$(TEST),$(notdir $(wildcard $(dir)/*.c)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*))) $(SOUNDBANK_NAME).bin
 PNGFILES	:=	$(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.png)))
 
@@ -98,9 +100,7 @@ endif
 
 export OFILES		:=	$(addsuffix .o,$(BINFILES)) \
 				$(PNGFILES:.png=.o) \
-				$(CPPFILES:.cpp=.o) \
-				$(CFILES:.c=.o) \
-				$(SFILES:.s=.o) \
+				$(CFILES:.c=.o)
 
 export AUDIOFILES	:=	$(foreach dir,$(AUDIO),$(notdir $(wildcard $(dir)/*)))
  
@@ -115,16 +115,22 @@ export LIBPATHS		:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
  
 #---------------------------------------------------------------------------------
 $(BUILD):
-	@[ -d $@ ] || mkdir -p $@
+	@[ -d $@ ] || mkdir -p $@ && mkdir -p $(BINARIES) && mkdir -p $(BINARIES)/$(TEST)
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@for i in $(TESTFILES:.c=) ; do \
+		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $$i.o ; \
+		export OFILES="$(subst main.o,$$i.o,$(OFILES))"; \
+		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $(CURDIR)/$(BINARIES)/$(TEST)/$$i.nds ; \
+		export OFILES="$(subst $$i.o,main.o,$(OFILES))"; \
+	done;
  
+ 		
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET).arm9
- 
- 
-#---------------------------------------------------------------------------------
+	@rm -fr $(BUILD) $(BINARIES)
+	
+	
 else
  
 #---------------------------------------------------------------------------------

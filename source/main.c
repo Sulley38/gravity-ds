@@ -4,9 +4,9 @@ dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
 #include <nds.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <unistd.h>
 
 #include "graficos.h"
 #include "fondos.h"

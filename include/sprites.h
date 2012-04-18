@@ -17,5 +17,4 @@ extern void establecerPaletaPrincipal();
 extern void establecerPaletaSecundaria();
 
 /* Para guardar los sprites en memoria y luego poder usarlos.*/
-
 extern void guardarSpritesEnMemoria();

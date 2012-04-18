@@ -89,7 +89,3 @@ void guardarSpritesEnMemoria(){
 		gfx3[i] = rombo[i*2] | (rombo[(i*2)+1]<<8);
 	}
 }
-
-
-
-

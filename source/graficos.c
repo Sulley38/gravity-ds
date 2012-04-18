@@ -30,6 +30,3 @@ void initVideo() {
     videoSetModeSub(MODE_5_2D | // Establecer el modo gráfico 5
                     DISPLAY_BG3_ACTIVE); // Activar el fondo 3
 }
-
-
-

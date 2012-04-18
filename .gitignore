@@ -1,7 +1,5 @@
 /.cproject
 /.project
 /.settings
-/*.arm9
-/*.elf
-/*.nds
+/bin
 /build
