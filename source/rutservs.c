@@ -6,6 +6,7 @@ rutservs.c
 #include <nds.h>
 #include <stdio.h>
 #include "teclado.h"
+#include "temporizadores.h"
 #include "defines.h"
 
 //Este procedimiento inicializa la tabla de interrupciones para que el gestor de interrupciones sepa
@@ -13,5 +14,11 @@ rutservs.c
 //aquí donde se configuran los registros de control de los periféricos.
 void interrupciones()
 {
-	//...		
+	irqSet(IRQ_KEYS,RutTec);
+	irqSet(IRQ_TIMER0,intTemporizador);
+
+	HabilitarIntTemp();
+	HabilitarIntTec();
+
+	prepararTemporizador(1);
 }

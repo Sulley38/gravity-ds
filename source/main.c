@@ -4,9 +4,6 @@ dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
 #include <nds.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <unistd.h>
 
 #include "graficos.h"
 #include "fondos.h"
@@ -30,6 +27,9 @@ int main(void) {
 	lcdMainOnBottom();
 	initVideo();
 	initFondos();
+
+	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
+	interrupciones();
 
 	/* Mostrar fondos en pantalla. */
 	mostrarFondoEstrellado();
