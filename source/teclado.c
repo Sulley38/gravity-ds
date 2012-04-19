@@ -10,13 +10,6 @@ teclado.c
 
 int tecla; // variable para guardar el valor de la tecla pulsada
 
-//Esta función tiene que devolver el valor de la tecla pulsada
-int TeclaPulsada() 
-{
-	//...
-	return 0;
-}
-
 //Este procedimiento habilita las interrupciones del teclado
 void HabilitarIntTec()
 {
@@ -48,7 +41,7 @@ void RutTec()
 		iprintf( "START\n");
 	}
 	else{
-	iprintf( " A | B\n");
+		iprintf( " A | B\n");
 	}
-		
+	DeshabilitarIntTec();
 }
