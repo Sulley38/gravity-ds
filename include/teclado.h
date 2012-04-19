@@ -14,4 +14,4 @@ extern void HabilitarIntTec();
 extern void DeshabilitarIntTec();
 
 //Rutina de atención a la interrupción del teclado
-extern void IntTec();
+extern void RutTec();
