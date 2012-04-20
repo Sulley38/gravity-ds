@@ -81,8 +81,12 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 TESTFILES	:=	$(foreach dir,$(TEST),$(notdir $(wildcard $(dir)/*.c)))
-BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*))) $(SOUNDBANK_NAME).bin
+BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*)))
 PNGFILES	:=	$(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.png)))
+
+ifneq  ($(strip $(AUDIOFILES)),)
+BINFILES += $(SOUNDBANK_NAME).bin
+endif
 
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
@@ -118,14 +122,13 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@ && mkdir -p $(BINARIES) && mkdir -p $(BINARIES)/$(TEST)
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@for i in $(TESTFILES:.c=) ; do \
-		rm $(CURDIR)/$(BINARIES)/$(TEST)/$$i.nds ; \
-		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $$i.o ; \
-		export OFILES="$(subst main.o,$$i.o,$(OFILES))"; \
-		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile $(CURDIR)/$(BINARIES)/$(TEST)/$$i.nds ; \
+		export OFILES="$(subst main.o,$$i.o,$(OFILES))" ; \
+		export OUTPUT="$(CURDIR)/$(BINARIES)/$(TEST)/$$i" ; \
+		make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile ; \
 		export OFILES="$(subst $$i.o,main.o,$(OFILES))"; \
 	done;
- 
- 		
+
+
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
@@ -140,6 +143,7 @@ else
 $(OUTPUT).nds	: 	$(OUTPUT).arm9
 $(OUTPUT).arm9	:	$(OUTPUT).elf
 $(OUTPUT).elf	:	$(OFILES)
+
 
 
 #---------------------------------------------------------------------------------
@@ -169,12 +173,13 @@ $(OUTPUT).elf	:	$(OFILES)
 # mmutil takes all audio files in the audio folder and puts them into a
 # soundbank file.
 #---------------------------------------------------------------------------------
+ifneq  ($(strip $(AUDIOFILES)),)
 $(SOUNDBANK_NAME).bin : $(AUDIOFILES)
-#---------------------------------------------------------------------------------
 	@echo $(notdir $^)
 	@mmutil -d $^ -o$(SOUNDBANK_NAME).bin -h$(SOUNDBANK_NAME).h
+endif
 
- 
+#---------------------------------------------------------------------------------
 -include $(DEPSDIR)/*.d
  
 #---------------------------------------------------------------------------------------
