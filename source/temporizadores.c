@@ -2,7 +2,7 @@
 temporizadores.c
 -------------------------------------*/
 
-// aÃ±adir los includes que sean necesarios
+// añadir los includes que sean necesarios
 #include <nds.h>
 #include <stdio.h>
 #include "defines.h"
@@ -21,6 +21,7 @@ void resetearTiempo()
 {
 	tiempo = 0;
 }
+
 
 // Este procedimiento habilita las interrupciones del temporizador
 void HabilitarIntTemp()
@@ -48,6 +49,7 @@ void DeshabilitarIntTemp()
 	EnableInts();
 }
 
+
 // Establece la frecuencia del temporizador id a la indicada en interrupciones/seg
 void prepararTemporizador(int frecuencia)
 {
@@ -70,10 +72,10 @@ void prepararTemporizador(int frecuencia)
 			}
 		}
 	}
+
 	// Establece los registros
 	TIMER0_DAT = latch;
 	TIMER0_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
-	iprintf( "Latch ajustado a %d\nDividiendo la frecuencia al nivel %d\n---------\n", latch, divisor );
 }
 
 // Activa el temporizador
@@ -88,10 +90,9 @@ void pararTemporizador()
 	TIMER0_CNT = TIMER0_CNT & ~(1 << 7); // apaga bit 7
 }
 
-// Rutina de atencion a la interrupcion del temporizador
-// Hay que llamar a HabilitarIntTemp() primero, o no se tendrÃ¡n en cuenta estas interrupciones
+// Rutina de atencion a la interrupcion del temporizador 0
+// Hay que llamar a HabilitarIntTemp() primero, o no se tendrán en cuenta estas interrupciones
 void intTemporizador()
 {
 	tiempo++;
-	iprintf( "%d ...\n", tiempo );
 }

@@ -7,6 +7,7 @@ dovoto y otro de Jaeden Amero
 
 #include "graficos.h"
 #include "fondos.h"
+#include "rutservs.h"
 #include "sprites.h"
 #include "defines.h"
 
