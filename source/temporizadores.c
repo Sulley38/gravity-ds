@@ -2,14 +2,27 @@
 temporizadores.c
 -------------------------------------*/
 
-// añadir los includes que sean necesarios
+// aÃ±adir los includes que sean necesarios
 #include <nds.h>
 #include <stdio.h>
 #include "defines.h"
 
+// Variable de tiempo transcurrido
 int tiempo = 0;
 
-//Este procedimiento habilita las interrupciones del temporizador
+// Devuelve el tiempo que ha transcurrido de partida
+int obtenerTiempo()
+{
+	return tiempo;
+}
+
+// Pone el contador de tiempo a cero
+void resetearTiempo()
+{
+	tiempo = 0;
+}
+
+// Este procedimiento habilita las interrupciones del temporizador
 void HabilitarIntTemp()
 {
 	//Para ello primero se deshabilitan todas las interrupciones
@@ -22,7 +35,7 @@ void HabilitarIntTemp()
 	EnableInts();
 }		
 
-//Este procedimiento deshabilita las interrupciones del temporizador
+// Este procedimiento deshabilita las interrupciones del temporizador
 void DeshabilitarIntTemp()
 {
 	//Para ello primero se deshabilitan todas las interrupciones
@@ -35,18 +48,21 @@ void DeshabilitarIntTemp()
 	EnableInts();
 }
 
-//Establece la frecuencia del temporizador id a la indicada en interrupciones/seg
-void prepararTemporizador(uint8 id, int frecuencia)
+// Establece la frecuencia del temporizador id a la indicada en interrupciones/seg
+void prepararTemporizador(int frecuencia)
 {
-	int latch = -1;
-
+	int latch = -1, divisor = 0;
+	// Calcula el latch
 	latch = 65532 - (1/frecuencia)*33554432;
 	if( latch < 0 ) {
 		latch = 65532 - (1/frecuencia)*(33554432/64);
+		divisor = 1;
 		if( latch < 0 ) {
 			latch = 65532 - (1/frecuencia)*(33554432/256);
+			divisor = 2;
 			if( latch < 0 ) {
 				latch = 65532 - (1/frecuencia)*(33554432/1024);
+				divisor = 3;
 				if( latch < 0 ) {
 					iprintf( "No se puede contar a tan baja frecuencia\n" );
 					latch = 0;
@@ -54,23 +70,26 @@ void prepararTemporizador(uint8 id, int frecuencia)
 			}
 		}
 	}
-
+	// Establece los registros
 	TIMER0_DAT = latch;
-	iprintf( "Latch ajustado a %d\n\n", latch );
-	TIMER0_CNT = 3 | 1 << 6; // bits 0, 1 y 6 encendidos
+	TIMER0_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
+	iprintf( "Latch ajustado a %d\nDividiendo la frecuencia al nivel %d\n---------\n", latch, divisor );
 }
 
-void iniciarTemporizador(uint8 id)
+// Activa el temporizador
+void iniciarTemporizador()
 {
 	TIMER0_CNT = TIMER0_CNT | 1 << 7; // enciende bit 7
 }
 
-void pararTemporizador(uint8 id)
+// Desactiva el temporizador
+void pararTemporizador()
 {
 	TIMER0_CNT = TIMER0_CNT & ~(1 << 7); // apaga bit 7
 }
 
-//Rutina de atención a la interrupción del temporizador
+// Rutina de atencion a la interrupcion del temporizador
+// Hay que llamar a HabilitarIntTemp() primero, o no se tendrÃ¡n en cuenta estas interrupciones
 void intTemporizador()
 {
 	tiempo++;
