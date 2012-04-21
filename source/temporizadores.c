@@ -4,8 +4,8 @@ temporizadores.c
 
 // añadir los includes que sean necesarios
 #include <nds.h>
-#include <stdio.h>
 #include "defines.h"
+#include "temporizadores.h"
 
 // Variable de tiempo transcurrido
 int tiempo = 0;
@@ -50,7 +50,7 @@ void DeshabilitarIntTemp()
 }
 
 
-// Establece la frecuencia del temporizador id a la indicada en interrupciones/seg
+// Establece la frecuencia del temporizador 0 a la indicada en interrupciones/seg
 void prepararTemporizador(int frecuencia)
 {
 	int latch = -1, divisor = 0;
@@ -65,33 +65,34 @@ void prepararTemporizador(int frecuencia)
 			if( latch < 0 ) {
 				latch = 65532 - (1/frecuencia)*(33554432/1024);
 				divisor = 3;
-				if( latch < 0 ) {
-					iprintf( "No se puede contar a tan baja frecuencia\n" );
-					latch = 0;
-				}
 			}
 		}
 	}
 
-	// Establece los registros
-	TIMER0_DAT = latch;
-	TIMER0_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
+	if( latch < 0 ) {
+		// No se puede contar a la frecuencia indicada: no se activa el temporizador
+		DeshabilitarIntTemp();
+		TIMER0_CNT = 0;
+	} else {
+		// Establece los registros
+		TIMER0_DAT = latch;
+		TIMER0_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
+	}
 }
 
-// Activa el temporizador
+// Activa el temporizador 0
 void iniciarTemporizador()
 {
 	TIMER0_CNT = TIMER0_CNT | 1 << 7; // enciende bit 7
 }
 
-// Desactiva el temporizador
+// Desactiva el temporizador 0
 void pararTemporizador()
 {
 	TIMER0_CNT = TIMER0_CNT & ~(1 << 7); // apaga bit 7
 }
 
 // Rutina de atencion a la interrupcion del temporizador 0
-// Hay que llamar a HabilitarIntTemp() primero, o no se tendrán en cuenta estas interrupciones
 void intTemporizador()
 {
 	tiempo++;

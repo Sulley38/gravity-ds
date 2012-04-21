@@ -118,6 +118,7 @@ export LIBPATHS		:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 .PHONY: $(BUILD) clean
  
 #---------------------------------------------------------------------------------
+all: $(BUILD)
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@ && mkdir -p $(BINARIES) && mkdir -p $(BINARIES)/$(TEST)
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile

@@ -4,13 +4,9 @@ dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
 #include <nds.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "fondos.h"
 
 /* añadir aquí los includes para cada fondo. */
-
 #include "FondoEstrellado.h"
 
 /* Seleccionar un canal DMA para copiar a memoria las imágenes */

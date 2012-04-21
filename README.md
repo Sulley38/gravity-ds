@@ -28,8 +28,7 @@ Copiar la clave que aparece en la caja de texto, y pegarla en [tu cuenta](https:
 *De esta forma, tu ordenador queda asociado con la cuenta de GitHub por SSH*  
 
 ### Configuración del proyecto ###
-Importar el proyecto a Eclipse desde Git (File > Import > Git > URI - Dirección en GitHub), lanzar el "New Project Wizard" y seleccionar Makefile con código existente en C.  
-En Project > Properties > C/C++ Build > Behaviour > Build (Incremental build), cambiar 'all' por 'build' y guardar los cambios.  
+Importar el proyecto a Eclipse desde Git (File > Import > Git > URI - Dirección en GitHub), lanzar el "New Project Wizard" y seleccionar Makefile con código existente en C.   
 En Project > Properties > Path and Symbols > Import Settings, seleccionar el archivo 'config.xml' y aceptar.  
 Botón derecho en la carpeta en el Project Explorer > Index > Rebuild.
 

@@ -4,11 +4,8 @@ dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
 #include <nds.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "sprites.h"
 #include "defines.h"
+#include "sprites.h"
 
 u16* gfx;
 u16* gfx3;

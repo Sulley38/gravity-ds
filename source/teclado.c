@@ -6,7 +6,7 @@ teclado.c
 #include <nds.h>
 #include <stdio.h>
 #include "defines.h"
-#include "graficos.h"
+#include "teclado.h"
 
 int tecla; // variable para guardar el valor de la tecla pulsada
 

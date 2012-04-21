@@ -4,12 +4,11 @@ dovoto y otro de Jaeden Amero
 ---------------------------------------------------------------------------------*/
 
 #include <nds.h>
-
-#include "graficos.h"
-#include "fondos.h"
-#include "rutservs.h"
-#include "sprites.h"
 #include "defines.h"
+#include "fondos.h"
+#include "graficos.h"
+#include "interrupciones.h"
+#include "sprites.h"
 
 
 //---------------------------------------------------------------------------------
@@ -30,7 +29,7 @@ int main(void) {
 	initFondos();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
-	interrupciones();
+	rellenarTablaInt();
 
 	/* Mostrar fondos en pantalla. */
 	mostrarFondoEstrellado();
