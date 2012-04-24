@@ -43,10 +43,8 @@ int main(void) {
 	establecerPaletaPrincipal();
 	establecerPaletaSecundaria();
 
-	/* Para poder imprimir en pantalla (hacer trazas) hay que descomentar esta línea */
-	//consoleDemoInit();
-	/* Una vez descomentada, no se verán los gráficos de la pantalla superior. */	
-
+	/* Bucle principal */
+	int frame;
 	while(1) {
 
 		/* ¿Qué se está haciendo aquí? -- Cambiar este texto por la explicación */
@@ -114,6 +112,10 @@ int main(void) {
 			FALSE
 			);              
 		
+		/* Espera al siguiente fotograma */
+		frame = getFrames();
+		while( frame == getFrames() ) {}
+
 		oamUpdate(&oamMain);
 		oamUpdate(&oamSub);
 	}

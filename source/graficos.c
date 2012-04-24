@@ -6,6 +6,8 @@ dovoto y otro de Jaeden Amero
 #include <nds.h>
 #include "graficos.h"
 
+int frame = 0;
+
 /* Definir el sistema de vídeo */
 void initVideo() {
     /*  Mapear la memoria VRAM para mostrar gráficos en las dos pantallas. */
@@ -25,4 +27,21 @@ void initVideo() {
     /*  Establecer el modo de vídeo de la pantalla secundaria. */
     videoSetModeSub(MODE_5_2D | // Establecer el modo gráfico 5
                     DISPLAY_BG3_ACTIVE); // Activar el fondo 3
+}
+
+/* Pone a cero el contador de frames */
+void zeroFrames() {
+	frame = 0;
+}
+
+/* Devuelve los frames dibujados en lo que va de segundo */
+int getFrames() {
+	return frame;
+}
+
+/** Rutina de atención a las interrupciones de refresco vertical
+ * Por defecto, la consola envía una de estas interrupciones 60 veces por segundo (60 fps)
+ */
+void intVBlank() {
+	frame++;
 }
