@@ -5,6 +5,7 @@ temporizadores.c
 // añadir los includes que sean necesarios
 #include <nds.h>
 #include "defines.h"
+#include "graficos.h"
 #include "temporizadores.h"
 
 // Variable de tiempo transcurrido
@@ -96,4 +97,5 @@ void pararTemporizador()
 void intTemporizador()
 {
 	tiempo++;
+	zeroFrames();
 }
