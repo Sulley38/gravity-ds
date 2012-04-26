@@ -14,7 +14,6 @@ En Window > Preferences > Team > Git > Configuration > Pestaña "User settings", 
 1. user.name --> Nombre Apellido
 2. user.email --> Tu e-mail
 3. github.user --> Nombre de cuenta GitHub.com
-4. github.token --> [API Token](https://github.com/settings/admin) de cuenta GitHub.com
 
 Guardar los cambios clickando "Apply"
 

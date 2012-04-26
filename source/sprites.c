@@ -11,6 +11,8 @@ u16* gfx;
 u16* gfx3;
 u16* gfx2;
 u16* gfxSub;
+u16* cuadrado;
+u16* cuadrado2;
 
 /* Inicializar la memoria de Sprites. */
 void initSpriteMem() {
@@ -23,6 +25,8 @@ void initSpriteMem() {
 	gfx2 = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	gfx3 = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	gfxSub = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
+	cuadrado = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
+	cuadrado2 = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 }
 
 /* Dentro de esta función hay que definir el color con el que se mostrará cada uno de los 256 
@@ -84,5 +88,10 @@ void guardarSpritesEnMemoria(){
 		// el cuadrado de 16x16 pixels se guarda con los valores para dibujar un rombo 
 		// a partir del primer cuadrado en la memoria de sprites reservada a la pantalla principal	
 		gfx3[i] = rombo[i*2] | (rombo[(i*2)+1]<<8);
+
+	}
+	for(i = 0; i < 64 * 64 / 2; i++) {
+		cuadrado[i] = 1 | (1 << 8);
+		cuadrado2[i] = 2 | (2 << 8);
 	}
 }

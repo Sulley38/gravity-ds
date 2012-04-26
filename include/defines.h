@@ -47,10 +47,11 @@ defines.h
 
 // Para no liarse con los números a cada estado se le puede asignar un nombre
 
-#define INICIO			0
-//...
-
+#define MENU			0
+#define CUENTA_ATRAS	1
+#define AVANZAR_PERSONAJE	2
+#define PAUSA			3
+#define FIN				9
 
 // variables globales
-
-extern int ESTADO;
+int ESTADO;
