@@ -5,6 +5,7 @@ extern u16* gfxSub;
 extern u16* cuadrado;
 extern u16* cuadrado2;
 extern u16* corredorA;
+extern u16* corredorB;
 
 
 /* Inicializar la memoria de Sprites. */
