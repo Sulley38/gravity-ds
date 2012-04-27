@@ -60,6 +60,7 @@ int main(void) {
 		  break;
 		case PAUSA:
 			Pausar();
+		   break;
 		default:
 		  break;
 		}
