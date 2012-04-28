@@ -8,6 +8,8 @@ dovoto y otro de Jaeden Amero
 #include "sprites.h"
 
 int frame = 0;
+extern int distancia;
+extern int velocidad;
 
 /* Definir el sistema de vídeo */
 void initVideo() {
@@ -45,6 +47,7 @@ int getFrames() {
  */
 void intVBlank() {
 	frame++;
+	distancia = distancia + velocidad;
 }
 
 void dibujar_personaje(int x, int y, int invertido){

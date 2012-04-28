@@ -37,11 +37,5 @@ void DeshabilitarIntTec()
 //Rutina de atención a la interrupción del teclado
 void RutTec()
 {
-	if (TECLAS_DAT==1015){
-		iprintf( "START\n");
-	}
-	else{
-		iprintf( " A | B\n");
-	}
-	DeshabilitarIntTec();
+
 }

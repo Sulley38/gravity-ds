@@ -55,3 +55,5 @@ defines.h
 
 // variables globales
 int ESTADO;
+int distancia;
+int velocidad;
