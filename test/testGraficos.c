@@ -16,44 +16,9 @@ int main() {
 
 	/*Empieza lo mio*/
 	while(1) {
-		if(cuenta>3000){
-			oamSet(&oamMain, //main graphics engine context
-					0,           //oam index (0 to 127)
-					20, 20,   //x and y pixle location of the sprite
-					0,                    //priority, lower renders last (on top)
-					0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-					SpriteSize_32x32,
-					SpriteColorFormat_256Color,
-					corredorA,                  //pointer to the loaded graphics
-					-1,                  //sprite rotation data
-					FALSE,               //double the size when rotating?
-					FALSE,			//hide the sprite?
-					FALSE, FALSE, //vflip, hflip
-					FALSE	//apply mosaic
-					);
 
+		dibujar_personaje(20,100);
 
-		}
-		else{
-			oamSet(&oamMain, //main graphics engine context
-					0,           //oam index (0 to 127)
-					20, 20,   //x and y pixle location of the sprite
-					0,                    //priority, lower renders last (on top)
-					0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-					SpriteSize_32x32,
-					SpriteColorFormat_256Color,
-					corredorB,                  //pointer to the loaded graphics
-					-1,                  //sprite rotation data
-					FALSE,               //double the size when rotating?
-					FALSE,			//hide the sprite?
-					FALSE, FALSE, //vflip, hflip
-					FALSE	//apply mosaic
-					);
-		}
-		oamUpdate(&oamMain);
-		oamUpdate(&oamSub);
-		cuenta ++;
-		cuenta= cuenta%6000;
 	}
 
 	return 0;

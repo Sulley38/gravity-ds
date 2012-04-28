@@ -8,3 +8,5 @@ extern void zeroFrames();
 extern int getFrames();
 /* Atención a las interrupciones de refresco vertical */
 extern void intVBlank();
+/* Dibuja el personaje en el x,y que se indique */
+extern void dibujar_personaje(int x, int y);

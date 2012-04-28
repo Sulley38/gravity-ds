@@ -5,6 +5,7 @@ dovoto y otro de Jaeden Amero
 
 #include <nds.h>
 #include "graficos.h"
+#include "sprites.h"
 
 int frame = 0;
 
@@ -44,4 +45,25 @@ int getFrames() {
  */
 void intVBlank() {
 	frame++;
+}
+
+void dibujar_personaje(int x, int y){
+
+	oamSet(&oamMain, //main graphics engine context
+			0,           //oam index (0 to 127)
+			x, y,   //x and y pixle location of the sprite
+			0,                    //priority, lower renders last (on top)
+			0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+			SpriteSize_32x32,
+			SpriteColorFormat_256Color,
+			corredor[((frame%20)/5)],                  //pointer to the loaded graphics
+			-1,                  //sprite rotation data
+			FALSE,               //double the size when rotating?
+			FALSE,			//hide the sprite?
+			FALSE, FALSE, //vflip, hflip
+			FALSE	//apply mosaic
+			);
+	oamUpdate(&oamMain);
+
+
 }
