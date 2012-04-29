@@ -10,6 +10,7 @@ dovoto y otro de Jaeden Amero
 int frame = 0;
 extern int distancia;
 extern int velocidad;
+extern int cantidad_bloques;
 
 /* Definir el sistema de vídeo */
 void initVideo() {
@@ -70,7 +71,7 @@ void dibujar_personaje(int x, int y, int invertido){
 
 }
 
-void dibujar_bloques(int pos[3][2],int min,int max, int dist ){
+void dibujar_bloques(int pos[cantidad_bloques][2],int min,int max, int dist ){
 	int oam=1;
 	int i;
 	for (i=min;i<max;i++){

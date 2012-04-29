@@ -57,3 +57,5 @@ defines.h
 int ESTADO;
 int distancia;
 int velocidad;
+int personaje[2];
+int cantidad_bloques;
