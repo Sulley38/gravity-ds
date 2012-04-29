@@ -3,6 +3,7 @@
  */
 
 #include <nds.h>
+#include "defines.h"
 #include "estado_avanzar.h"
 #include "graficos.h"
 
@@ -42,5 +43,7 @@ uint8 obtenerFrames() {
 void intVBlank() {
 	Frame++;
 	if( Frame == 60 ) Frame = 0;
-	Avanzar();
+	// Acciones dependiendo del estado actual
+	if( ESTADO == AVANZAR_PERSONAJE )
+		Avanzar();
 }
