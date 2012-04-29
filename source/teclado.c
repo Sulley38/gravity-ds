@@ -34,7 +34,7 @@ void DeshabilitarIntTec()
 }
 
 //Rutina de atención a la interrupción del teclado
-void RutTec()
+void intTeclado()
 {
 
 }

@@ -5,26 +5,22 @@ sprites.h
 #ifndef SPRITES_H
 #define SPRITES_H
 
+/* Direcciones de memoria en las que están guardados los sprites */
 extern u16* cuadrado;
 extern u16* cuadrado2;
 extern u16* corredor[4];
 extern u16* bloque;
 
 
-/* Inicializar la memoria de Sprites. */
+/* Inicializa la memoria de sprites */
 extern void initSpriteMem();
 
-/* Dentro de esta función hay que definir el color con el que se mostrará cada uno de los 256 
- * colores posibles en la pantalla principal. El 0 es transparente y los no definidos son negros.
- */
-extern void establecerPaletaPrincipal();
+/* Define los colores posibles para el estado 'Menu' */
+extern void establecerPaletaMenu();
+/* Define los colores posibles para el estado 'Avanzar personaje' */
+extern void establecerPaletaAvanzarPersonaje();
 
-/* Dentro de esta función hay que definir el color con el que se mostrará cada uno de los 256 
- * colores posibles en la pantalla secundaria. El 0 es transparente y los no definidos son negros.
- */
-extern void establecerPaletaSecundaria();
-
-/* Para guardar los sprites en memoria y luego poder usarlos.*/
+/* Guarda los sprites en memoria para luego poder usarlos */
 extern void guardarSpritesEnMemoria();
 
 

@@ -9,7 +9,7 @@ int ESTADO;
 int main() {
 
 	consoleDemoInit();
-	irqSet(IRQ_KEYS,RutTec);
+	irqSet(IRQ_KEYS,intTeclado);
 	HabilitarIntTec();
 
 	iprintf( "Chicos! Hoy vamos a aprender a contar hasta 20.\n" );

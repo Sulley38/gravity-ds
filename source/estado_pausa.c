@@ -3,7 +3,6 @@
 #include "defines.h"
 #include "estado_pausa.h"
 #include "graficos.h"
-#include "main.h"
 #include "sprites.h"
 #include "pantalla.h"
 

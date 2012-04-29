@@ -1,7 +1,7 @@
-/*---------------------------------------------------------------------------------
-Este código se ha implementado basándose en el ejemplo "Simple sprite demo" de 
-dovoto y otro de Jaeden Amero
----------------------------------------------------------------------------------*/
+/**
+ * Fichero principal del videojuego Gravity-DS
+ *  Copyright 2012 - Puma Corporation
+ */
 
 #include <nds.h>
 #include "defines.h"
@@ -11,7 +11,6 @@ dovoto y otro de Jaeden Amero
 #include "estado_pausa.h"
 #include "fondos.h"
 #include "graficos.h"
-#include "main.h"
 #include "interrupciones.h"
 #include "sprites.h"
 
@@ -32,16 +31,15 @@ int main(void){
 	initVideo();
 	initFondos();
 
-	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
-	rellenarTablaInt();
-
 	/* Inicializar memoria de sprites y guardar en ella los sprites */
 	initSpriteMem();
 	guardarSpritesEnMemoria();
 
-	/* Establecer las paletas para los sprites */
-	establecerPaletaPrincipal();
-	establecerPaletaSecundaria();
+	/* Establece la paleta para el primer estado */
+	establecerPaletaMenu();
+
+	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
+	rellenarTablaInt();
 
 	/* Bucle principal */
 	while( ESTADO != FIN ) {
@@ -54,7 +52,6 @@ int main(void){
 			HacerCuentaAtras();
 		  break;
 		case AVANZAR_PERSONAJE:
-			Avanzar();
 		  break;
 		case PAUSA:
 			Pausar();

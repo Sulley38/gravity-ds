@@ -16,7 +16,7 @@ void rellenarTablaInt()
 {
 	irqSet(IRQ_VBLANK,intVBlank);
 	irqSet(IRQ_TIMER0,intTemporizador);
-	irqSet(IRQ_KEYS,RutTec);
+	irqSet(IRQ_KEYS,intTeclado);
 
 	HabilitarIntTemp();
 	HabilitarIntTec();

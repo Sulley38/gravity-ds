@@ -52,4 +52,7 @@ defines.h
 #define FIN				9
 
 
+// Variable global de estado
+extern int ESTADO;
+
 #endif // DEFINES_H

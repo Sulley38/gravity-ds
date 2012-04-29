@@ -1,18 +1,12 @@
-/*---------------------------------------------------------------------------------
-Este código se ha implementado basándose en el ejemplo "Simple sprite demo" de 
-dovoto y otro de Jaeden Amero
----------------------------------------------------------------------------------*/
+/**
+ * Motor gráfico y control de fotogramas por segundo
+ */
 
 #include <nds.h>
+#include "estado_avanzar.h"
 #include "graficos.h"
-#include "sprites.h"
 
-int frame = 0;
-int distancia;
-int velocidad;
-int cantidad_bloques;
-int personaje[2];
-int min,max;
+uint8 Frame = 0;
 
 /* Definir el sistema de vídeo */
 void initVideo() {
@@ -35,70 +29,18 @@ void initVideo() {
                     DISPLAY_BG3_ACTIVE); // Activar el fondo 3
 }
 
-/* Pone a cero el contador de frames */
-void zeroFrames() {
-	frame = 0;
-}
+
 
 /* Devuelve los frames dibujados en lo que va de segundo */
-int getFrames() {
-	return frame;
+uint8 obtenerFrames() {
+	return Frame;
 }
 
 /** Rutina de atención a las interrupciones de refresco vertical
  * Por defecto, la consola envía una de estas interrupciones 60 veces por segundo (60 fps)
  */
 void intVBlank() {
-	frame++;
-	distancia = distancia + velocidad;
+	Frame++;
+	if( Frame == 60 ) Frame = 0;
+	Avanzar();
 }
-
-
-void dibujar_personaje(int x, int y, int invertido){
-
-	oamSet(&oamMain, //main graphics engine context
-			0,           //oam index (0 to 127)
-			x, y,   //x and y pixle location of the sprite
-			0,                    //priority, lower renders last (on top)
-			0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-			SpriteSize_32x32,
-			SpriteColorFormat_256Color,
-			corredor[((frame%20)/5)],                  //pointer to the loaded graphics
-			-1,                  //sprite rotation data
-			FALSE,               //double the size when rotating?
-			FALSE,			//hide the sprite?
-			FALSE, invertido, //vflip, hflip
-			FALSE	//apply mosaic
-			);
-
-}
-
-void dibujar_bloques(int pos[cantidad_bloques][2], int dist ){
-	int oam=1;
-	int i;
-	for (i=min;i<=max;i++){
-		oamSet(&oamMain, //main graphics engine context
-				oam,           //oam index (0 to 127)
-				pos[i][0]-dist, pos[i][1],   //x and y pixle location of the sprite
-				0,                    //priority, lower renders last (on top)
-				0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-				SpriteSize_64x32,
-				SpriteColorFormat_256Color,
-				bloque,                  //pointer to the loaded graphics
-				-1,                  //sprite rotation data
-				FALSE,               //double the size when rotating?
-				FALSE,			//hide the sprite?
-				FALSE, FALSE, //vflip, hflip
-				FALSE	//apply mosaic
-				);
-		oam++;
-	}
-
-}
-
-void limpiar_bloques(int pos[cantidad_bloques][2], int dist ){
-	oamClear(&oamMain,1,0);
-	while (pos[min][0]+64<dist)	min++;
-	while (pos[max][0]<dist+256 && max != cantidad_bloques)	max++;
-}
-

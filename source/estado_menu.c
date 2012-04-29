@@ -2,7 +2,6 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_menu.h"
-#include "main.h"
 #include "sprites.h"
 
 void MostrarMenu() {
@@ -49,6 +48,8 @@ void MostrarMenu() {
 			 // Elimina los botones
 			oamClearSprite(&oamMain,0);
 			oamClearSprite(&oamMain,1);
+			// Carga la siguiente paleta
+			establecerPaletaAvanzarPersonaje();
 			ESTADO = AVANZAR_PERSONAJE;
 		} else if( pos_pantalla.py >= 100 && pos_pantalla.py <= 164 ) {
 			ESTADO = FIN;

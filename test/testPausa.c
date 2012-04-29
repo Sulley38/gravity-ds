@@ -1,18 +1,17 @@
+
 #include <nds.h>
 #include "defines.h"
 #include "estado_pausa.h"
-#include "fondos.h"
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sprites.h"
-#include "teclado.h"
 
 int ESTADO;
 
 int main() {
-	//TODO LO DEL MAIN
-	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();mostrarFondoEstrellado();mostrarFondoEstrelladoSub();initSpriteMem();
-	guardarSpritesEnMemoria();establecerPaletaPrincipal();establecerPaletaSecundaria();
+	// LO DEL MAIN
+	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
+	initSpriteMem();guardarSpritesEnMemoria();establecerPaletaMenu();
 
 	//LO MIO
 	consoleDemoInit();

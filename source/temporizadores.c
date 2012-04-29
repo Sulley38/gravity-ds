@@ -97,5 +97,4 @@ void pararTemporizador()
 void intTemporizador()
 {
 	tiempo++;
-	zeroFrames();
 }
