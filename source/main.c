@@ -5,13 +5,14 @@ dovoto y otro de Jaeden Amero
 
 #include <nds.h>
 #include "defines.h"
-#include "fondos.h"
-#include "graficos.h"
-#include "interrupciones.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
 #include "estado_menu.h"
 #include "estado_pausa.h"
+#include "fondos.h"
+#include "graficos.h"
+#include "main.h"
+#include "interrupciones.h"
 #include "sprites.h"
 
 int ESTADO = MENU;
@@ -41,8 +42,6 @@ int main(void){
 	/* Establecer las paletas para los sprites */
 	establecerPaletaPrincipal();
 	establecerPaletaSecundaria();
-
-
 
 	/* Bucle principal */
 	while( ESTADO != FIN ) {

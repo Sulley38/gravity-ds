@@ -7,6 +7,8 @@
 #include "sprites.h"
 #include "teclado.h"
 
+int ESTADO;
+
 int main() {
 	//TODO LO DEL MAIN
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();mostrarFondoEstrellado();mostrarFondoEstrelladoSub();initSpriteMem();

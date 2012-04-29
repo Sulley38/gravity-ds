@@ -7,6 +7,7 @@
 #include "sprites.h"
 #include "teclado.h"
 
+int ESTADO;
 
 int main() {
 

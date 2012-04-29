@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "pantalla.h"
 
+int ESTADO;
+
 int main() {
 
 	consoleDemoInit();
