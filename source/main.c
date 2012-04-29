@@ -15,7 +15,7 @@ dovoto y otro de Jaeden Amero
 #include "sprites.h"
 
 //---------------------------------------------------------------------------------
-int main(void) {
+int main(void){
 //---------------------------------------------------------------------------------
 
 	/*  Poner en marcha el motor gráfico 2D. */
@@ -43,6 +43,8 @@ int main(void) {
 	/* Establecer las paletas para los sprites */
 	establecerPaletaPrincipal();
 	establecerPaletaSecundaria();
+
+
 
 	/* Bucle principal */
 	ESTADO = MENU;
@@ -72,6 +74,11 @@ int main(void) {
 
 
 //void OriginalMain() {
+/* ¿Qué se está haciendo aquí? -- Cambiar este texto por la explicación */
+	//touchPosition pos_pantalla;
+	//touchRead(&pos_pantalla);
+	//while(pos_pantalla.px==0 && pos_pantalla.py==0)
+		//touchRead(&pos_pantalla);
 	/* Definir variables */
 	//touchPosition pos_pantalla;
 	//int frame;

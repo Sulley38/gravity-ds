@@ -9,11 +9,9 @@ void main(){
 	touchPosition pantalla;
 
 
-
-
 		while(TRUE)	{
 			pantalla = posicionPantalla();
-		iprintf("%d , %d",pantalla.px,pantalla.py);
+			iprintf("%d, %d", pantalla.px, pantalla.py);
 	}
 
 }
