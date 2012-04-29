@@ -1,9 +1,14 @@
-extern u16* gfx;
-extern u16* gfx2;
-extern u16* gfx3;
-extern u16* gfxSub;
+/*-------------------------------------
+sprites.h
+-------------------------------------*/
+
+#ifndef SPRITES_H
+#define SPRITES_H
+
 extern u16* cuadrado;
 extern u16* cuadrado2;
+extern u16* corredor[4];
+extern u16* bloque;
 
 
 /* Inicializar la memoria de Sprites. */
@@ -21,3 +26,6 @@ extern void establecerPaletaSecundaria();
 
 /* Para guardar los sprites en memoria y luego poder usarlos.*/
 extern void guardarSpritesEnMemoria();
+
+
+#endif // SPRITES_H

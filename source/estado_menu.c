@@ -4,6 +4,8 @@
 #include "estado_menu.h"
 #include "sprites.h"
 
+int ESTADO;
+
 void MostrarMenu() {
 
 	// Esto hay que arreglar
@@ -39,7 +41,6 @@ void MostrarMenu() {
 		FALSE, FALSE, //vflip, hflip
 		FALSE	//apply mosaic
 		);
-
 
 	oamUpdate(&oamMain);
 	oamUpdate(&oamSub);

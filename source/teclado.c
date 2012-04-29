@@ -4,7 +4,6 @@ teclado.c
 
 // añadir los includes que sean necesarios
 #include <nds.h>
-#include <stdio.h>
 #include "defines.h"
 #include "teclado.h"
 
@@ -37,11 +36,5 @@ void DeshabilitarIntTec()
 //Rutina de atención a la interrupción del teclado
 void RutTec()
 {
-	if (TECLAS_DAT==1015){
-		iprintf( "START\n");
-	}
-	else{
-		iprintf( " A | B\n");
-	}
-	DeshabilitarIntTec();
+
 }

@@ -5,11 +5,7 @@ defines.h
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#include <nds.h>
-#include <stdio.h>
-
 //Aquí se definen los registros del gestor de interrupciones
-
 #define IME		(*(vuint32*)0x04000208) //Interrupt Master Enable -- Habilita o deshabilita todas las interrupciones
 #define IE		(*(vuint32*)0x04000210) //Interrupt Enable -- Activa o desactiva las interrupciones una a una
 #define IF		(*(vuint32*)0x04000214) //Interrupt Flag -- Guarda las peticiones de interrupción
@@ -35,8 +31,8 @@ defines.h
 #define TIMER0_DAT    (*(vuint16*)0x04000100) //registro de datos del temporizador
 // Se utiliza para indicar a partir de qué valor tiene que empezar a contar
 
-// Para no liarse con los números a cada teclas se le ha asignado un nombre
 
+// Para no liarse con los números a cada teclas se le ha asignado un nombre
 #define A			0 
 #define B			1
 #define SELECT			2 
@@ -49,14 +45,15 @@ defines.h
 #define L			9
 
 // Para no liarse con los números a cada estado se le puede asignar un nombre
-
 #define MENU			0
 #define CUENTA_ATRAS	1
 #define AVANZAR_PERSONAJE	2
 #define PAUSA			3
 #define FIN				9
 
-// variables globales
+
+// Variables globales
 extern int ESTADO;
+
 
 #endif // DEFINES_H

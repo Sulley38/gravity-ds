@@ -5,8 +5,13 @@ dovoto y otro de Jaeden Amero
 
 #include <nds.h>
 #include "graficos.h"
+#include "sprites.h"
 
 int frame = 0;
+int distancia;
+int velocidad;
+int cantidad_bloques;
+int personaje[2];
 
 /* Definir el sistema de vídeo */
 void initVideo() {
@@ -44,4 +49,48 @@ int getFrames() {
  */
 void intVBlank() {
 	frame++;
+	distancia = distancia + velocidad;
+}
+
+
+void dibujar_personaje(int x, int y, int invertido){
+
+	oamSet(&oamMain, //main graphics engine context
+			0,           //oam index (0 to 127)
+			x, y,   //x and y pixle location of the sprite
+			0,                    //priority, lower renders last (on top)
+			0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+			SpriteSize_32x32,
+			SpriteColorFormat_256Color,
+			corredor[((frame%20)/5)],                  //pointer to the loaded graphics
+			-1,                  //sprite rotation data
+			FALSE,               //double the size when rotating?
+			FALSE,			//hide the sprite?
+			FALSE, invertido, //vflip, hflip
+			FALSE	//apply mosaic
+			);
+
+}
+
+void dibujar_bloques(int pos[cantidad_bloques][2],int min,int max, int dist ){
+	int oam=1;
+	int i;
+	for (i=min;i<max;i++){
+		oamSet(&oamMain, //main graphics engine context
+				oam,           //oam index (0 to 127)
+				pos[i][0]-dist, pos[i][1],   //x and y pixle location of the sprite
+				0,                    //priority, lower renders last (on top)
+				0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+				SpriteSize_64x32,
+				SpriteColorFormat_256Color,
+				bloque,                  //pointer to the loaded graphics
+				-1,                  //sprite rotation data
+				FALSE,               //double the size when rotating?
+				FALSE,			//hide the sprite?
+				FALSE, FALSE, //vflip, hflip
+				FALSE	//apply mosaic
+				);
+		oam++;
+	}
+
 }

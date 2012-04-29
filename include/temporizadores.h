@@ -1,7 +1,9 @@
 /*-------------------------------------
 temporizadores.h
 -------------------------------------*/
-#include <nds.h>
+
+#ifndef TEMPORIZADORES_H
+#define TEMPORIZADORES_H
 
 extern int obtenerTiempo();
 extern void resetearTiempo();
@@ -13,3 +15,5 @@ extern void prepararTemporizador(int frecuencia);
 extern void iniciarTemporizador();
 extern void pararTemporizador();
 extern void intTemporizador();
+
+#endif // TEMPORIZADORES_H
