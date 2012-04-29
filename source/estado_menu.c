@@ -2,9 +2,8 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_menu.h"
+#include "main.h"
 #include "sprites.h"
-
-int ESTADO;
 
 void MostrarMenu() {
 
