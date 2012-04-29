@@ -8,6 +8,7 @@
 #include "teclado.h"
 
 
+
 int main() {
 
 	distancia=0;
@@ -15,7 +16,8 @@ int main() {
 	cantidad_bloques=15;
 	personaje[0]=0;
 	personaje[1]=128;
-
+	max=5;
+	min=0;
 	int bloques_prueba[15][2]={ {-1, 0}, {0, 168}, {63, 0}, {64, 168}, {78, 78}, {127, 0}, {128, 168}, {142, 78}, {151, 152}, {167, 16}, {187, 136}, {194, 32}, {207, 78}, {299, 164}, {363, 164}};
 
 	/*  COPIAPEGA DEL PRINCIPAL */
@@ -27,9 +29,9 @@ int main() {
 
 		dibujar_personaje(personaje[0],personaje[1],0);
 
-		dibujar_bloques(bloques_prueba,0,16,distancia);
+		dibujar_bloques(bloques_prueba,distancia);
 		oamUpdate(&oamMain);
-
+		limpiar_bloques(bloques_prueba,distancia);
 	}
 
 	return 0;

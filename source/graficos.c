@@ -12,6 +12,7 @@ int distancia;
 int velocidad;
 int cantidad_bloques;
 int personaje[2];
+int min,max;
 
 /* Definir el sistema de vídeo */
 void initVideo() {
@@ -72,10 +73,10 @@ void dibujar_personaje(int x, int y, int invertido){
 
 }
 
-void dibujar_bloques(int pos[cantidad_bloques][2],int min,int max, int dist ){
+void dibujar_bloques(int pos[cantidad_bloques][2], int dist ){
 	int oam=1;
 	int i;
-	for (i=min;i<max;i++){
+	for (i=min;i<=max;i++){
 		oamSet(&oamMain, //main graphics engine context
 				oam,           //oam index (0 to 127)
 				pos[i][0]-dist, pos[i][1],   //x and y pixle location of the sprite
@@ -94,3 +95,10 @@ void dibujar_bloques(int pos[cantidad_bloques][2],int min,int max, int dist ){
 	}
 
 }
+
+void limpiar_bloques(int pos[cantidad_bloques][2], int dist ){
+	oamClear(&oamMain,1,0);
+	while (pos[min][0]+64<dist)	min++;
+	while (pos[max][0]<dist+256 && max != cantidad_bloques)	max++;
+}
+
