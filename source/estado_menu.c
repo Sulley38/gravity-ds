@@ -4,8 +4,6 @@
 #include "estado_menu.h"
 #include "sprites.h"
 
-extern int ESTADO;
-
 void MostrarMenu() {
 
 	// Esto hay que arreglar
@@ -48,6 +46,9 @@ void MostrarMenu() {
 
 	if( pos_pantalla.px >= 20 && pos_pantalla.px <= 84 ) {
 		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ) {
+			 // Elimina los botones
+			oamClearSprite(&oamMain,0);
+			oamClearSprite(&oamMain,1);
 			ESTADO = AVANZAR_PERSONAJE;
 		} else if( pos_pantalla.py >= 100 && pos_pantalla.py <= 164 ) {
 			ESTADO = FIN;

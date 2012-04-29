@@ -14,6 +14,8 @@ dovoto y otro de Jaeden Amero
 #include "estado_pausa.h"
 #include "sprites.h"
 
+int ESTADO = MENU;
+
 //---------------------------------------------------------------------------------
 int main(void) {
 //---------------------------------------------------------------------------------
@@ -32,10 +34,6 @@ int main(void) {
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
 
-	/* Mostrar fondos en pantalla. */
-	mostrarFondoEstrellado();
-	mostrarFondoEstrelladoSub();
-
 	/* Inicializar memoria de sprites y guardar en ella los sprites */
 	initSpriteMem();
 	guardarSpritesEnMemoria();
@@ -45,7 +43,6 @@ int main(void) {
 	establecerPaletaSecundaria();
 
 	/* Bucle principal */
-	ESTADO = MENU;
 	while( ESTADO != FIN ) {
 
 		switch( ESTADO ) {
@@ -60,6 +57,7 @@ int main(void) {
 		  break;
 		case PAUSA:
 			Pausar();
+		  break;
 		default:
 		  break;
 		}

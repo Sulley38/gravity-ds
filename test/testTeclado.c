@@ -1,6 +1,10 @@
+// Fichero de prueba del teclado
+
 #include "teclado.h"
 #include <nds.h>
 #include <stdio.h>
+
+int ESTADO;
 
 int main() {
 

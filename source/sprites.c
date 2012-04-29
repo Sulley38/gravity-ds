@@ -7,6 +7,7 @@ dovoto y otro de Jaeden Amero
 #include "defines.h"
 #include "sprites.h"
 
+
 u16* gfx;
 u16* gfx3;
 u16* gfx2;
@@ -21,12 +22,17 @@ void initSpriteMem() {
 	oamInit(&oamSub, SpriteMapping_1D_32, FALSE);
 
 	/* Reserva de memoria para cada sprite que quiera incluirse en la pantalla */
+	// MENÚ
+	cuadrado = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
+	cuadrado2 = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
+	// CUENTA_ATRAS
+	// AVANZAR_PERSONAJE
 	gfx = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	gfx2 = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	gfx3 = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	gfxSub = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
-	cuadrado = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
-	cuadrado2 = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
+	// PASAR
+
 }
 
 /* Dentro de esta función hay que definir el color con el que se mostrará cada uno de los 256 

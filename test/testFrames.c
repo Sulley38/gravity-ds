@@ -5,6 +5,8 @@
 #include "graficos.h"
 #include "temporizadores.h"
 
+int ESTADO;
+
 int main() {
 
 	consoleDemoInit();

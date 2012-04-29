@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "temporizadores.h"
 
+int ESTADO;
+
 int main() {
 
 	int tmp = 0;

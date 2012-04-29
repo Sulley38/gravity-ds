@@ -2,6 +2,9 @@
 defines.h
 -------------------------------------*/
 
+#ifndef DEFINES_H
+#define DEFINES_H
+
 #include <nds.h>
 #include <stdio.h>
 
@@ -54,4 +57,6 @@ defines.h
 #define FIN				9
 
 // variables globales
-int ESTADO;
+extern int ESTADO;
+
+#endif // DEFINES_H
