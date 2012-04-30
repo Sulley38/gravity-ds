@@ -19,6 +19,7 @@ extern u16* cuadrado;
 extern u16* cuadrado2;
 extern u16* corredor[4];
 extern u16* bloque;
+extern u16* play[3];
 
 
 /* Inicializa la memoria de sprites */

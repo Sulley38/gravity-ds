@@ -63,7 +63,7 @@ int main(void){
 		}
 
 		CurrentFrame = obtenerFrames();
-		while( obtenerFrames() == CurrentFrame ) {}
+		while( obtenerFrames() == CurrentFrame );
 	}
 
 	return 0;

@@ -24,8 +24,8 @@ uint32 Puntos;
 /* Inicializa las variables de la partida */
 void InicializarVariablesJuego() {
 	DistanciaRecorrida = 0;
-	VelocidadHorizontal = 2;
-	VelocidadVertical = 2;
+	VelocidadHorizontal = 4;
+	VelocidadVertical = 4;
 	PosicionPersonaje[0] = 128;
 	PosicionPersonaje[1] = 32;
 	PosicionPersonaje[2] = 0;
@@ -96,7 +96,7 @@ void dibujar_personaje() {
 		0, // OAM Index
 		PosicionPersonaje[0], PosicionPersonaje[1], // Posición X e Y
 		0, 0, SpriteSize_32x32, SpriteColorFormat_256Color,
-		corredor[obtenerFrames()/15], // Puntero al sprite
+		corredor[(obtenerFrames()%20)/5], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, PosicionPersonaje[2], FALSE
 		);
 }

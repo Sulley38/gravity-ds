@@ -40,6 +40,7 @@ void MostrarMenu() {
 		FALSE	//apply mosaic
 		);
 
+
 	oamUpdate(&oamMain);
 	oamUpdate(&oamSub);
 
