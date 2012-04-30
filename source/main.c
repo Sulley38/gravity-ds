@@ -42,6 +42,7 @@ int main(void){
 	rellenarTablaInt();
 
 	/* Bucle principal */
+	uint8 CurrentFrame;
 	while( ESTADO != FIN ) {
 
 		switch( ESTADO ) {
@@ -61,7 +62,8 @@ int main(void){
 		  break;
 		}
 
-		swiWaitForVBlank();
+		CurrentFrame = obtenerFrames();
+		while( obtenerFrames() == CurrentFrame ) {}
 	}
 
 	return 0;

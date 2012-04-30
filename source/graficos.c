@@ -31,7 +31,6 @@ void initVideo() {
 }
 
 
-
 /* Devuelve los frames dibujados en lo que va de segundo */
 uint8 obtenerFrames() {
 	return Frame;
@@ -43,7 +42,4 @@ uint8 obtenerFrames() {
 void intVBlank() {
 	Frame++;
 	if( Frame == 60 ) Frame = 0;
-	// Acciones dependiendo del estado actual
-	//if( ESTADO == AVANZAR_PERSONAJE )
-		//Avanzar();
 }
