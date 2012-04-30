@@ -5,9 +5,9 @@ teclado.c
 // añadir los includes que sean necesarios
 #include <nds.h>
 #include "defines.h"
+#include "estado_avanzar.h"
 #include "teclado.h"
 
-int tecla; // variable para guardar el valor de la tecla pulsada
 
 //Este procedimiento habilita las interrupciones del teclado
 void HabilitarIntTec()
@@ -16,8 +16,8 @@ void HabilitarIntTec()
 	DisableInts();
 	//Escribir un 1 en el bit correspondiente al teclado del REG_IE
 	IE = IE | 1 << 12;
-
-	TECLAS_CNT = (1 | 1<<1 | 1<<3 | 1 << 14 ) & ~(1<<15);
+	// Ajusta el registro de control del teclado para las teclas que queremos usar
+	TECLAS_CNT = (1 << 0 | 1 << 1 | 1 << 3 | 1 << 6 | 1 << 7 | 1 << 14) & ~(1 << 15);
 	//Para acabar, se habilitan todas las interrupciones
 	EnableInts();
 }
@@ -36,5 +36,8 @@ void DeshabilitarIntTec()
 //Rutina de atención a la interrupción del teclado
 void intTeclado()
 {
-
+	if( ESTADO == AVANZAR_PERSONAJE && (TECLAS_DAT & ~(1 << 0 | 1 << 1 | 1 << 6 | 1 << 7)) )
+		CambiarGravedad();
+	else if( ESTADO == AVANZAR_PERSONAJE && (TECLAS_DAT & ~(1 << 3)) )
+		ESTADO = PAUSA;
 }
