@@ -14,8 +14,8 @@ uint8 VelocidadHorizontal, VelocidadVertical;
 int16 PosicionPersonaje[3]; // [0] = X; [1] = Y; [2] = 0 hacia abajo, 1 hacia arriba
 
 // Variables de estado de los bloques
-uint16 BloqueExtremoIzq, BloqueExtremoDer, CantidadBloques = 65;
-uint16 Bloques[65][2]= {{0, 0}, {0, 176}, {64, 0}, {64, 176}, {78, 86}, {128, 0}, {128, 176}, {142, 86} , {150, 160}, {168, 16}, {188, 144}, {194, 32}, {206, 86}, {300, 172}, {362, 172}, {400, 106}, {470, 76}, {472, 160}, {536, 40}, {536, 160}, {608, 5}, {672, 5}, {736, 5}, {800, 5}, {879, 112}, {949, 6}, {1044, 170}, {1046, 50}, {1108, 154},{1110, 68}, {1172, 170}, {1174, 82}, {1238, 170}, {1300, 170}, {1322, 84}, {1364, 170}, {1386, 84}, {1398, 154}, {1430, 170}, {1450, 84}, {1476, 100}, {1492, 170}, {1514, 84}, {1524, 154}, {1556, 170}, {1578, 84}, {1604, 100}, {1620, 170}, {1642, 84}, {1652, 154}, {1684, 170}, {1706, 84}, {1732, 100}, {1750, 170}, {1770, 84}, {1780, 154}, {1812, 170}, {1834, 84}, {1860, 100}, {1972, 4}, {2036, 4}, {2100, 4}, {2164, 4}, {2228, 4}, {2292, 4}};
+uint16 BloqueExtremoIzq, BloqueExtremoDer;
+static const uint16 Bloques[CANTIDAD_BLOQUES][2]= {{0, 0}, {0, 176}, {64, 0}, {64, 176}, {78, 86}, {128, 0}, {128, 176}, {142, 86} , {150, 160}, {168, 16}, {188, 144}, {194, 32}, {206, 86}, {300, 172}, {362, 172}, {400, 106}, {470, 76}, {472, 160}, {536, 40}, {536, 160}, {608, 5}, {672, 5}, {736, 5}, {800, 5}, {879, 112}, {949, 6}, {1044, 170}, {1046, 50}, {1108, 154},{1110, 68}, {1172, 170}, {1174, 82}, {1238, 170}, {1300, 170}, {1322, 84}, {1364, 170}, {1386, 84}, {1398, 154}, {1430, 170}, {1450, 84}, {1476, 100}, {1492, 170}, {1514, 84}, {1524, 154}, {1556, 170}, {1578, 84}, {1604, 100}, {1620, 170}, {1642, 84}, {1652, 154}, {1684, 170}, {1706, 84}, {1732, 100}, {1750, 170}, {1770, 84}, {1780, 154}, {1812, 170}, {1834, 84}, {1860, 100}, {1972, 4}, {2036, 4}, {2100, 4}, {2164, 4}, {2228, 4}, {2292, 4}};
 
 // Variable de puntuación
 uint32 Puntos;
@@ -129,9 +129,9 @@ void limpiar_bloques() {
 	// Limpiar los 30 espacios asignados a bloques
 	oamClear(&oamMain,1,30);
 	// Buscar los bloques que entrarán en la pantalla
-	while( Bloques[BloqueExtremoIzq][0] + ANCHURA_BLOQUE < DistanciaRecorrida && BloqueExtremoIzq != CantidadBloques )
+	while( Bloques[BloqueExtremoIzq][0] + ANCHURA_BLOQUE < DistanciaRecorrida && BloqueExtremoIzq != CANTIDAD_BLOQUES )
 		BloqueExtremoIzq++; // Ya no se ve
-	while( Bloques[BloqueExtremoDer][0] < DistanciaRecorrida + ANCHURA_PANTALLA && BloqueExtremoDer != CantidadBloques - 1 )
+	while( Bloques[BloqueExtremoDer][0] < DistanciaRecorrida + ANCHURA_PANTALLA && BloqueExtremoDer != CANTIDAD_BLOQUES - 1 )
 		BloqueExtremoDer++;  // Ahora se ve
 }
 

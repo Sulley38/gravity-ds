@@ -5,6 +5,8 @@ estado_avanzar.h
 #ifndef E_AVANZAR_H
 #define E_AVANZAR_H
 
+#define CANTIDAD_BLOQUES 65
+
 /* Inicializa las variables de la partida */
 extern void InicializarVariablesJuego();
 /* Avanza un paso */
