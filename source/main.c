@@ -52,6 +52,7 @@ int main(void){
 			HacerCuentaAtras();
 		  break;
 		case AVANZAR_PERSONAJE:
+			Avanzar();
 		  break;
 		case PAUSA:
 			Pausar();
@@ -60,6 +61,7 @@ int main(void){
 		  break;
 		}
 
+		swiWaitForVBlank();
 	}
 
 	return 0;

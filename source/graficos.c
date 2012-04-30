@@ -44,6 +44,6 @@ void intVBlank() {
 	Frame++;
 	if( Frame == 60 ) Frame = 0;
 	// Acciones dependiendo del estado actual
-	if( ESTADO == AVANZAR_PERSONAJE )
-		Avanzar();
+	//if( ESTADO == AVANZAR_PERSONAJE )
+		//Avanzar();
 }
