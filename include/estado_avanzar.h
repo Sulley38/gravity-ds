@@ -5,6 +5,8 @@ estado_avanzar.h
 #ifndef E_AVANZAR_H
 #define E_AVANZAR_H
 
+/* Inicializa las variables de la partida */
+extern void InicializarVariablesJuego();
 /* Avanza un paso */
 extern void Avanzar();
 /* Permuta la dirección de la gravedad entre arriba y abajo */
