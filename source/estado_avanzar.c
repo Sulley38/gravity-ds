@@ -72,7 +72,6 @@ void Avanzar() {
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > ALTURA_PANTALLA || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
 		oamClear(&oamMain,0,51);
-		establecerPaletaMenu();
 		ESTADO = MENU;
 	}
 
@@ -95,7 +94,9 @@ void dibujar_personaje() {
 	oamSet(&oamMain,
 		0, // OAM Index
 		PosicionPersonaje[0], PosicionPersonaje[1], // Posición X e Y
-		0, 0, SpriteSize_32x32, SpriteColorFormat_256Color,
+		0, // Prioridad (menor -> arriba)
+		1, // Índice de paleta
+		SpriteSize_32x32, SpriteColorFormat_256Color,
 		corredor[(obtenerFrames()%20)/5], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, PosicionPersonaje[2], FALSE
 		);
@@ -112,7 +113,9 @@ void dibujar_bloques() {
 		oamSet(&oamMain,
 			oam, // OAM Index
 			Bloques[i][0] - DistanciaRecorrida, Bloques[i][1], // Posición X e Y
-			0, 0, SpriteSize_64x32, SpriteColorFormat_256Color,
+			0, // Prioridad (menor -> arriba)
+			1, // Índice de paleta
+			SpriteSize_64x32, SpriteColorFormat_256Color,
 			bloque, // Puntero al sprite
 			-1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);

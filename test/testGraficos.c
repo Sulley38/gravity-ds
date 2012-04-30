@@ -11,14 +11,13 @@ int main() {
 
 	/*  COPIAPEGA DEL PRINCIPAL */
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
-	initSpriteMem();guardarSpritesEnMemoria();establecerPaletaAvanzarPersonaje();
-	establecerPaletaAvanzarPersonaje();
+	initSpriteMem();guardarSpritesEnMemoria();cargarPaletaSprites();
 
 	oamSet(&oamMain, //main graphics engine context
 		51,           //oam index (0 to 127)
 		32, 20,   //x and y pixle location of the sprite
 		0,                    //priority, lower renders last (on top)
-		0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
 		play[0],                  //pointer to the loaded graphics
@@ -33,7 +32,7 @@ int main() {
 		52,           //oam index (0 to 127)
 		96, 20,   //x and y pixle location of the sprite
 		0,                    //priority, lower renders last (on top)
-		0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
 		play[1],                  //pointer to the loaded graphics
@@ -48,7 +47,7 @@ int main() {
 		53,           //oam index (0 to 127)
 		160, 20,   //x and y pixle location of the sprite
 		0,                    //priority, lower renders last (on top)
-		0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
 		play[2],                  //pointer to the loaded graphics

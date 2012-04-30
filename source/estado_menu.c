@@ -11,38 +11,27 @@ void MostrarMenu() {
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 
-	oamSet(&oamMain, //main graphics engine context
-		51,           //oam index (0 to 127)
-		20, 20,   //x and y pixle location of the sprite
-		0,                    //priority, lower renders last (on top)
-		0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-		SpriteSize_64x64,
-		SpriteColorFormat_256Color,
-		cuadrado,                  //pointer to the loaded graphics
-		-1,                  //sprite rotation data
-		FALSE,               //double the size when rotating?
-		FALSE,			//hide the sprite?
-		FALSE, FALSE, //vflip, hflip
-		FALSE	//apply mosaic
+	oamSet(&oamMain,
+		51, // OAM Index
+		20, 20, // Posición X e Y
+		0, // Prioridad (menor -> arriba)
+		0, // Índice de paleta
+		SpriteSize_64x64, SpriteColorFormat_256Color,
+		cuadrado, // Puntero al sprite
+		-1, FALSE, FALSE, FALSE, FALSE, FALSE
 		);
-	oamSet(&oamMain, //main graphics engine context
-		52,           //oam index (0 to 127)
-		20,100,   //x and y pixle location of the sprite
-		0,                    //priority, lower renders last (on top)
-		0,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-		SpriteSize_64x64,
-		SpriteColorFormat_256Color,
-		cuadrado2,                  //pointer to the loaded graphics
-		-1,                  //sprite rotation data
-		FALSE,               //double the size when rotating?
-		FALSE,			//hide the sprite?
-		FALSE, FALSE, //vflip, hflip
-		FALSE	//apply mosaic
+	oamSet(&oamMain,
+		52, // OAM Index
+		20, 100, // Posición X e Y
+		0, // Prioridad (menor -> arriba)
+		0, // Índice de paleta
+		SpriteSize_64x64, SpriteColorFormat_256Color,
+		cuadrado2, // Puntero al sprite
+		-1, FALSE, FALSE, FALSE, FALSE, FALSE
 		);
 
 
 	oamUpdate(&oamMain);
-	oamUpdate(&oamSub);
 
 	if( pos_pantalla.px >= 20 && pos_pantalla.px <= 84 ) {
 		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ) {

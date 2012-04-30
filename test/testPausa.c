@@ -11,7 +11,7 @@ int ESTADO;
 int main() {
 	// LO DEL MAIN
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
-	initSpriteMem();guardarSpritesEnMemoria();establecerPaletaMenu();
+	initSpriteMem();guardarSpritesEnMemoria();cargarPaletaSprites();
 
 	//LO MIO
 	consoleDemoInit();

@@ -11,7 +11,8 @@ int main() {
 
 	while(TRUE)	{
 		pantalla = posicionPantalla();
-		iprintf("%d, %d", pantalla.px, pantalla.py);
+		if( pantalla.px != 0 || pantalla.py != 0 )
+			iprintf("Has tocado en: (%d, %d)\n", pantalla.px, pantalla.py);
 	}
 
 	return 0;

@@ -13,5 +13,4 @@ extern uint8 obtenerFrames();
 /* Atención a las interrupciones de refresco vertical */
 extern void intVBlank();
 
-
 #endif // GRAFICOS_H

@@ -8,7 +8,6 @@ void HacerCuentaAtras() {
 	// Stub
 
 	// Pasar al siguiente estado
-	establecerPaletaAvanzarPersonaje();
 	InicializarVariablesJuego();
 	ESTADO = AVANZAR_PERSONAJE;
 }
