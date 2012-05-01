@@ -20,7 +20,7 @@ int main() {
 		2,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
-		resume[0],                  //pointer to the loaded graphics
+		boton_exit[0],                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data
 		FALSE,               //double the size when rotating?
 		FALSE,			//hide the sprite?
@@ -35,7 +35,7 @@ int main() {
 		2,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
-		resume[1],                  //pointer to the loaded graphics
+		boton_exit[1],                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data
 		FALSE,               //double the size when rotating?
 		FALSE,			//hide the sprite?
