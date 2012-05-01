@@ -93,7 +93,7 @@ void dibujar_personaje() {
 		0, // Prioridad (menor -> arriba)
 		1, // Índice de paleta
 		SpriteSize_32x32, SpriteColorFormat_256Color,
-		corredor[(obtenerFrames()%20)/5], // Puntero al sprite
+		Corredor[(obtenerFrames()%20)/5], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, PosicionPersonaje[2], FALSE
 		);
 }
@@ -112,7 +112,7 @@ void dibujar_bloques() {
 			0, // Prioridad (menor -> arriba)
 			1, // Índice de paleta
 			SpriteSize_64x32, SpriteColorFormat_256Color,
-			bloque, // Puntero al sprite
+			Bloque, // Puntero al sprite
 			-1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);
 		oam++;
