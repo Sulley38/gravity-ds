@@ -129,10 +129,6 @@ void Pausar() {
 			FALSE	//apply mosaic
 			);
 
-
-	oamUpdate(&oamMain);
-	oamUpdate(&oamSub);
-
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 

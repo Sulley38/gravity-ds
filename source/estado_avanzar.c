@@ -65,14 +65,10 @@ void Avanzar() {
 	// Actualiza el sprite del personaje para crear la animación
 	dibujar_personaje();
 
-	// Actualiza las pantallas
-	oamUpdate(&oamMain);
-	oamUpdate(&oamSub);
-
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > ALTURA_PANTALLA || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
 		oamClear(&oamMain,0,51);
-		ESTADO = MENU;
+		ESTADO = PUNTUACION;
 	}
 
 }
