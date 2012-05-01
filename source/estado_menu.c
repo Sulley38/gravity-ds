@@ -15,7 +15,7 @@ void MostrarMenu() {
 	if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
 		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ) {
 			 // Elimina los botones
-			oamClear(&oamMain,51,2);
+			oamClear(&oamMain,120,6);
 			ESTADO = CUENTA_ATRAS;
 		} else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ) {
 			ESTADO = FIN;
