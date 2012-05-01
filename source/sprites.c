@@ -138,4 +138,5 @@ void guardarSpritesEnMemoria(){
 		bloque[i] = bitsBloque[i*2] | (bitsBloque[(i*2)+1]<<8);
 	}
 
+
 }
