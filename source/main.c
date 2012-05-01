@@ -58,12 +58,20 @@ int main(void){
 		case PAUSA:
 			Pausar();
 		  break;
+		case PUNTUACION:
+			PedirPuntuacion();
+		  break;
 		default:
 		  break;
 		}
 
+		// Espera al siguiente frame
 		CurrentFrame = obtenerFrames();
 		while( obtenerFrames() == CurrentFrame );
+
+		// Actualiza las pantallas
+		oamUpdate(&oamMain);
+		oamUpdate(&oamSub);
 	}
 
 	return 0;
