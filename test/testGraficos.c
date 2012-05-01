@@ -17,10 +17,10 @@ int main() {
 		51,           //oam index (0 to 127)
 		32, 20,   //x and y pixle location of the sprite
 		0,                    //priority, lower renders last (on top)
-		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+		2,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
-		play[0],                  //pointer to the loaded graphics
+		resume[0],                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data
 		FALSE,               //double the size when rotating?
 		FALSE,			//hide the sprite?
@@ -32,10 +32,10 @@ int main() {
 		52,           //oam index (0 to 127)
 		96, 20,   //x and y pixle location of the sprite
 		0,                    //priority, lower renders last (on top)
-		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
+		2,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
 		SpriteSize_64x64,
 		SpriteColorFormat_256Color,
-		play[1],                  //pointer to the loaded graphics
+		resume[1],                  //pointer to the loaded graphics
 		-1,                  //sprite rotation data
 		FALSE,               //double the size when rotating?
 		FALSE,			//hide the sprite?
@@ -43,20 +43,6 @@ int main() {
 		FALSE	//apply mosaic
 		);
 
-	oamSet(&oamMain, //main graphics engine context
-		53,           //oam index (0 to 127)
-		160, 20,   //x and y pixle location of the sprite
-		0,                    //priority, lower renders last (on top)
-		1,					  //this is the palette index if multiple palettes or the alpha value if bmp sprite
-		SpriteSize_64x64,
-		SpriteColorFormat_256Color,
-		play[2],                  //pointer to the loaded graphics
-		-1,                  //sprite rotation data
-		FALSE,               //double the size when rotating?
-		FALSE,			//hide the sprite?
-		FALSE, FALSE, //vflip, hflip
-		FALSE	//apply mosaic
-		);
 	oamUpdate(&oamMain);
 	/*Empieza lo mio*/
 	while(1) {

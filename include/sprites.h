@@ -18,7 +18,9 @@ extern u16* cuadrado;
 extern u16* cuadrado2;
 extern u16* corredor[4];
 extern u16* bloque;
-extern u16* play[3];
+extern u16* play[2];
+extern u16* resume[2];
+extern u16* boton_exit[2];
 
 /* Inicializa la memoria de sprites */
 extern void initSpriteMem();

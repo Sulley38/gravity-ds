@@ -24,8 +24,8 @@ uint32 Puntos;
 /* Inicializa las variables de la partida */
 void InicializarVariablesJuego() {
 	DistanciaRecorrida = 0;
-	VelocidadHorizontal = 4;
-	VelocidadVertical = 4;
+	VelocidadHorizontal = 3;
+	VelocidadVertical = 3;
 	PosicionPersonaje[0] = 128;
 	PosicionPersonaje[1] = 32;
 	PosicionPersonaje[2] = 0;
