@@ -1,4 +1,3 @@
-
 #include <nds.h>
 #include "defines.h"
 #include "estado_pausa.h"
@@ -13,10 +12,12 @@ int main() {
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
 	initSpriteMem();guardarSpritesEnMemoria();cargarPaletaSprites();
 
-	//LO MIO
+	//La prueba de los botones
 	consoleDemoInit();
 	Pausar();
 
-	while(TRUE){}
+	while(TRUE){
+
+	}
 	return 0;
 }

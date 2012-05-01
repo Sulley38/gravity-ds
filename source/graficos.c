@@ -45,6 +45,9 @@ void intVBlank() {
 	if( Frame == 60 ) Frame = 0;
 }
 
+/**
+ * Dibujamos el boton PLAY en la pantalla
+ */
 void dibujar_play(int x, int y){
 	oamSet(&oamMain, //main graphics engine context
 				120,           //oam index (0 to 127)
@@ -76,6 +79,9 @@ void dibujar_play(int x, int y){
 					FALSE	//apply mosaic
 					);}
 
+/**
+ * Dibujamos el boton EXIT en la pantalla
+ */
 	void dibujar_exit(int x, int y){
 		oamSet(&oamMain, //main graphics engine context
 							122,           //oam index (0 to 127)
@@ -108,6 +114,9 @@ void dibujar_play(int x, int y){
 							);
 	}
 
+	/**
+	 * Dibujamos el boton RESUME en la pantalla
+	 */
 	void dibujar_resume(int x, int y){
 			oamSet(&oamMain, //main graphics engine context
 								124,           //oam index (0 to 127)
@@ -139,6 +148,7 @@ void dibujar_play(int x, int y){
 								FALSE	//apply mosaic
 								);
 		}
+
 
 
 

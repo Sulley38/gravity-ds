@@ -10,6 +10,7 @@ void MostrarMenu() {
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 
+	//Dibujamos los botones
 	dibujar_play(60,20);
 	dibujar_exit(60,110);
 
