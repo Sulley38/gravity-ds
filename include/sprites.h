@@ -14,19 +14,20 @@ sprites.h
 #define ALTURA_BLOQUE 16
 
 /* Direcciones de memoria en las que están guardados los sprites */
-extern u16* cuadrado;
-extern u16* cuadrado2;
-extern u16* corredor[4];
-extern u16* bloque;
-extern u16* play[2];
-extern u16* resume[2];
-extern u16* boton_exit[2];
+extern u16* Corredor[4];
+extern u16* Bloque;
+extern u16* botonJugar[2];
+extern u16* botonContinuar[2];
+extern u16* botonSalir[2];
+
+/* Función principal para cargar lo relacionado con sprites */
+extern void cargarSprites();
 
 /* Inicializa la memoria de sprites */
-extern void initSpriteMem();
+void initSpriteMem();
 /* Define la paleta de colores extendida para todos los sprites del juego */
-extern void cargarPaletaSprites();
+void establecerPaletaSprites();
 /* Guarda los sprites en memoria para luego poder usarlos */
-extern void guardarSpritesEnMemoria();
+void guardarSpritesEnMemoria();
 
 #endif // SPRITES_H

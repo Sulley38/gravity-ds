@@ -9,6 +9,7 @@
 #include "estado_cuentaatras.h"
 #include "estado_menu.h"
 #include "estado_pausa.h"
+#include "estado_puntuacion.h"
 #include "fondos.h"
 #include "graficos.h"
 #include "interrupciones.h"
@@ -24,19 +25,13 @@ int main(void){
     powerOn(POWER_ALL_2D);
 
 	/*
-	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico
-	*  y configurar el sistema de fondos.
+	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico,
+	*  configurar el sistema de fondos y cargar los sprites
 	*/
 	lcdMainOnBottom();
 	initVideo();
-	initFondos();
-
-	/* Inicializar memoria de sprites y guardar en ella los sprites */
-	initSpriteMem();
-	guardarSpritesEnMemoria();
-
-	/* Establece la paleta de colores */
-	cargarPaletaSprites();
+	//initFondos();
+	cargarSprites();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
@@ -58,12 +53,20 @@ int main(void){
 		case PAUSA:
 			Pausar();
 		  break;
+		case PUNTUACION:
+			PedirPuntuacion();
+		  break;
 		default:
 		  break;
 		}
 
+		// Espera al siguiente frame
 		CurrentFrame = obtenerFrames();
 		while( obtenerFrames() == CurrentFrame );
+
+		// Actualiza las pantallas
+		oamUpdate(&oamMain);
+		oamUpdate(&oamSub);
 	}
 
 	return 0;

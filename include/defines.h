@@ -49,6 +49,7 @@ defines.h
 #define CUENTA_ATRAS	1
 #define AVANZAR_PERSONAJE	2
 #define PAUSA			3
+#define PUNTUACION		4
 #define FIN				9
 
 

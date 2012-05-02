@@ -46,7 +46,7 @@ int main() {
 	iprintf( "Estupendo! Eso es todo.\n" );
 	pararTemporizador();
 
-	while(TRUE) {}
+	while(TRUE);
 
 	return 0;
 }

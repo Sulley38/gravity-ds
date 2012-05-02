@@ -2,7 +2,6 @@
 interrupciones.c
 -------------------------------------*/
 
-// añadir los includes que sean necesarios
 #include <nds.h>
 #include "graficos.h"
 #include "interrupciones.h"
