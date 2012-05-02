@@ -45,8 +45,7 @@ int main() {
 
 	oamUpdate(&oamMain);
 	/*Empieza lo mio*/
-	while(1) {
-	}
+	while(1);
 
 	return 0;
 }
