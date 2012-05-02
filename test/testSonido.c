@@ -5,7 +5,7 @@
 int ESTADO;
 
 int main() {
-	int partitura[6]={6,10, 10,10,10};
+	int partitura[4]={7000,10500,10500,10500};
 	int notas[13] =
 	{
 		4186 ,//Do	0
@@ -25,9 +25,7 @@ int main() {
 	int freq=1;
 	int n=1;
 	soundEnable();
-	int channel = soundPlayPSG(DutyCycle_50, notas[partitura[0]]+3000, 127,64);
-	soundResume(channel);
-
+	int channel = soundPlayPSG(DutyCycle_50, partitura[0], 127,64);
 
 
 
@@ -36,9 +34,7 @@ int main() {
 		if (freq==4 )			soundPause(channel);
 		if (n%5==0 && freq<4){
 			soundResume(channel);
-			soundSetFreq(channel,notas[partitura[freq]]+3000);
-			if(partitura[freq]==12)	soundPause(channel);
-
+			soundSetFreq(channel,partitura[freq]);
 			freq ++;
 		}
 		if (n==100){

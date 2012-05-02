@@ -12,13 +12,13 @@ int main() {
 	consoleDemoInit();
 
 	// Preparar el temporizador
-	irqSet(IRQ_TIMER0,intTemporizador);
+	irqSet(IRQ_TIMER0,intTemporizador0);
 	HabilitarIntTemp();
-	prepararTemporizador(1);
+	prepararTemporizador(1,0);
 
 	// Contar hasta 20
 	iprintf( "Chicos! Hoy vamos a aprender a contar hasta 20.\n" );
-	iniciarTemporizador();
+	iniciarTemporizador(0);
 	while(tmp < 20) {
 		if( tmp < obtenerTiempo() ) {
 			tmp++;
@@ -27,7 +27,7 @@ int main() {
 	}
 
 	iprintf( "Muy bieeeeen!\n" );
-	pararTemporizador();
+	pararTemporizador(0);
 
 	// Poner a cero
 	iprintf( "Ahora pongo a cero y contamos hasta 10.\n" );
@@ -35,7 +35,7 @@ int main() {
 	resetearTiempo();
 
 	// Contar hasta 10
-	iniciarTemporizador();
+	iniciarTemporizador(0);
 	while(tmp < 10) {
 		if( tmp < obtenerTiempo() ) {
 			tmp++;
@@ -44,7 +44,7 @@ int main() {
 	}
 
 	iprintf( "Estupendo! Eso es todo.\n" );
-	pararTemporizador();
+	pararTemporizador(0);
 
 	while(TRUE);
 

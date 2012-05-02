@@ -20,6 +20,7 @@ defines.h
 
 // Aquí se definen los registros del temporizador
 #define TIMER0_CNT   (*(vuint16*)0x04000102) //registro de control del temporizador
+#define TIMER1_CNT   (*(vuint16*)0x04000106)
 // El temporizador se activa poniendo un 1 en el 7º bit.
 // El temporizador interrumpirá al desbordarse el contador, si hay un 1 en el 6º bit.
 // Los dos bits de menos peso indican lo siguiente:
@@ -29,6 +30,7 @@ defines.h
 //			11 frecuencia 33554432/1024 hz
 
 #define TIMER0_DAT    (*(vuint16*)0x04000100) //registro de datos del temporizador
+#define TIMER1_DAT    (*(vuint16*)0x04000104)
 // Se utiliza para indicar a partir de qué valor tiene que empezar a contar
 
 
@@ -55,5 +57,6 @@ defines.h
 
 // Variable global de estado
 extern int ESTADO;
+extern int sonido_moneda;
 
 #endif // DEFINES_H

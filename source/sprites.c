@@ -14,6 +14,7 @@ u16* Bloque;
 u16* botonJugar[2];
 u16* botonContinuar[2];
 u16* botonSalir[2];
+u16* moneda;
 
 /* Función principal para cargar lo relacionado con sprites */
 void cargarSprites(){
@@ -41,6 +42,7 @@ void initSpriteMem() {
 	botonContinuar[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonSalir[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonSalir[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
+	moneda = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 
 }
 
@@ -136,5 +138,8 @@ void guardarSpritesEnMemoria(){
 		Bloque[i] = bitsBloque[i*2] | (bitsBloque[(i*2)+1]<<8);
 	}
 
+	for (i=0; i<16*16/2;i++){
+		moneda[i] = 170 | 170<<8;
+	}
 
 }

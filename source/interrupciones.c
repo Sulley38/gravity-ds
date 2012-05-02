@@ -14,11 +14,13 @@ interrupciones.c
 void rellenarTablaInt()
 {
 	irqSet(IRQ_VBLANK,intVBlank);
-	irqSet(IRQ_TIMER0,intTemporizador);
+	irqSet(IRQ_TIMER0,intTemporizador0);
+	irqSet(IRQ_TIMER1,intTempMoneda);
 	irqSet(IRQ_KEYS,intTeclado);
 
 	HabilitarIntTemp();
 	HabilitarIntTec();
 
-	prepararTemporizador(1);
+	prepararTemporizador(1,0);
+	prepararTemporizador(15,1);
 }

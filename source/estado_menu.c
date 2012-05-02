@@ -10,24 +10,35 @@
  * Muestra un par de botones con las opciones de jugar o salir.
  * Cambia de estado según lo que se haya pulsado.
  */
+int animacion=0;
+int animar=0;
+
 void MostrarMenu() {
+
+	if (animar)			animacion +=5;
 
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 
-	dibujar_botonJugar(60,20);
-	dibujar_botonSalir(60,110);
+	dibujar_botonJugar(60,20-animacion);
+	dibujar_botonSalir(60,110+animacion);
 
 	if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
-		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ) {
-			 // Elimina los botones
-			oamClear(&oamMain,120,2);
-			oamClear(&oamMain,124,2);
-			ESTADO = CUENTA_ATRAS;
-		} else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ) {
+		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 )
+			animar=1;
+		else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 )
 			ESTADO = FIN;
-		}
 	}
+
+	if (animacion==80){
+		animacion=0;
+		animar=0;
+		 // Elimina los botones
+		oamClear(&oamMain,120,2);
+		oamClear(&oamMain,124,2);
+		ESTADO = CUENTA_ATRAS;
+	}
+
 
 }
 

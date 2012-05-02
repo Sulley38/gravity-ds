@@ -14,15 +14,21 @@
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sprites.h"
+#include "temporizadores.h"
 
 int ESTADO = MENU;
+int sonido_moneda;
 
 //---------------------------------------------------------------------------------
 int main(void){
 //---------------------------------------------------------------------------------
-
+	sonido_moneda = soundPlayPSG(DutyCycle_50, 7000, 127,64);
+	soundPause(sonido_moneda);
 	/*  Poner en marcha el motor gráfico 2D. */
     powerOn(POWER_ALL_2D);
+
+	soundEnable();
+	prepararTemporizador(12,1);
 
 	/*
 	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico,
@@ -35,11 +41,11 @@ int main(void){
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
+	HabilitarIntTemp();
 
 	/* Bucle principal */
 	uint8 CurrentFrame;
 	while( ESTADO != FIN ) {
-
 		switch( ESTADO ) {
 		case MENU:
 			MostrarMenu();

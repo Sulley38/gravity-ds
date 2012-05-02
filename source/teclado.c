@@ -7,6 +7,7 @@ teclado.c
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "teclado.h"
+#include "temporizadores.h"
 
 
 //Este procedimiento habilita las interrupciones del teclado
@@ -39,7 +40,6 @@ void intTeclado()
 	if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
 		CambiarGravedad();
 	} else if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(START)) ) {
-		oamClear(&oamMain,0,51);
 		ESTADO = PAUSA;
 	}
 }

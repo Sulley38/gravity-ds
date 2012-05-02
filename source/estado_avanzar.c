@@ -90,7 +90,7 @@ void dibujar_personaje() {
 	oamSet(&oamMain,
 		0, // OAM Index
 		PosicionPersonaje[0], PosicionPersonaje[1], // Posición X e Y
-		0, // Prioridad (menor -> arriba)
+		1, // Prioridad (menor -> arriba)
 		1, // Índice de paleta
 		SpriteSize_32x32, SpriteColorFormat_256Color,
 		Corredor[(obtenerFrames()%20)/5], // Puntero al sprite
@@ -109,7 +109,7 @@ void dibujar_bloques() {
 		oamSet(&oamMain,
 			oam, // OAM Index
 			Bloques[i][0] - DistanciaRecorrida, Bloques[i][1], // Posición X e Y
-			0, // Prioridad (menor -> arriba)
+			1, // Prioridad (menor -> arriba)
 			1, // Índice de paleta
 			SpriteSize_64x32, SpriteColorFormat_256Color,
 			Bloque, // Puntero al sprite
