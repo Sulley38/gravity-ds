@@ -1,3 +1,4 @@
+// Estado 'Pausa' definido en el autómata
 
 #include <nds.h>
 #include "defines.h"

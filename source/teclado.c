@@ -36,8 +36,10 @@ void DeshabilitarIntTec()
 //Rutina de atención a la interrupción del teclado
 void intTeclado()
 {
-	if( ESTADO == AVANZAR_PERSONAJE && (TECLAS_DAT & ~(1 << 0 | 1 << 1 | 1 << 6 | 1 << 7)) )
+	if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
 		CambiarGravedad();
-	else if( ESTADO == AVANZAR_PERSONAJE && (TECLAS_DAT & ~(1 << 3)) )
+	} else if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(START)) ) {
+		oamClear(&oamMain,0,51);
 		ESTADO = PAUSA;
+	}
 }
