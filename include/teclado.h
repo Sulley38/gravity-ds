@@ -5,6 +5,7 @@ teclado.h
 #ifndef TECLADO_H
 #define TECLADO_H
 
+/* Macro para comprobar si una tecla ha sido pulsada */
 #define TECLA_PULSADA(n) !(TECLAS_DAT & (1 << 10 | 1 << n))
 
 //Este procedimiento habilita las interrupciones del teclado

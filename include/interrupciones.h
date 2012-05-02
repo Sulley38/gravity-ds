@@ -10,5 +10,4 @@ interrupciones.h
 //aquí donde se configuran los registros de control de los periféricos.
 extern void rellenarTablaInt();
 
-
 #endif // INTERRUPCIONES_H

@@ -20,11 +20,14 @@ extern u16* botonJugar[2];
 extern u16* botonContinuar[2];
 extern u16* botonSalir[2];
 
+/* Función principal para cargar lo relacionado con sprites */
+extern void cargarSprites();
+
 /* Inicializa la memoria de sprites */
-extern void initSpriteMem();
+void initSpriteMem();
 /* Define la paleta de colores extendida para todos los sprites del juego */
-extern void cargarPaletaSprites();
+void establecerPaletaSprites();
 /* Guarda los sprites en memoria para luego poder usarlos */
-extern void guardarSpritesEnMemoria();
+void guardarSpritesEnMemoria();
 
 #endif // SPRITES_H

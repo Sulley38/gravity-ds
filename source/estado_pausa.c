@@ -4,11 +4,13 @@
 #include "defines.h"
 #include "estado_menu.h"
 #include "estado_pausa.h"
-#include "graficos.h"
-#include "sprites.h"
 #include "pantalla.h"
 
 
+/**
+ * Muestra un par de botones con las opciones de continuar juego o salir.
+ * Cambia de estado según lo que se haya pulsado.
+ */
 void Pausar() {
 
 	touchPosition pos_pantalla;
@@ -23,8 +25,9 @@ void Pausar() {
 			oamClear(&oamMain,122,4);
 			ESTADO = AVANZAR_PERSONAJE;
 		} else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ) {
-			ESTADO = FIN;
+			// Elimina los botones
+			oamClear(&oamMain,122,2);
+			ESTADO = MENU;
 		}
 	}
 }
-

@@ -5,6 +5,11 @@
 #include "estado_menu.h"
 #include "sprites.h"
 
+
+/**
+ * Muestra un par de botones con las opciones de jugar o salir.
+ * Cambia de estado según lo que se haya pulsado.
+ */
 void MostrarMenu() {
 
 	touchPosition pos_pantalla;
@@ -27,12 +32,16 @@ void MostrarMenu() {
 }
 
 
+/**
+ * Dibuja el botón PLAY en la posición (X,Y)
+ * ** OAM Index: se reservan el 120 y el 121
+ */
 void dibujar_botonJugar(uint8 X, uint8 Y) {
 	oamSet(&oamMain,
 		120, // OAM Index
 		X, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonJugar[0], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE
@@ -42,19 +51,23 @@ void dibujar_botonJugar(uint8 X, uint8 Y) {
 		121, // OAM Index
 		X + 64, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonJugar[1], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE
 		);
 }
 
+/**
+ * Dibuja el botón RESUME en la posición (X,Y)
+ * ** OAM Index: se reservan el 122 y el 123
+ */
 void dibujar_botonContinuar(uint8 X, uint8 Y) {
 	oamSet(&oamMain,
 		122, // OAM Index
 		X, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonContinuar[0], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE
@@ -64,19 +77,23 @@ void dibujar_botonContinuar(uint8 X, uint8 Y) {
 		123, // OAM Index
 		X + 64, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonContinuar[1], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE
 		);
 }
 
+/**
+ * Dibuja el botón EXIT en la posición (X,Y)
+ * ** OAM Index: se reservan el 124 y el 125
+ */
 void dibujar_botonSalir(uint8 X, uint8 Y) {
 	oamSet(&oamMain,
 		124, // OAM Index
 		X, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonSalir[0], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE
@@ -86,7 +103,7 @@ void dibujar_botonSalir(uint8 X, uint8 Y) {
 		125, // OAM Index
 		X + 64, Y, // Posición X e Y
 		0, // Prioridad (menor -> arriba)
-		2, // Índice de paleta
+		0, // Índice de paleta
 		SpriteSize_64x64, SpriteColorFormat_256Color,
 		botonSalir[1], // Puntero al sprite
 		-1, FALSE, FALSE, FALSE, FALSE, FALSE

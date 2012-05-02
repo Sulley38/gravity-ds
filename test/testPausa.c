@@ -10,10 +10,9 @@ int ESTADO;
 int main() {
 	// LO DEL MAIN
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
-	initSpriteMem();guardarSpritesEnMemoria();cargarPaletaSprites();
+	cargarSprites();
 
 	// La prueba de los botones
-	consoleDemoInit();
 	Pausar();
 	while(TRUE);
 	return 0;

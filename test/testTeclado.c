@@ -10,7 +10,7 @@ int ESTADO;
 void imprimir() {
 	int tecla = 0;
 	while( !TECLA_PULSADA(tecla) ) { tecla++; }
-	printf( "Has pulsado la tecla %d\n", tecla );
+	iprintf( "Has pulsado la tecla %d\n", tecla );
 }
 
 int main() {
