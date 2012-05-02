@@ -5,26 +5,8 @@ temporizadores.c
 // añadir los includes que sean necesarios
 #include <nds.h>
 #include "defines.h"
-#include "graficos.h"
+#include "sonido.h"
 #include "temporizadores.h"
-
-// Variable de tiempo transcurrido
-int tiempo = 0;
-
-int tiempo_sonido_moneda=5;
-int sonido_moneda;
-
-// Devuelve el tiempo que ha transcurrido de partida
-int obtenerTiempo()
-{
-	return tiempo;
-}
-
-// Pone el contador de tiempo a cero
-void resetearTiempo()
-{
-	tiempo = 0;
-}
 
 
 // Este procedimiento habilita las interrupciones del temporizador
@@ -53,9 +35,12 @@ void DeshabilitarIntTemp()
 	EnableInts();
 }
 
-
-// Establece la frecuencia del temporizador 0 a la indicada en interrupciones/seg
-void prepararTemporizador(int frecuencia, int temp)
+/**
+ * Establece la frecuencia de interrupción del temporizador 'id' a la indicada por el parámetro.
+ * La frecuencia se mide en interrupciones por segundo.
+ * Se calcula el valor a partir del cual debe contar y se ajusta el registros de control.
+ */
+void prepararTemporizador(uint8 id, uint16 frecuencia)
 {
 	int latch = -1, divisor = 0;
 	// Calcula el latch
@@ -76,55 +61,67 @@ void prepararTemporizador(int frecuencia, int temp)
 	if( latch < 0 ) {
 		// No se puede contar a la frecuencia indicada: no se activa el temporizador
 		DeshabilitarIntTemp();
-		TIMER0_CNT = 0;
+		TEMP_CONTROL(id) = 0;
 	} else {
-		if (temp==0){
-			// Establece los registros
-			TIMER0_DAT = latch;
-			TIMER0_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
-		}
-		if(temp==1){
-			TIMER1_DAT = latch;
-			TIMER1_CNT = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
-		}
+		// Establece los registros
+		TEMP_DATOS(id) = latch;
+		TEMP_CONTROL(id) = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
 	}
 }
 
-// Activa el temporizador 0
-void iniciarTemporizador(int temp)
+/**
+ * Activa el temporizador 'id'.
+ * Para ello, enciende el bit 7 de su registro de control.
+ */
+void iniciarTemporizador(uint8 id)
 {
-	if (temp==0)		TIMER0_CNT = TIMER0_CNT | 1 << 7; // enciende bit 7
-	if (temp==1)		TIMER1_CNT = TIMER1_CNT | 1 << 7; // enciende bit 7
+	TEMP_CONTROL(id) = TEMP_CONTROL(id) | 1 << 7;
 }
 
-// Desactiva el temporizador 0
-void pararTemporizador(int temp)
+/**
+ * Desactiva el temporizador 'id'.
+ * Para ello, apaga el bit 7 de su registro de control.
+ */
+void pararTemporizador(uint8 id)
 {
-	if (temp==0)		TIMER0_CNT = TIMER0_CNT & ~(1 << 7); // apaga bit 7
-	if (temp==1)		TIMER1_CNT = TIMER1_CNT & ~(1 << 7); // apaga bit 7
+	TEMP_CONTROL(id) = TEMP_CONTROL(id) & ~(1 << 7);
 }
 
-// Rutina de atencion a la interrupcion del temporizador 0
+
+// ---------------------------------------
+// TEMPORIZADOR 0: Tiempo de partida
+// ---------------------------------------
+
+// Variable de tiempo transcurrido
+uint16 tiempo_juego = 0;
+
+/* Devuelve el tiempo que ha transcurrido de partida */
+uint16 obtenerTiempo()
+{
+	return tiempo_juego;
+}
+
+/* Pone el contador de tiempo a cero */
+void resetearTiempo()
+{
+	tiempo_juego = 0;
+}
+
+/* Rutina de atencion a la interrupcion del temporizador 0 */
 void intTemporizador0()
 {
-	tiempo++;
+	tiempo_juego++;
 }
 
-void intTempMoneda(){
-	if (tiempo_sonido_moneda==1)		soundSetFreq(sonido_moneda,10500);
-	if (tiempo_sonido_moneda==4)		soundSetVolume(sonido_moneda,60);
-	if (tiempo_sonido_moneda==5){
-		soundPause(sonido_moneda);
-		pararTemporizador(1);
-	}
+// ---------------------------------------
+// TEMPORIZADOR 1: Sonido de moneda
+// ---------------------------------------
 
-	tiempo_sonido_moneda ++;
+// Variable para controlar el progreso del sonido
+uint8 tiempo_sonido_moneda = 0;
 
-}
-
-void ruidoMoneda(){
-	iniciarTemporizador(1);
-	soundSetFreq(sonido_moneda,7000);
-	soundResume(sonido_moneda);
-	tiempo_sonido_moneda=0;
+/* Rutina de atencion a la interrupcion del temporizador 1 */
+void intTemporizador1() {
+	tiempo_sonido_moneda++;
+	ajustarSonido(tiempo_sonido_moneda);
 }

@@ -19,8 +19,11 @@ defines.h
 #define TECLAS_CNT	(*(vu16*)0x4000132) //registro de control del teclado
 
 // Aquí se definen los registros del temporizador
-#define TIMER0_CNT   (*(vuint16*)0x04000102) //registro de control del temporizador
+// Registros de control de los temporizadores
+#define TIMER0_CNT   (*(vuint16*)0x04000102)
 #define TIMER1_CNT   (*(vuint16*)0x04000106)
+#define TIMER2_CNT   (*(vuint16*)0x0400010A)
+#define TIMER3_CNT   (*(vuint16*)0x0400010E)
 // El temporizador se activa poniendo un 1 en el 7º bit.
 // El temporizador interrumpirá al desbordarse el contador, si hay un 1 en el 6º bit.
 // Los dos bits de menos peso indican lo siguiente:
@@ -29,8 +32,11 @@ defines.h
 //			10 frecuencia 33554432/256 hz
 //			11 frecuencia 33554432/1024 hz
 
-#define TIMER0_DAT    (*(vuint16*)0x04000100) //registro de datos del temporizador
+// Registros de datos de los temporizadores
+#define TIMER0_DAT    (*(vuint16*)0x04000100)
 #define TIMER1_DAT    (*(vuint16*)0x04000104)
+#define TIMER2_DAT    (*(vuint16*)0x04000108)
+#define TIMER3_DAT    (*(vuint16*)0x0400010C)
 // Se utiliza para indicar a partir de qué valor tiene que empezar a contar
 
 

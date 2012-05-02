@@ -10,6 +10,9 @@ uint8 Frame = 0;
 
 /* Definir el sistema de vídeo */
 void initVideo() {
+	/*  Poner en marcha el motor gráfico 2D. */
+    powerOn(POWER_ALL_2D);
+
     /*  Mapear la memoria VRAM para mostrar gráficos en las dos pantallas. */
     vramSetPrimaryBanks(VRAM_A_MAIN_BG,
                      VRAM_B_MAIN_SPRITE,

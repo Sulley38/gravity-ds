@@ -5,6 +5,7 @@ estado_avanzar.h
 #ifndef E_AVANZAR_H
 #define E_AVANZAR_H
 
+/* Número de bloques que hay en el nivel */
 #define CANTIDAD_BLOQUES 65
 
 /* Inicializa las variables de la partida */

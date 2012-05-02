@@ -25,7 +25,8 @@ void Pausar() {
 			oamClear(&oamMain,122,4);
 			ESTADO = AVANZAR_PERSONAJE;
 		} else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ) {
-			// Elimina los botones
+			// Elimina los botones y los elementos del juego
+			oamClear(&oamMain,0,51);
 			oamClear(&oamMain,122,2);
 			ESTADO = MENU;
 		}

@@ -6,39 +6,45 @@
 #include "sprites.h"
 
 
+/* Variables de control de la animación del menú */
+uint8 DesplazamientoAnimacion = 0;
+uint8 Animar = 0;
+
 /**
  * Muestra un par de botones con las opciones de jugar o salir.
  * Cambia de estado según lo que se haya pulsado.
+ * Al pulsar "Jugar", se crea un efecto de desplazamiento del menú.
  */
-int animacion=0;
-int animar=0;
-
 void MostrarMenu() {
-
-	if (animar)			animacion +=5;
 
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 
-	dibujar_botonJugar(60,20-animacion);
-	dibujar_botonSalir(60,110+animacion);
+	dibujar_botonJugar(60,20-DesplazamientoAnimacion);
+	dibujar_botonSalir(60,110+DesplazamientoAnimacion);
 
-	if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
-		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 )
-			animar=1;
-		else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 )
-			ESTADO = FIN;
+	if( !Animar ) {
+		// Esperar una entrada táctil del usuario
+		if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
+			if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 )
+				Animar = 1;
+			else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 )
+				ESTADO = FIN;
+		}
+	} else {
+		if( DesplazamientoAnimacion == 80 ) {
+			// Reestablece la animación
+			Animar = 0;
+			DesplazamientoAnimacion = 0;
+			 // Elimina los botones
+			oamClear(&oamMain,120,2);
+			oamClear(&oamMain,124,2);
+			// Cambio de estado: pasa al juego
+			ESTADO = CUENTA_ATRAS;
+		} else {
+			DesplazamientoAnimacion += 5;
+		}
 	}
-
-	if (animacion==80){
-		animacion=0;
-		animar=0;
-		 // Elimina los botones
-		oamClear(&oamMain,120,2);
-		oamClear(&oamMain,124,2);
-		ESTADO = CUENTA_ATRAS;
-	}
-
 
 }
 

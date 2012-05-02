@@ -2,12 +2,10 @@
 teclado.c
 -------------------------------------*/
 
-// añadir los includes que sean necesarios
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "teclado.h"
-#include "temporizadores.h"
 
 
 //Este procedimiento habilita las interrupciones del teclado

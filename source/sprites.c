@@ -1,7 +1,7 @@
 /**
  * Definición de todos los sprites del juego.
  * Las funciones cargan los sprites en la memoria antes de empezar la partida.
- * Es suficiente con llamar a la función cargarSprites() para realizar todo.
+ * Es suficiente con llamar a la función cargarSprites() para realizar todas las operaciones pertinentes.
  */
 
 #include <nds.h>
@@ -11,10 +11,10 @@
 /* Direcciones de memoria en las que están guardados los sprites */
 u16* Corredor[4];
 u16* Bloque;
+u16* Moneda;
 u16* botonJugar[2];
 u16* botonContinuar[2];
 u16* botonSalir[2];
-u16* moneda;
 
 /* Función principal para cargar lo relacionado con sprites */
 void cargarSprites(){
@@ -36,13 +36,13 @@ void initSpriteMem() {
 	Corredor[2] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	Corredor[3] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	Bloque = oamAllocateGfx(&oamMain, SpriteSize_64x32, SpriteColorFormat_256Color);
+	Moneda = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	botonJugar[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonJugar[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonContinuar[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonContinuar[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonSalir[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonSalir[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
-	moneda = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 
 }
 
@@ -128,18 +128,17 @@ void guardarSpritesEnMemoria(){
 		botonSalir[0][i] = bitsExitA[i*2] | (bitsExitA[(i*2)+1]<<8);
 		botonSalir[1][i] = bitsExitB[i*2] | (bitsExitB[(i*2)+1]<<8);
 	}
-	for(i = 0; i < 32 * 32 / 2; i++){
+	for(i = 0; i < 32 * 32 / 2; i++) {
 		Corredor[0][i] = bitsCorredorA[i*2] | (bitsCorredorA[(i*2)+1]<<8);
 		Corredor[1][i] = bitsCorredorB[i*2] | (bitsCorredorB[(i*2)+1]<<8);
 		Corredor[2][i] = bitsCorredorC[i*2] | (bitsCorredorC[(i*2)+1]<<8);
 		Corredor[3][i] = bitsCorredorD[i*2] | (bitsCorredorD[(i*2)+1]<<8);
 	}
-	for(i = 0; i < 64 * 16 / 2; i++){
+	for(i = 0; i < 64 * 16 / 2; i++) {
 		Bloque[i] = bitsBloque[i*2] | (bitsBloque[(i*2)+1]<<8);
 	}
-
-	for (i=0; i<16*16/2;i++){
-		moneda[i] = 170 | 170<<8;
+	for(i = 0; i < 16 * 16 / 2; i++) {
+		Moneda[i] = 170 | 170 << 8;
 	}
 
 }

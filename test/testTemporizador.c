@@ -14,7 +14,7 @@ int main() {
 	// Preparar el temporizador
 	irqSet(IRQ_TIMER0,intTemporizador0);
 	HabilitarIntTemp();
-	prepararTemporizador(1,0);
+	prepararTemporizador(0,1);
 
 	// Contar hasta 20
 	iprintf( "Chicos! Hoy vamos a aprender a contar hasta 20.\n" );

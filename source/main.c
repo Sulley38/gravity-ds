@@ -13,35 +13,28 @@
 #include "fondos.h"
 #include "graficos.h"
 #include "interrupciones.h"
+#include "sonido.h"
 #include "sprites.h"
-#include "temporizadores.h"
+
 
 int ESTADO = MENU;
-int sonido_moneda;
 
 //---------------------------------------------------------------------------------
 int main(void){
 //---------------------------------------------------------------------------------
-	sonido_moneda = soundPlayPSG(DutyCycle_50, 7000, 127,64);
-	soundPause(sonido_moneda);
-	/*  Poner en marcha el motor gráfico 2D. */
-    powerOn(POWER_ALL_2D);
-
-	soundEnable();
-	prepararTemporizador(12,1);
 
 	/*
-	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico,
+	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico y el de audio,
 	*  configurar el sistema de fondos y cargar los sprites
 	*/
 	lcdMainOnBottom();
 	initVideo();
+	cargarSonido();
 	//initFondos();
 	cargarSprites();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
-	HabilitarIntTemp();
 
 	/* Bucle principal */
 	uint8 CurrentFrame;
@@ -75,5 +68,6 @@ int main(void){
 		oamUpdate(&oamSub);
 	}
 
+	limpiarSonido();
 	return 0;
 }
