@@ -16,7 +16,7 @@ void mostrarPantallaInicio(){
 
 	pararTemporizador(0);
 	resetearTiempo();
-	mostrarFondoDegradado();
+	mostrarFondoAzul();
 
 	ESTADO = MENU;
 

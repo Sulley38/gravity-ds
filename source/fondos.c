@@ -97,7 +97,7 @@ void mostrarFondoPuma() {
                      puma1993BitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
-void mostrarFondoDegradado() {
+void mostrarFondoAzul() {
     dmaCopyHalfWords(DMA_CHANNEL,
                      degradadoBitmap, /* Variable generada automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
