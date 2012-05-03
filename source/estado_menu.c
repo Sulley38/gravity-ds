@@ -9,6 +9,7 @@
 /* Variables de control de la animación del menú */
 uint8 DesplazamientoAnimacion = 0;
 uint8 Animar = 0;
+int pantallaPulsada = 0;
 
 /**
  * Muestra un par de botones con las opciones de jugar o salir.
@@ -25,7 +26,7 @@ void MostrarMenu() {
 
 	if( !Animar ) {
 		// Esperar una entrada táctil del usuario
-		if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
+		if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188  && !pantallaPulsada) {
 			if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ){
 				Animar = 1;
 			}
@@ -47,6 +48,7 @@ void MostrarMenu() {
 			DesplazamientoAnimacion += 5;
 		}
 	}
+	pantallaPulsada = pos_pantalla.px;
 
 }
 
