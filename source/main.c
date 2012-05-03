@@ -4,6 +4,7 @@
  */
 
 #include <nds.h>
+#include <stdio.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
@@ -69,7 +70,6 @@ int main(void){
 		// Espera al siguiente frame
 		CurrentFrame = obtenerFrames();
 		while( obtenerFrames() == CurrentFrame );
-
 		// Actualiza las pantallas
 		oamUpdate(&oamMain);
 		oamUpdate(&oamSub);

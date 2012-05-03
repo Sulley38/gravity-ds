@@ -74,9 +74,9 @@ void Avanzar() {
 	}
 
 	//Teclado
-	if (!Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO))){
-		CambiarGravedad();
-	}
+	if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(START)) )														ESTADO = PAUSA;
+	if (!Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)))		CambiarGravedad();
+
 	Pulsado=TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
 
 

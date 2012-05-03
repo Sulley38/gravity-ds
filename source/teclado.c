@@ -38,8 +38,7 @@ void intTeclado()
 {
 	if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
 		//CambiarGravedad();
-		sonidoMoneda();
 	} else if( ESTADO == AVANZAR_PERSONAJE && (TECLA_PULSADA(START)) ) {
-		ESTADO = PAUSA;
+		//ESTADO = PAUSA;
 	}
 }
