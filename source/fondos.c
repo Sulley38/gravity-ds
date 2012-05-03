@@ -8,6 +8,7 @@ dovoto y otro de Jaeden Amero
 
 /* añadir aquí los includes para cada fondo. */
 #include "FondoEstrellado.h"
+#include "puma1993.h"
 
 /* Seleccionar un canal DMA para copiar a memoria las imágenes */
 static const int DMA_CHANNEL = 3;
@@ -88,3 +89,9 @@ void mostrarFondoEstrelladoSub() {
                      FondoEstrelladoBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
+void mostrarFondoPuma() {
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     puma1993Bitmap, /* Variable generada automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
+                     puma1993BitmapLen); /* Longitud (en bytes) generada automáticamente */
+}

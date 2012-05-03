@@ -58,6 +58,7 @@ defines.h
 #define AVANZAR_PERSONAJE	2
 #define PAUSA			3
 #define PUNTUACION		4
+#define FONDO_PUMA		5
 #define FIN				9
 
 

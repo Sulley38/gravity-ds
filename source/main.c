@@ -10,6 +10,7 @@
 #include "estado_menu.h"
 #include "estado_pausa.h"
 #include "estado_puntuacion.h"
+#include "estado_fondoPuma.h"
 #include "fondos.h"
 #include "graficos.h"
 #include "interrupciones.h"
@@ -17,7 +18,7 @@
 #include "sprites.h"
 
 
-int ESTADO = MENU;
+int ESTADO = FONDO_PUMA;
 
 //---------------------------------------------------------------------------------
 int main(void){
@@ -30,7 +31,10 @@ int main(void){
 	lcdMainOnBottom();
 	initVideo();
 	cargarSonido();
+
 	//initFondos();
+	//mostrarFondoPuma();
+
 	cargarSprites();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
@@ -40,6 +44,9 @@ int main(void){
 	uint8 CurrentFrame;
 	while( ESTADO != FIN ) {
 		switch( ESTADO ) {
+		case FONDO_PUMA:
+		mostrarPantallaInicio();
+		break;
 		case MENU:
 			MostrarMenu();
 		  break;
