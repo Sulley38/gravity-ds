@@ -16,7 +16,7 @@ void mostrarPantallaInicio(){
 	pararTemporizador(0);
 	resetearTiempo();
 	mostrarFondoEstrellado();
-	//quitar fondo
+
 	ESTADO = MENU;
 
 }
