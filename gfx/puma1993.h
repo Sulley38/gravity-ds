@@ -1,10 +1,3 @@
-/*
- * puma.h
- *
- *  Created on: 03/05/2012
- *      Author: Dani
- */
-
 #ifndef PUMA_H
 #define PUMA_H
 

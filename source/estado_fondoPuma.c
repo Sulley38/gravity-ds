@@ -8,6 +8,7 @@ void mostrarPantallaInicio(){
 
 	initFondos();
 	mostrarFondoPuma();
+	bgSetCenter (20,80,80);
 
 	iniciarTemporizador(0);
 
@@ -15,7 +16,7 @@ void mostrarPantallaInicio(){
 
 	pararTemporizador(0);
 	resetearTiempo();
-	mostrarFondoEstrellado();
+	mostrarFondoDegradado();
 
 	ESTADO = MENU;
 
