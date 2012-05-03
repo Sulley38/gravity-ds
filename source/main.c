@@ -7,10 +7,10 @@
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
+#include "estado_fondopuma.h"
 #include "estado_menu.h"
 #include "estado_pausa.h"
 #include "estado_puntuacion.h"
-#include "estado_fondopuma.h"
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sonido.h"
@@ -64,7 +64,6 @@ int main(void){
 		// Espera al siguiente frame
 		CurrentFrame = obtenerFrames();
 		while( obtenerFrames() == CurrentFrame );
-
 		// Actualiza las pantallas
 		oamUpdate(&oamMain);
 		oamUpdate(&oamSub);
