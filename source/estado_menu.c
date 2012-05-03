@@ -26,10 +26,12 @@ void MostrarMenu() {
 	if( !Animar ) {
 		// Esperar una entrada táctil del usuario
 		if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 ) {
-			if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 )
+			if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ){
 				Animar = 1;
-			else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 )
+			}
+			else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ){
 				ESTADO = FIN;
+			}
 		}
 	} else {
 		if( DesplazamientoAnimacion == 80 ) {

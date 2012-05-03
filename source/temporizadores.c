@@ -125,3 +125,9 @@ void intTemporizador1() {
 	tiempo_sonido_moneda++;
 	ajustarSonido(tiempo_sonido_moneda);
 }
+
+
+void resetearSonido()
+{
+	tiempo_sonido_moneda = 0;
+}

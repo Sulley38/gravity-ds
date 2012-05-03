@@ -19,10 +19,12 @@ static const uint16 Bloques[CANTIDAD_BLOQUES][2]= {{0, 0}, {0, 176}, {64, 0}, {6
 
 /* Variable de puntuación */
 uint8 MonedasRecogidas;
+int Pulsado;
 
 
 /* Inicializa las variables de la partida */
 void InicializarVariablesJuego() {
+	Pulsado=0;
 	DistanciaRecorrida = 0;
 	VelocidadHorizontal = 3;
 	VelocidadVertical = 3;
@@ -70,6 +72,13 @@ void Avanzar() {
 		oamClear(&oamMain,0,51);
 		ESTADO = PUNTUACION;
 	}
+
+	//Teclado
+	if (!Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO))){
+		CambiarGravedad();
+	}
+	Pulsado=TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
+
 
 }
 

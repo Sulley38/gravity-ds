@@ -39,6 +39,8 @@ void ajustarSonido(uint8 tiempoTranscurrido) {
 	} else if(tiempoTranscurrido == 5){
 		soundPause(sonido_moneda);
 		pararTemporizador(1);
+		resetearSonido();
+		soundSetFreq(sonido_moneda, 7000);
 	}
 }
 
