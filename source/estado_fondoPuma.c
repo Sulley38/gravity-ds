@@ -8,7 +8,7 @@ void mostrarPantallaInicio(){
 
 	initFondos();
 	mostrarFondoPuma();
-	bgSetCenter (20,80,80);
+	mostrarFondoArribaSub();
 
 	iniciarTemporizador(0);
 

@@ -10,6 +10,7 @@ dovoto y otro de Jaeden Amero
 #include "FondoEstrellado.h"
 #include "puma1993.h"
 #include "degradado.h"
+#include "FondoArriba.h"
 
 /* Seleccionar un canal DMA para copiar a memoria las imágenes */
 static const int DMA_CHANNEL = 3;
@@ -102,4 +103,10 @@ void mostrarFondoAzul() {
                      degradadoBitmap, /* Variable generada automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
                      degradadoBitmapLen); /* Longitud (en bytes) generada automáticamente */
+}
+void mostrarFondoArribaSub() {
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     FondoArribaBitmap, /* Variable generada automáticamente */
+                     (uint16 *)BG_BMP_RAM_SUB(0), /* Dirección del fondo 3 principal */
+                     FondoArribaBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }

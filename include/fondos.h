@@ -13,4 +13,5 @@ extern void mostrarFondoEstrellado();
 extern void mostrarFondoEstrelladoSub();
 extern void mostrarFondoPuma();
 extern void mostrarFondoAzul();
+extern void mostrarFondoArribaSub();
 #endif // FONDOS_H
