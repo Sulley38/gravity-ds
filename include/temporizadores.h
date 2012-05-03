@@ -28,5 +28,6 @@ extern void intTemporizador0();
 
 // Temporizador 1
 extern void intTemporizador1();
+extern void resetearSonido();
 
 #endif // TEMPORIZADORES_H

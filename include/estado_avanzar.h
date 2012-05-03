@@ -8,6 +8,9 @@ estado_avanzar.h
 /* Número de bloques que hay en el nivel */
 #define CANTIDAD_BLOQUES 65
 
+/* Macro para comprobar si una tecla ha sido pulsada */
+#define TECLA_PULSADA(n) !(TECLAS_DAT & (1 << 10 | 1 << n))
+
 /* Inicializa las variables de la partida */
 extern void InicializarVariablesJuego();
 /* Avanza un paso */

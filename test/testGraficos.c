@@ -29,7 +29,7 @@ void limpiar_monedas(){
 		posiciones_moneda[i][0] -= 5;
 		if (posiciones_moneda[i][0]<-26){
 			posiciones_moneda[i][0] = 270;
-			posiciones_moneda[i][1] = ((posiciones_moneda[i][1]*13927+324)%150)+20;
+			posiciones_moneda[i][1] = ((posiciones_moneda[i][1]*1397+123)%150)+20;
 			posiciones_moneda[i][2] = 0;
 		}
 	}
