@@ -43,9 +43,3 @@ void ajustarSonido(uint8 tiempoTranscurrido) {
 		soundSetFreq(sonido_moneda, 7000);
 	}
 }
-
-
-/* Libera los recursos usados por el sonido */
-void limpiarSonido() {
-	soundKill(sonido_moneda);
-}

@@ -15,8 +15,6 @@ estado_avanzar.h
 extern void InicializarVariablesJuego();
 /* Avanza un paso */
 extern void Avanzar();
-/* Permuta la dirección de la gravedad entre arriba y abajo */
-extern void CambiarGravedad();
 
 /* Dibuja el personaje del juego en la posición (X,Y) dada por PosicionPersonaje[] */
 void dibujar_personaje();

@@ -10,8 +10,7 @@
 #include "estado_menu.h"
 #include "estado_pausa.h"
 #include "estado_puntuacion.h"
-#include "estado_fondoPuma.h"
-#include "fondos.h"
+#include "estado_fondopuma.h"
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sonido.h"
@@ -26,15 +25,11 @@ int main(void){
 
 	/*
 	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico y el de audio,
-	*  configurar el sistema de fondos y cargar los sprites
+	*  y cargar los sprites
 	*/
 	lcdMainOnBottom();
 	initVideo();
 	cargarSonido();
-
-	//initFondos();
-	//mostrarFondoPuma();
-
 	cargarSprites();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
@@ -45,8 +40,8 @@ int main(void){
 	while( ESTADO != FIN ) {
 		switch( ESTADO ) {
 		case FONDO_PUMA:
-		mostrarPantallaInicio();
-		break;
+			mostrarPantallaInicio();
+		  break;
 		case MENU:
 			MostrarMenu();
 		  break;
@@ -75,6 +70,5 @@ int main(void){
 		oamUpdate(&oamSub);
 	}
 
-	limpiarSonido();
 	return 0;
 }

@@ -1,1 +1,2 @@
 http://libnds.devkitpro.org/index.html
+http://www.liranuna.com/nds-2d-tuts/

@@ -5,7 +5,6 @@ interrupciones.c
 #include <nds.h>
 #include "graficos.h"
 #include "interrupciones.h"
-#include "teclado.h"
 #include "temporizadores.h"
 
 //Este procedimiento inicializa la tabla de interrupciones para que el gestor de interrupciones sepa
@@ -16,11 +15,8 @@ void rellenarTablaInt()
 	irqSet(IRQ_VBLANK,intVBlank);
 	irqSet(IRQ_TIMER0,intTemporizador0);
 	irqSet(IRQ_TIMER1,intTemporizador1);
-	irqSet(IRQ_KEYS,intTeclado);
 
 	HabilitarIntTemp();
-	HabilitarIntTec();
-
 	prepararTemporizador(0,1);
 	prepararTemporizador(1,15);
 }

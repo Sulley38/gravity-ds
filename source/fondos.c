@@ -1,16 +1,14 @@
-/*---------------------------------------------------------------------------------
-Este código se ha implementado basándose en el ejemplo "Simple sprite demo" de 
-dovoto y otro de Jaeden Amero
----------------------------------------------------------------------------------*/
+/**
+ * Mecanismo para mostrar imágenes estáticas de fondo de pantalla
+ */
 
 #include <nds.h>
 #include "fondos.h"
 
-/* añadir aquí los includes para cada fondo. */
-#include "FondoEstrellado.h"
-#include "puma1993.h"
-#include "degradado.h"
-#include "FondoArriba.h"
+/* Añadir aquí los includes para cada fondo. */
+#include "FondoAzul.h"
+#include "FondoPuma.h"
+#include "FondoPuntuacion.h"
 
 /* Seleccionar un canal DMA para copiar a memoria las imágenes */
 static const int DMA_CHANNEL = 3;
@@ -77,36 +75,23 @@ void initFondos() {
 
 /* Para cada imagen que se quiera llevar a pantalla hay que hacer una de estas funciones. */
 
-void mostrarFondoEstrellado() {
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoEstrelladoBitmap, /* Variable generada automáticamente */
-                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
-                     FondoEstrelladoBitmapLen); /* Longitud (en bytes) generada automáticamente */
-}
-
-void mostrarFondoEstrelladoSub() {
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoEstrelladoBitmap, /* Variable generada automáticamente */
-                     (uint16 *)BG_BMP_RAM_SUB(0), /* Dirección del fondo 3 principal */
-                     FondoEstrelladoBitmapLen); /* Longitud (en bytes) generada automáticamente */
-}
-
 void mostrarFondoPuma() {
     dmaCopyHalfWords(DMA_CHANNEL,
-                     puma1993Bitmap, /* Variable generada automáticamente */
+                     FondoPumaBitmap, /* Variable generada automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
-                     puma1993BitmapLen); /* Longitud (en bytes) generada automáticamente */
+                     FondoPumaBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
 void mostrarFondoAzul() {
     dmaCopyHalfWords(DMA_CHANNEL,
-                     degradadoBitmap, /* Variable generada automáticamente */
+                     FondoAzulBitmap, /* Variable generada automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
-                     degradadoBitmapLen); /* Longitud (en bytes) generada automáticamente */
+                     FondoAzulBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
-void mostrarFondoArribaSub() {
+
+void mostrarFondoPuntuacion() {
     dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoArribaBitmap, /* Variable generada automáticamente */
+                     FondoPuntuacionBitmap, /* Variable generada automáticamente */
                      (uint16 *)BG_BMP_RAM_SUB(0), /* Dirección del fondo 3 principal */
-                     FondoArribaBitmapLen); /* Longitud (en bytes) generada automáticamente */
+                     FondoPuntuacionBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }

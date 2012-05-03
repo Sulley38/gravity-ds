@@ -19,12 +19,12 @@ static const uint16 Bloques[CANTIDAD_BLOQUES][2]= {{0, 0}, {0, 176}, {64, 0}, {6
 
 /* Variable de puntuación */
 uint8 MonedasRecogidas;
-int Pulsado;
+uint32 Pulsado;
 
 
 /* Inicializa las variables de la partida */
 void InicializarVariablesJuego() {
-	Pulsado=0;
+	Pulsado = 0;
 	DistanciaRecorrida = 0;
 	VelocidadHorizontal = 3;
 	VelocidadVertical = 3;
@@ -39,10 +39,19 @@ void InicializarVariablesJuego() {
 }
 
 /* Avanza un paso
- * Esta función se llama cada vez que se recibe una interrupción VBlank
- * Se encarga de actualizar los sprites que se muestran en pantalla
+ * Esta función se llama desde el bucle principal, una vez por frame
+ * Se encarga de actualizar los sprites que se muestran en pantalla y hacer la encuesta del teclado
  */
 void Avanzar() {
+
+	// Encuesta de teclado
+	if( !Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
+		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
+			PosicionPersonaje[2] = !PosicionPersonaje[2];
+	} else if( !Pulsado && TECLA_PULSADA(START) ) {
+		ESTADO = PAUSA; // Entra en el menú de pausa
+	}
+	Pulsado = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
 
 	// Avanza un poco la distancia recorrida del mapa
 	DistanciaRecorrida += VelocidadHorizontal;
@@ -73,19 +82,6 @@ void Avanzar() {
 		ESTADO = PUNTUACION;
 	}
 
-	//Teclado
-	if (!Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO))){
-		CambiarGravedad();
-	}
-	Pulsado=TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
-
-
-}
-
-/* Permuta la dirección de la gravedad entre arriba y abajo cuando se está apoyado en una plataforma */
-void CambiarGravedad() {
-	if( EnPlataforma() )
-		PosicionPersonaje[2] = !PosicionPersonaje[2];
 }
 
 

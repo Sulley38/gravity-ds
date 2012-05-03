@@ -18,27 +18,7 @@ defines.h
 #define TECLAS_DAT	(*(vu16*)0x4000130) //registro de datos del teclado
 #define TECLAS_CNT	(*(vu16*)0x4000132) //registro de control del teclado
 
-// Aquí se definen los registros del temporizador
-// Registros de control de los temporizadores
-#define TIMER0_CNT   (*(vuint16*)0x04000102)
-#define TIMER1_CNT   (*(vuint16*)0x04000106)
-#define TIMER2_CNT   (*(vuint16*)0x0400010A)
-#define TIMER3_CNT   (*(vuint16*)0x0400010E)
-// El temporizador se activa poniendo un 1 en el 7º bit.
-// El temporizador interrumpirá al desbordarse el contador, si hay un 1 en el 6º bit.
-// Los dos bits de menos peso indican lo siguiente:
-//			00 frecuencia 33554432 hz
-//			01 frecuencia 33554432/64 hz
-//			10 frecuencia 33554432/256 hz
-//			11 frecuencia 33554432/1024 hz
-
-// Registros de datos de los temporizadores
-#define TIMER0_DAT    (*(vuint16*)0x04000100)
-#define TIMER1_DAT    (*(vuint16*)0x04000104)
-#define TIMER2_DAT    (*(vuint16*)0x04000108)
-#define TIMER3_DAT    (*(vuint16*)0x0400010C)
-// Se utiliza para indicar a partir de qué valor tiene que empezar a contar
-
+// No nos hace falta definir los registros de temporizador, tenemos una macro para acceder a ellos
 
 // Para no liarse con los números a cada teclas se le ha asignado un nombre
 #define A			0 
@@ -53,17 +33,16 @@ defines.h
 #define L			9
 
 // Para no liarse con los números a cada estado se le puede asignar un nombre
-#define MENU			0
-#define CUENTA_ATRAS	1
-#define AVANZAR_PERSONAJE	2
-#define PAUSA			3
-#define PUNTUACION		4
-#define FONDO_PUMA		5
+#define FONDO_PUMA		0
+#define MENU			1
+#define CUENTA_ATRAS	2
+#define AVANZAR_PERSONAJE	3
+#define PAUSA			4
+#define PUNTUACION		5
 #define FIN				9
 
 
 // Variable global de estado
 extern int ESTADO;
-extern int sonido_moneda;
 
 #endif // DEFINES_H
