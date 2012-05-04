@@ -10,88 +10,40 @@
 #include "FondoPuma.h"
 #include "FondoPuntuacion.h"
 
-/* Seleccionar un canal DMA para copiar a memoria las imágenes */
-static const int DMA_CHANNEL = 3;
+
+/* Identificadores de los fondos */
+static int Fondo2, Fondo3, FondoSub3;
 
 /* Procedimiento para configurar el sistema de fondos. */
 void initFondos() {
-    /*  Establecer la afinidad del fondo 3 de la pantalla principal con color de 16 bits. */
-    REG_BG3CNT = BG_BMP16_256x256 |
-                 BG_BMP_BASE(0) | // La dirección inicial de memoria
-                 BG_PRIORITY(3); // Baja prioridad
-
-    /*  Establecer la matriz de transformación afin del fondo 3 de la pantalla principal
-        a la matriz de identidad. */
-    REG_BG3PA = 1 << 8;
-    REG_BG3PB = 0;
-    REG_BG3PC = 0;
-    REG_BG3PD = 1 << 8;
-
-/*******************************************************************************************/
-    /*  Definir la situación del fondo 3 de la pantalla principal. */
-    /*  Esto deberá cambiar según la posición en la que se quiera poner el gráfico */
-    REG_BG3X = 0;
-    REG_BG3Y = 0;
-/*******************************************************************************************/
-
-    /*  Establecer la afinidad del fondo 2 de la pantalla principal con color de 16 bits. */
-    REG_BG2CNT = BG_BMP16_128x128 |
-                 BG_BMP_BASE(8) | // La dirección inicial de memoria
-                 BG_PRIORITY(2);  // Baja prioridad
-
-    /*  Establecer la matriz de transformación afin del fondo 2 de la pantalla principal 
-        a la matriz de identidad. */
-    REG_BG2PA = 1 << 8;
-    REG_BG2PB = 0;
-    REG_BG2PC = 0;
-    REG_BG2PD = 1 << 8;
-
-/*******************************************************************************************/
-    /*  Definir la situación del fondo 2 de la pantalla principal. */
-    /*  Esto deberá cambiar según la posición en la que se quiera poner el gráfico */
-    REG_BG2X = -(SCREEN_WIDTH / 2 - 32) << 8;
-    REG_BG2Y = -32 << 8;
-/*******************************************************************************************/
-
-    /*  Establecer la afinidad del fondo 3 de la pantalla secundaria con color de 16 bits. */
-    REG_BG3CNT_SUB = BG_BMP16_256x256 |
-                     BG_BMP_BASE(0) | // La dirección inicial de memoria
-                     BG_PRIORITY(3); // Baja prioridad
-
-    /*  Establecer la matriz de transformación afin del fondo 3 de la pantalla secundaria
-        a la matriz de identidad. */
-    REG_BG3PA_SUB = 1 << 8;
-    REG_BG3PB_SUB = 0;
-    REG_BG3PC_SUB = 0;
-    REG_BG3PD_SUB = 1 << 8;
-
-/*******************************************************************************************/
-    /*  Definir la situación del fondo 3 de la pantalla secundaria. */
-    /*  Esto deberá cambiar según la posición en la que se quiera poner el gráfico */
-    REG_BG3X_SUB = 0;
-    REG_BG3Y_SUB = 0;
-/*******************************************************************************************/
+	// Fondo 2 de la pantalla principal (alta prioridad)
+	Fondo2 = bgInit(2, BgType_Bmp16, BgSize_B16_128x128, 0, 0);
+	bgSetPriority(Fondo2, 0);
+	// Fondo 3 de la pantalla principal (baja prioridad)
+	Fondo3 = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 3, 0);
+	bgSetPriority(Fondo3, 3);
+	// Fondo 3 de la pantalla secundaria (baja prioridad)
+	FondoSub3 = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 0, 0);
+	bgSetPriority(FondoSub3, 3);
+	bgUpdate();
 }
 
 /* Para cada imagen que se quiera llevar a pantalla hay que hacer una de estas funciones. */
 
 void mostrarFondoPuma() {
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoPumaBitmap, /* Variable generada automáticamente */
-                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
-                     FondoPumaBitmapLen); /* Longitud (en bytes) generada automáticamente */
+    dmaCopy(FondoPumaBitmap, /* Variable generada automáticamente */
+    		bgGetGfxPtr(Fondo3), /* Dirección del fondo 3 principal */
+            FondoPumaBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
 void mostrarFondoAzul() {
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoAzulBitmap, /* Variable generada automáticamente */
-                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo 3 principal */
-                     FondoAzulBitmapLen); /* Longitud (en bytes) generada automáticamente */
+    dmaCopy(FondoAzulBitmap, /* Variable generada automáticamente */
+            bgGetGfxPtr(Fondo3), /* Dirección del fondo 3 principal */
+            FondoAzulBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
 void mostrarFondoPuntuacion() {
-    dmaCopyHalfWords(DMA_CHANNEL,
-                     FondoPuntuacionBitmap, /* Variable generada automáticamente */
-                     (uint16 *)BG_BMP_RAM_SUB(0), /* Dirección del fondo 3 principal */
-                     FondoPuntuacionBitmapLen); /* Longitud (en bytes) generada automáticamente */
+    dmaCopy(FondoPuntuacionBitmap, /* Variable generada automáticamente */
+            bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
+            FondoPuntuacionBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }

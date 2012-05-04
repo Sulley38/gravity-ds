@@ -3,12 +3,12 @@
 
 //======================================================================
 //
-//	FondoPuntuacion, 256x191@16, 
+//	FondoPuntuacion, 256x192@16, 
 //	Alphabit on.
-//	+ bitmap lz77 compressed
-//	Total size: 21060 = 21060
+//	+ bitmap not compressed
+//	Total size: 98304 = 98304
 //
-//	Time-stamp: 2012-05-03, 21:06:44
+//	Time-stamp: 2012-05-03, 22:42:05
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.10
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -17,8 +17,8 @@
 #ifndef GRIT_FONDOPUNTUACION_H
 #define GRIT_FONDOPUNTUACION_H
 
-#define FondoPuntuacionBitmapLen 21060
-extern const unsigned int FondoPuntuacionBitmap[5265];
+#define FondoPuntuacionBitmapLen 98304
+extern const unsigned int FondoPuntuacionBitmap[24576];
 
 #endif // GRIT_FONDOPUNTUACION_H
 

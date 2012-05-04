@@ -5,10 +5,10 @@
 //
 //	FondoAzul, 256x192@16, 
 //	Alphabit on.
-//	+ bitmap lz77 compressed
-//	Total size: 11648 = 11648
+//	+ bitmap not compressed
+//	Total size: 98304 = 98304
 //
-//	Time-stamp: 2012-05-03, 21:06:44
+//	Time-stamp: 2012-05-03, 22:42:04
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.10
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -17,8 +17,8 @@
 #ifndef GRIT_FONDOAZUL_H
 #define GRIT_FONDOAZUL_H
 
-#define FondoAzulBitmapLen 11648
-extern const unsigned int FondoAzulBitmap[2912];
+#define FondoAzulBitmapLen 98304
+extern const unsigned int FondoAzulBitmap[24576];
 
 #endif // GRIT_FONDOAZUL_H
 

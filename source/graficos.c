@@ -14,19 +14,21 @@ void initVideo() {
     powerOn(POWER_ALL_2D);
 
     /*  Mapear la memoria VRAM para mostrar gráficos en las dos pantallas. */
-    vramSetPrimaryBanks(VRAM_A_MAIN_BG,
-                     VRAM_B_MAIN_SPRITE,
-                     VRAM_C_SUB_BG,
-                     VRAM_D_SUB_SPRITE);
+    vramSetPrimaryBanks(VRAM_A_MAIN_BG_0x06000000,
+            VRAM_B_MAIN_BG_0x06020000,
+            VRAM_C_SUB_BG_0x06200000,
+            VRAM_D_SUB_SPRITE);
+    vramSetBankE(VRAM_E_MAIN_SPRITE);
 
     /* Reserva el banco F para poder escribir en él la paleta de colores extendida */
     vramSetBankF(VRAM_F_LCD);
 
     /*  Establecer el modo de vídeo de la pantalla principal. */
-    videoSetMode(MODE_5_2D | // Establecer el modo gráfico 5
+    /*videoSetMode(MODE_5_2D | // Establecer el modo gráfico 5
                  DISPLAY_BG2_ACTIVE | // Activar el fondo 2
                  DISPLAY_BG3_ACTIVE); // Activar el fondo 3
-
+*/
+    videoSetMode(MODE_5_2D);
     /*  Establecer el modo de vídeo de la pantalla secundaria. */
     videoSetModeSub(MODE_5_2D | // Establecer el modo gráfico 5
                     DISPLAY_BG3_ACTIVE); // Activar el fondo 3
