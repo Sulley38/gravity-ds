@@ -11,6 +11,7 @@ extern void initFondos();
 /* Para cada imagen que se quiera llevar a pantalla hay que hacer una de estas funciones. */
 extern void mostrarFondoPuma();
 extern void mostrarFondoAzul();
+extern void mostrarFondoLogo();
 extern void mostrarFondoPuntuacion();
-extern void mostrarFONDOPRINCIPAL();
+
 #endif // FONDOS_H

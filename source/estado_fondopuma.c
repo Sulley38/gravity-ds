@@ -15,7 +15,7 @@ void mostrarPantallaInicio(){
 	// Carga el sistema de fondos y la imagen de Puma Corp.
 	initFondos();
 	mostrarFondoPuma();
-	mostrarFONDOPRINCIPAL();
+	mostrarFondoLogo();
 
 	// Espera 3 segundos
 	iniciarTemporizador(0);

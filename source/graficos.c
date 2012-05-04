@@ -23,15 +23,9 @@ void initVideo() {
     /* Reserva el banco F para poder escribir en él la paleta de colores extendida */
     vramSetBankF(VRAM_F_LCD);
 
-    /*  Establecer el modo de vídeo de la pantalla principal. */
-    /*videoSetMode(MODE_5_2D | // Establecer el modo gráfico 5
-                 DISPLAY_BG2_ACTIVE | // Activar el fondo 2
-                 DISPLAY_BG3_ACTIVE); // Activar el fondo 3
-*/
+    /*  Establecer el modo de vídeo de las pantallas principal y secundaria. */
     videoSetMode(MODE_5_2D);
-    /*  Establecer el modo de vídeo de la pantalla secundaria. */
-    videoSetModeSub(MODE_5_2D | // Establecer el modo gráfico 5
-                    DISPLAY_BG3_ACTIVE); // Activar el fondo 3
+    videoSetModeSub(MODE_5_2D);
 }
 
 

@@ -5,11 +5,12 @@
 #include <nds.h>
 #include "fondos.h"
 
+
 /* Añadir aquí los includes para cada fondo. */
 #include "FondoAzul.h"
+#include "FondoLogo.h"
 #include "FondoPuma.h"
 #include "FondoPuntuacion.h"
-#include "FONDOPRINCIPAL1.h"
 
 
 /* Identificadores de los fondos */
@@ -21,12 +22,11 @@ void initFondos() {
 	Fondo2 = bgInit(2, BgType_Bmp16, BgSize_B16_128x128, 0, 0);
 	bgSetPriority(Fondo2, 0);
 	// Fondo 3 de la pantalla principal (baja prioridad)
-	Fondo3 = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 3, 0);
+	Fondo3 = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 4, 0);
 	bgSetPriority(Fondo3, 3);
 	// Fondo 3 de la pantalla secundaria (baja prioridad)
 	FondoSub3 = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 0, 0);
 	bgSetPriority(FondoSub3, 3);
-	bgUpdate();
 }
 
 /* Para cada imagen que se quiera llevar a pantalla hay que hacer una de estas funciones. */
@@ -43,14 +43,14 @@ void mostrarFondoAzul() {
             FondoAzulBitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
 
+void mostrarFondoLogo() {
+    dmaCopy(FondoLogoBitmap, /* Variable generada automáticamente */
+            bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
+            FondoLogoBitmapLen); /* Longitud (en bytes) generada automáticamente */
+}
+
 void mostrarFondoPuntuacion() {
     dmaCopy(FondoPuntuacionBitmap, /* Variable generada automáticamente */
             bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
             FondoPuntuacionBitmapLen); /* Longitud (en bytes) generada automáticamente */
-}
-
-void mostrarFONDOPRINCIPAL() {
-    dmaCopy(FONDOPRINCIPAL1Bitmap, /* Variable generada automáticamente */
-            bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
-            FONDOPRINCIPAL1BitmapLen); /* Longitud (en bytes) generada automáticamente */
 }
