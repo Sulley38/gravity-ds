@@ -9,6 +9,7 @@
 #include "FondoAzul.h"
 #include "FondoPuma.h"
 #include "FondoPuntuacion.h"
+#include "FONDOPRINCIPAL1.h"
 
 
 /* Identificadores de los fondos */
@@ -46,4 +47,10 @@ void mostrarFondoPuntuacion() {
     dmaCopy(FondoPuntuacionBitmap, /* Variable generada automáticamente */
             bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
             FondoPuntuacionBitmapLen); /* Longitud (en bytes) generada automáticamente */
+}
+
+void mostrarFONDOPRINCIPAL() {
+    dmaCopy(FONDOPRINCIPAL1Bitmap, /* Variable generada automáticamente */
+            bgGetGfxPtr(FondoSub3), /* Dirección del fondo 3 secundario */
+            FONDOPRINCIPAL1BitmapLen); /* Longitud (en bytes) generada automáticamente */
 }

@@ -12,5 +12,5 @@ extern void initFondos();
 extern void mostrarFondoPuma();
 extern void mostrarFondoAzul();
 extern void mostrarFondoPuntuacion();
-
+extern void mostrarFONDOPRINCIPAL();
 #endif // FONDOS_H
