@@ -1,25 +1,25 @@
 
-//{{BLOCK(FondoPuntuacion)
+//{{BLOCK(FondoLogo)
 
 //======================================================================
 //
-//	FondoPuntuacion, 256x192@16, 
+//	FondoLogo, 256x192@16, 
 //	Alphabit on.
 //	+ bitmap not compressed
 //	Total size: 98304 = 98304
 //
-//	Time-stamp: 2012-05-04, 21:49:52
+//	Time-stamp: 2012-05-04, 21:49:51
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.10
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-#ifndef GRIT_FONDOPUNTUACION_H
-#define GRIT_FONDOPUNTUACION_H
+#ifndef GRIT_FONDOLOGO_H
+#define GRIT_FONDOLOGO_H
 
-#define FondoPuntuacionBitmapLen 98304
-extern const unsigned int FondoPuntuacionBitmap[24576];
+#define FondoLogoBitmapLen 98304
+extern const unsigned int FondoLogoBitmap[24576];
 
-#endif // GRIT_FONDOPUNTUACION_H
+#endif // GRIT_FONDOLOGO_H
 
-//}}BLOCK(FondoPuntuacion)
+//}}BLOCK(FondoLogo)

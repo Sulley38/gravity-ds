@@ -1,0 +1,29 @@
+// Fichero de prueba de la pantalla táctil
+
+#include <nds.h>
+#include <stdio.h>
+
+int ESTADO;
+
+int main() {
+
+	consoleDemoInit();
+
+	touchPosition pantalla;
+	u16 OldX = 0, OldY = 0;
+
+	touchRead(&pantalla);
+	while(TRUE)	{
+
+		while( (pantalla.px == OldX && pantalla.py == OldY) || (pantalla.px == 0 && pantalla.py == 0) ) {
+			touchRead(&pantalla);
+			swiWaitForVBlank();
+		}
+
+		iprintf("Has tocado en: (%d, %d)\n", pantalla.px, pantalla.py);
+		OldX = pantalla.px;
+		OldY = pantalla.py;
+	}
+
+	return 0;
+}
