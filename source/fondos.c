@@ -12,6 +12,7 @@
 #include "FondoPuma.h"
 #include "FondoPuntuacion.h"
 
+
 /* Identificadores de los fondos */
 static int Fondo2, Fondo3, FondoSub3;
 
