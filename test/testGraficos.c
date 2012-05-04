@@ -6,7 +6,7 @@
 #include "sprites.h"
 
 int ESTADO = AVANZAR_PERSONAJE;
-int posiciones_moneda[9][3]={{260,151,1}, {290,48,1}, {320,213,1}, {350,208,1}, {380,122,1}, {410,159,1}, {440,208,1}, {470,71,1}, {500,214,1}};
+int posiciones_moneda[9][3]={{260,151,0}, {290,48,0}, {320,213,0}, {350,208,0}, {380,122,0}, {410,159,0}, {440,208,0}, {470,71,1}, {500,214,1}};
 
 void dibujar_monedas(){
 	int i;
@@ -18,7 +18,7 @@ void dibujar_monedas(){
 				1, // Índice de paleta
 				SpriteSize_8x16, SpriteColorFormat_256Color,
 				Moneda, // Puntero al sprite
-				-1, FALSE, posiciones_moneda[i][2], FALSE, FALSE, FALSE
+				-1, FALSE, !posiciones_moneda[i][2], FALSE, FALSE, FALSE
 				);
 	}
 }
@@ -30,7 +30,7 @@ void limpiar_monedas(){
 		if (posiciones_moneda[i][0]<-26){
 			posiciones_moneda[i][0] = 270;
 			posiciones_moneda[i][1] = ((posiciones_moneda[i][1]*1397+123)%150)+20;
-			posiciones_moneda[i][2] = 0;
+			posiciones_moneda[i][2] = 1;
 		}
 	}
 
