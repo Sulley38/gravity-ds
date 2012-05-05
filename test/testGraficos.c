@@ -4,6 +4,10 @@
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sprites.h"
+#include "sonido.h"
+#include "fondos.h"
+
+#include "FondoAzul.h"
 
 int PUNTOS_TOTALES=0;
 int ESTADO = AVANZAR_PERSONAJE;
@@ -16,8 +20,8 @@ void dibujar_monedas(){
 				i+60, // OAM Index
 				posiciones_moneda[i][0],posiciones_moneda[i][1], // Posición X e Y
 				1, // Prioridad (menor -> arriba)
-				1, // Índice de paleta
-				SpriteSize_8x16, SpriteColorFormat_256Color,
+				2, // Índice de paleta
+				SpriteSize_16x16, SpriteColorFormat_256Color,
 				Moneda, // Puntero al sprite
 				-1, FALSE, !posiciones_moneda[i][2], FALSE, FALSE, FALSE
 				);
@@ -31,9 +35,11 @@ uint8 tocar(uint8 x, uint8 y){
 	touchPosition pos_pantalla;
 	touchRead(&pos_pantalla);
 
-if (pos_pantalla.px >= x && pos_pantalla.px <= x+8){
+if (pos_pantalla.px >= x && pos_pantalla.px <= x+16){
 	if (pos_pantalla.py >= y && pos_pantalla.py <= y+16){
-	tocado=1;}
+		tocado=1;
+		sonidoMoneda();
+	}
 }
 return tocado;
 }
@@ -62,9 +68,10 @@ void limpiar_monedas(){
 
 int main(){
 
-
+	cargarSonido();
+	cargarFondo(FondoAzulBitmap, Fondo3, FondoAzulBitmapLen);
 	/*  COPIAPEGA DEL PRINCIPAL */
-	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();rellenarTablaInt();
+	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();
 	cargarSprites();
 	/*Empieza lo mio*/
 	while(1){

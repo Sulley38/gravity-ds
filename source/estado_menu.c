@@ -6,6 +6,7 @@
 #include "estado_cuentaatras.h"
 #include "estado_menu.h"
 #include "sprites.h"
+#include "pantalla.h"
 
 
 /* Variables de control de la animación del menú */
@@ -28,17 +29,10 @@ void MostrarMenu() {
 
 	if( !Animar ) {
 		// Esperar una entrada táctil del usuario
-		if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188  && !pantallaPulsada) {
-			if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ){
-				Animar = 1;
-			}
-			else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ){
-				ESTADO = FIN;
-			}
-		}
-		pantallaPulsada = pos_pantalla.px;
+		Animar = pantallaEncuesta();
 	} else {
-		if( DesplazamientoAnimacion == 80 ) {
+		DesplazamientoAnimacion += 5;
+		if( DesplazamientoAnimacion == 80 && Animar==1) {
 			// Reestablece la animación
 			Animar = 0;
 			DesplazamientoAnimacion = 0;
@@ -49,12 +43,9 @@ void MostrarMenu() {
 			InicializarCuentaAtras();
 			InicializarVariablesJuego();
 			ESTADO = CUENTA_ATRAS;
-		} else {
-			DesplazamientoAnimacion += 5;
 		}
+		else if( DesplazamientoAnimacion == 80 && Animar==2)			ESTADO = FIN;
 	}
-
-
 }
 
 

@@ -13,7 +13,6 @@
  */
 uint8 DesplazamientoAnimacion_Pausa = 0;
 uint8 Animar_Pausa = 0;
-int pantallaPulsada_Pausa = 0;
 
 void Pausar() {
 
@@ -23,15 +22,10 @@ void Pausar() {
 	dibujar_botonContinuar(60-DesplazamientoAnimacion_Pausa,20);
 	dibujar_botonSalir(60+DesplazamientoAnimacion_Pausa,110);
 
-	if( pos_pantalla.px >= 60 && pos_pantalla.px <= 188 && Animar_Pausa==0) {
-		if( pos_pantalla.py >= 20 && pos_pantalla.py <= 84 ) {
-
-			Animar_Pausa = 1;
-		} else if( pos_pantalla.py >= 110 && pos_pantalla.py <= 174 ) {
-			Animar_Pausa = 2;
-		}
+	if( !Animar_Pausa) {
+		Animar_Pausa=pantallaEncuesta();
 	}
-	else if(Animar_Pausa){
+	else {
 		DesplazamientoAnimacion_Pausa += 5;
 		if (DesplazamientoAnimacion_Pausa==160){
 			 if (Animar_Pausa==1){
