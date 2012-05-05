@@ -35,6 +35,7 @@ void MostrarMenu() {
 				ESTADO = FIN;
 			}
 		}
+		pantallaPulsada = pos_pantalla.px;
 	} else {
 		if( DesplazamientoAnimacion == 80 ) {
 			// Reestablece la animación
@@ -51,7 +52,7 @@ void MostrarMenu() {
 			DesplazamientoAnimacion += 5;
 		}
 	}
-	pantallaPulsada = pos_pantalla.px;
+
 
 }
 
