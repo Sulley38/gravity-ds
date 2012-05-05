@@ -7,15 +7,20 @@
 #include "temporizadores.h"
 
 
-/**
- * Muestra la imagen del puma y espera 3 segundos antes de pasar al menú
- */
-void mostrarPantallaInicio(){
+/* Cabeceras específicas de cada fondo */
+#include "FondoAzul.h"
+#include "FondoLogo.h"
+#include "FondoPuma.h"
+#include "FondoPuntuacion.h"
 
-	// Carga el sistema de fondos y la imagen de Puma Corp.
-	initFondos();
-	mostrarFondoPuma();
-	mostrarFondoLogo();
+/**
+ * Muestra las imágenes de Puma Corporation y el logo del juego, y espera 3 segundos antes de pasar al menú.
+ */
+void mostrarPantallaInicio() {
+
+	// Carga la imagen de Puma Corp. y el logo del juego
+	cargarFondo(FondoPumaBitmap, Fondo3, FondoPumaBitmapLen);
+	cargarFondo(FondoLogoBitmap, FondoSub3, FondoLogoBitmapLen);
 
 	// Espera 3 segundos
 	iniciarTemporizador(0);
@@ -23,9 +28,9 @@ void mostrarPantallaInicio(){
 	pararTemporizador(0);
 	resetearTiempo();
 
-	// Muestra los fondos principales del juego
-	mostrarFondoAzul();
-	mostrarFondoPuntuacion();
+	// Carga los fondos principales del juego
+	cargarFondo(FondoAzulBitmap, Fondo3, FondoAzulBitmapLen);
+	cargarFondo(FondoPuntuacionBitmap, FondoSub3, FondoPuntuacionBitmapLen);
 
 	// Pasa al menú
 	ESTADO = MENU;

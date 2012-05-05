@@ -5,7 +5,7 @@ estado_fondopuma.h
 #ifndef E_FONDOPUMA_H
 #define E_FONDOPUMA_H
 
-/* Muestra la imagen del puma y espera 3 segundos antes de pasar al menú */
+/* Muestra las imágenes de Puma Corporation y el logo del juego, y espera 3 segundos */
 extern void mostrarPantallaInicio();
 
 #endif // E_FONDOPUMA_H

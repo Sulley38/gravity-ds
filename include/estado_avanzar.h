@@ -15,6 +15,8 @@ estado_avanzar.h
 extern void InicializarVariablesJuego();
 /* Avanza un paso */
 extern void Avanzar();
+/* Actualiza convenientemente los sprites que se muestran en pantalla */
+extern void ActualizarPantalla();
 
 /* Dibuja el personaje del juego en la posición (X,Y) dada por PosicionPersonaje[] */
 void dibujar_personaje();

@@ -5,7 +5,7 @@ temporizadores.h
 #ifndef TEMPORIZADORES_H
 #define TEMPORIZADORES_H
 
-/* Macros para acceder directamente a los registros del temporizador n */
+/* Macros para acceder directamente a los registros de cualquier temporizador */
 #define TEMP_CONTROL(n) (*(vuint16*)(0x04000102 + (n << 2)))
 #define TEMP_DATOS(n) (*(vuint16*)(0x04000100 + (n << 2)))
 

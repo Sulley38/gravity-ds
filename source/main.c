@@ -11,6 +11,7 @@
 #include "estado_menu.h"
 #include "estado_pausa.h"
 #include "estado_puntuacion.h"
+#include "fondos.h"
 #include "graficos.h"
 #include "interrupciones.h"
 #include "sonido.h"
@@ -24,13 +25,14 @@ int main(void){
 //---------------------------------------------------------------------------------
 
 	/*
-	*  Establecer la pantalla inferior como principal, inicializar el sistema gráfico y el de audio,
-	*  y cargar los sprites
+	*  Establecer la pantalla inferior como principal e inicializa los sistemas de
+	*  gráficos (fondos y sprites) y sonido.
 	*/
 	lcdMainOnBottom();
 	initVideo();
-	cargarSonido();
+	initFondos();
 	cargarSprites();
+	cargarSonido();
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
@@ -47,9 +49,12 @@ int main(void){
 		  break;
 		case CUENTA_ATRAS:
 			HacerCuentaAtras();
+			ActualizarPantalla();
 		  break;
 		case AVANZAR_PERSONAJE:
+			TerminarCuentaAtras();
 			Avanzar();
+			ActualizarPantalla();
 		  break;
 		case PAUSA:
 			Pausar();

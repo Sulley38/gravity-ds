@@ -5,7 +5,6 @@
 #include "estado_avanzar.h"
 #include "graficos.h"
 #include "sprites.h"
-#include "temporizadores.h"
 
 
 /* Variables de estado del personaje */
@@ -19,43 +18,50 @@ static const uint16 Bloques[CANTIDAD_BLOQUES][2]= {{0, 0}, {0, 176}, {64, 0}, {6
 
 /* Variable de puntuación */
 uint8 MonedasRecogidas;
-uint32 Pulsado;
-
+/* Variable de control de la encuesta de teclado */
+uint32 TecladoActivo;
 
 /* Inicializa las variables de la partida */
 void InicializarVariablesJuego() {
-	Pulsado = 0;
 	DistanciaRecorrida = 0;
 	VelocidadHorizontal = 3;
 	VelocidadVertical = 3;
 	PosicionPersonaje[0] = 128;
-	PosicionPersonaje[1] = 32;
+	PosicionPersonaje[1] = 54;
 	PosicionPersonaje[2] = 0;
+
 	BloqueExtremoIzq = 0;
 	BloqueExtremoDer = 0;
 
 	MonedasRecogidas = 0;
-	resetearTiempo();
+	TecladoActivo = 0;
 }
 
-/* Avanza un paso
- * Esta función se llama desde el bucle principal, una vez por frame
- * Se encarga de actualizar los sprites que se muestran en pantalla y hacer la encuesta del teclado
+
+/**
+ * Avanza un paso.
+ * Aumenta la distancia recorrida y hace la encuesta de teclado.
+ * Se guarda una variable de control para evitar detecciones múltiples de una tecla pulsada.
  */
 void Avanzar() {
-
 	// Encuesta de teclado
-	if( !Pulsado && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
+	if( !TecladoActivo && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
 		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
 			PosicionPersonaje[2] = !PosicionPersonaje[2];
-	} else if( !Pulsado && TECLA_PULSADA(START) ) {
+	} else if( !TecladoActivo && TECLA_PULSADA(START) ) {
 		ESTADO = PAUSA; // Entra en el menú de pausa
 	}
-	Pulsado = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
+	TecladoActivo = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
 
 	// Avanza un poco la distancia recorrida del mapa
 	DistanciaRecorrida += VelocidadHorizontal;
+}
 
+/**
+ * Actualiza convenientemente los sprites que se muestran en pantalla.
+ * Esta función se llama desde el bucle principal, una vez por frame.
+ */
+void ActualizarPantalla() {
 	// Limpia los bloques que hubiera anteriormente
 	limpiar_bloques();
 	// Dibuja los nuevos bloques que se vean en pantalla
@@ -81,7 +87,6 @@ void Avanzar() {
 		oamClear(&oamMain,0,51);
 		ESTADO = PUNTUACION;
 	}
-
 }
 
 

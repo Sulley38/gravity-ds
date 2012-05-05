@@ -89,13 +89,13 @@ void pararTemporizador(uint8 id)
 
 
 // ---------------------------------------
-// TEMPORIZADOR 0: Tiempo de partida
+// TEMPORIZADOR 0: Contador genérico
 // ---------------------------------------
 
 // Variable de tiempo transcurrido
 uint16 tiempo_juego = 0;
 
-/* Devuelve el tiempo que ha transcurrido de partida */
+/* Devuelve el tiempo que ha transcurrido desde la activación el temporziador */
 uint16 obtenerTiempo()
 {
 	return tiempo_juego;

@@ -44,6 +44,5 @@ defines.h
 
 // Variable global de estado
 extern int ESTADO;
-extern int PUNTOS_TOTALES;
 
 #endif // DEFINES_H

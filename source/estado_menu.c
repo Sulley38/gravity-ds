@@ -2,6 +2,7 @@
 
 #include <nds.h>
 #include "defines.h"
+#include "estado_avanzar.h"
 #include "estado_menu.h"
 #include "sprites.h"
 
@@ -42,7 +43,9 @@ void MostrarMenu() {
 			 // Elimina los botones
 			oamClear(&oamMain,120,2);
 			oamClear(&oamMain,124,2);
-			// Cambio de estado: pasa al juego
+			// Cambio de estado: inicializa las variables y pasa al juego
+			InicializarCuentaAtras();
+			InicializarVariablesJuego();
 			ESTADO = CUENTA_ATRAS;
 		} else {
 			DesplazamientoAnimacion += 5;
@@ -57,7 +60,7 @@ void MostrarMenu() {
  * Dibuja el botón PLAY en la posición (X,Y)
  * ** OAM Index: se reservan el 120 y el 121
  */
-void dibujar_botonJugar(uint8 X, uint8 Y) {
+void dibujar_botonJugar(int X, int Y) {
 	oamSet(&oamMain,
 		120, // OAM Index
 		X, Y, // Posición X e Y
@@ -83,7 +86,7 @@ void dibujar_botonJugar(uint8 X, uint8 Y) {
  * Dibuja el botón RESUME en la posición (X,Y)
  * ** OAM Index: se reservan el 122 y el 123
  */
-void dibujar_botonContinuar(uint8 X, uint8 Y) {
+void dibujar_botonContinuar(int X, int Y) {
 	oamSet(&oamMain,
 		122, // OAM Index
 		X, Y, // Posición X e Y
@@ -109,7 +112,7 @@ void dibujar_botonContinuar(uint8 X, uint8 Y) {
  * Dibuja el botón EXIT en la posición (X,Y)
  * ** OAM Index: se reservan el 124 y el 125
  */
-void dibujar_botonSalir(uint8 X, uint8 Y) {
+void dibujar_botonSalir(int X, int Y) {
 	oamSet(&oamMain,
 		124, // OAM Index
 		X, Y, // Posición X e Y
