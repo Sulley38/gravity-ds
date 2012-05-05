@@ -3,6 +3,7 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
+#include "estado_cuentaatras.h"
 #include "estado_menu.h"
 #include "sprites.h"
 

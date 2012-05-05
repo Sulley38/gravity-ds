@@ -2,27 +2,19 @@
 
 #include <nds.h>
 #include <stdio.h>
+#include "pantalla.h"
 
 int ESTADO;
 
 int main() {
 
 	consoleDemoInit();
+	uint16 Lectura;
 
-	touchPosition pantalla;
-	u16 OldX = 0, OldY = 0;
-
-	touchRead(&pantalla);
 	while(TRUE)	{
-
-		while( (pantalla.px == OldX && pantalla.py == OldY) || (pantalla.px == 0 && pantalla.py == 0) ) {
-			touchRead(&pantalla);
-			swiWaitForVBlank();
-		}
-
-		iprintf("Has tocado en: (%d, %d)\n", pantalla.px, pantalla.py);
-		OldX = pantalla.px;
-		OldY = pantalla.py;
+		Lectura = pantallaTocada();
+		if( Lectura != 0 )
+			iprintf("Has tocado en: (%d, %d)\n", (uint8)(Lectura >> 8) , (uint8)Lectura);
 	}
 
 	return 0;
