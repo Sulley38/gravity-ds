@@ -5,9 +5,7 @@ sprites.h
 #ifndef SPRITES_H
 #define SPRITES_H
 
-/* Constantes de tamaño de los sprites **/
-#define ANCHURA_PANTALLA 256
-#define ALTURA_PANTALLA 192
+/* Constantes de tamaño de los sprites */
 #define ANCHURA_PERSONAJE 32
 #define ALTURA_PERSONAJE 32
 #define ANCHURA_BLOQUE 64
@@ -23,7 +21,6 @@ extern u16* botonSalir[2];
 
 /* Función principal para cargar lo relacionado con sprites */
 extern void cargarSprites();
-
 
 /* Inicializa la memoria de sprites */
 void initSpriteMem();

@@ -9,8 +9,8 @@ sonido.h
 extern void cargarSonido();
 
 /* Reproduce el sonido de moneda pulsada */
-extern void ruidoMoneda();
+extern void sonidoMoneda();
 /* Ajusta el sonido conforme pasa el tiempo */
-extern void ajustarSonido(uint8 tiempoTranscurrido);
+extern void ajustarSonido();
 
 #endif // SONIDO_H

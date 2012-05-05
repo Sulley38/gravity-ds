@@ -15,24 +15,24 @@
 
 /* Variable de control de la cuenta atrás */
 uint8 Cuenta;
-//int FactorEscala;
+s32 FactorEscala;
 
 /**
- * Prepara el temporizador y carga la situación inicial para hacer la cuenta atrás.
+ * Carga la situación inicial para hacer la cuenta atrás e inicia el temporizador.
  */
 void InicializarCuentaAtras() {
-	// Configura el temporizador para hacer la animación
-	prepararTemporizador(0,10);
-	iniciarTemporizador(0);
+	// Inicializar variables
+	Cuenta = 3;
+	FactorEscala = floatToFixed(0.5,8);
 
-	// Primer número
+	// Cargar primer número
 	cargarFondo(CuentaAtras3Bitmap, Fondo2, CuentaAtras3BitmapLen);
-	bgSetCenter(Fondo2,64,32);
+	bgSetCenter(Fondo2, -128, -32);
 	bgShow(Fondo2);
 	bgUpdate();
 
-	Cuenta = 3;
-	//FactorEscala = 0;
+	// Inicia el temporizador para hacer la animación
+	iniciarTemporizador(0);
 }
 
 /**
@@ -43,36 +43,38 @@ void InicializarCuentaAtras() {
 void HacerCuentaAtras() {
 
 	// Animación de la cuenta atrás
+	FactorEscala += 1 << 2;
+	bgSetScale(Fondo2, FactorEscala, FactorEscala);
+	bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 	if( Cuenta == 3 ) {
-		//FactorEscala++;
-		//bgSetScale(Fondo2, FactorEscala, FactorEscala);
-		//bgSetCenter(Fondo2, 64 + FactorEscala, 32 + FactorEscala);
 		// Pasa al siguiente número
-		if( obtenerTiempo() > 10 ) {
+		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtras2Bitmap, Fondo2, CuentaAtras2BitmapLen);
-			bgSetCenter(Fondo2,64,32);
+			bgSetCenter(Fondo2, -128, -32);
+			FactorEscala = floatToFixed(0.5,8);
 			resetearTiempo();
-			Cuenta = 2;
+			Cuenta--;
 		}
 	} else if( Cuenta == 2 ) {
 		// Pasa al siguiente número
-		if( obtenerTiempo() > 10 ) {
+		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtras1Bitmap, Fondo2, CuentaAtras1BitmapLen);
-			bgSetCenter(Fondo2,64,32);
+			bgSetCenter(Fondo2, -128, -32);
+			FactorEscala = floatToFixed(0.5,8);
 			resetearTiempo();
-			Cuenta = 1;
+			Cuenta--;
 		}
 	} else if( Cuenta == 1 ) {
 		// Pasa al siguiente número
-		if( obtenerTiempo() > 10 ) {
+		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtrasGoBitmap, Fondo2, CuentaAtrasGoBitmapLen);
-			bgSetCenter(Fondo2,4,4);
+			bgSetCenter(Fondo2, 8, -16);
+			bgSetScale(Fondo2, intToFixed(1,8), intToFixed(1,8));
 			resetearTiempo();
-			Cuenta = 0;
+			Cuenta--;
+			// Pasar al siguiente estado
+			ESTADO = AVANZAR_PERSONAJE;
 		}
-	} else {
-		// Pasar al siguiente estado
-		ESTADO = AVANZAR_PERSONAJE;
 	}
 
 	// Actualiza los cambios de tamaño y posición de los fondos
@@ -81,12 +83,10 @@ void HacerCuentaAtras() {
 
 /**
  * Termina la cuenta atrás quitando el GO! de la pantalla.
- * Se llama desde el bucle principal en el estado avanzar.
+ * Se llama desde el estado 'Avanzar personaje'
  */
-void TerminarCuentaAtras() {
-	if( obtenerTiempo() > 10 ) {
-		bgHide(Fondo2);
-		pararTemporizador(0);
-		resetearTiempo();
-	}
+void terminarCuentaAtras() {
+	bgHide(Fondo2);
+	pararTemporizador(0);
+	resetearTiempo();
 }

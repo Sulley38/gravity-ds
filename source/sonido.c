@@ -10,6 +10,8 @@
 
 // Variable que guarda el canal de reproducción del sonido
 int sonido_moneda;
+// Variable para controlar el progreso del sonido
+uint8 tiempo_sonido_moneda = 0;
 
 /* Inicializa el sistema y el sonido de la moneda */
 void cargarSonido() {
@@ -29,17 +31,18 @@ void sonidoMoneda() {
 
 /**
  * Ajusta el sonido conforme pasa el tiempo.
- * Esta función la llama el temporizador
+ * Esta función la llama el temporizador cada vez que interrumpe.
  */
-void ajustarSonido(uint8 tiempoTranscurrido) {
-	if(tiempoTranscurrido == 1) {
+void ajustarSonido() {
+	tiempo_sonido_moneda++;
+	if(tiempo_sonido_moneda == 1) {
 		soundSetFreq(sonido_moneda, 10500);
-	} else if(tiempoTranscurrido == 4) {
+	} else if(tiempo_sonido_moneda == 4) {
 		soundSetVolume(sonido_moneda, 60);
-	} else if(tiempoTranscurrido == 5){
-		soundPause(sonido_moneda);
+	} else if(tiempo_sonido_moneda == 5) {
 		pararTemporizador(1);
-		resetearSonido();
+		soundPause(sonido_moneda);
 		soundSetFreq(sonido_moneda, 7000);
+		tiempo_sonido_moneda = 0;
 	}
 }

@@ -3,8 +3,10 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
+#include "estado_cuentaatras.h"
 #include "graficos.h"
 #include "sprites.h"
+#include "temporizadores.h"
 
 
 /* Variables de estado del personaje */
@@ -49,6 +51,7 @@ void Avanzar() {
 		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
 			PosicionPersonaje[2] = !PosicionPersonaje[2];
 	} else if( !TecladoActivo && TECLA_PULSADA(START) ) {
+		terminarCuentaAtras();
 		ESTADO = PAUSA; // Entra en el menú de pausa
 	}
 	TecladoActivo = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
@@ -62,6 +65,10 @@ void Avanzar() {
  * Esta función se llama desde el bucle principal, una vez por frame.
  */
 void ActualizarPantalla() {
+	// Elimina el cartel GO! si ha pasado un segundo
+	if( obtenerTiempo() >= 1 )
+		terminarCuentaAtras();
+
 	// Limpia los bloques que hubiera anteriormente
 	limpiar_bloques();
 	// Dibuja los nuevos bloques que se vean en pantalla
@@ -83,7 +90,7 @@ void ActualizarPantalla() {
 	dibujar_personaje();
 
 	// Comprueba si el personaje ha muerto
-	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > ALTURA_PANTALLA || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
+	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > SCREEN_HEIGHT || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
 		oamClear(&oamMain,0,51);
 		ESTADO = PUNTUACION;
 	}
@@ -140,7 +147,7 @@ void limpiar_bloques() {
 	// Buscar los bloques que entrarán en la pantalla
 	while( Bloques[BloqueExtremoIzq][0] + ANCHURA_BLOQUE < DistanciaRecorrida && BloqueExtremoIzq != CANTIDAD_BLOQUES )
 		BloqueExtremoIzq++; // Ya no se ve
-	while( Bloques[BloqueExtremoDer][0] < DistanciaRecorrida + ANCHURA_PANTALLA && BloqueExtremoDer != CANTIDAD_BLOQUES - 1 )
+	while( Bloques[BloqueExtremoDer][0] < DistanciaRecorrida + SCREEN_WIDTH && BloqueExtremoDer != CANTIDAD_BLOQUES - 1 )
 		BloqueExtremoDer++;  // Ahora se ve
 }
 

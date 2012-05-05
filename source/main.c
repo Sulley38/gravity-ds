@@ -52,7 +52,6 @@ int main(void){
 			ActualizarPantalla();
 		  break;
 		case AVANZAR_PERSONAJE:
-			TerminarCuentaAtras();
 			Avanzar();
 			ActualizarPantalla();
 		  break;

@@ -107,7 +107,7 @@ void resetearTiempo()
 	tiempo_juego = 0;
 }
 
-/* Rutina de atencion a la interrupcion del temporizador 0 */
+/* Rutina de atención a la interrupción del temporizador 0 */
 void intTemporizador0()
 {
 	tiempo_juego++;
@@ -117,17 +117,7 @@ void intTemporizador0()
 // TEMPORIZADOR 1: Sonido de moneda
 // ---------------------------------------
 
-// Variable para controlar el progreso del sonido
-uint8 tiempo_sonido_moneda = 0;
-
-/* Rutina de atencion a la interrupcion del temporizador 1 */
+/* Rutina de atención a la interrupción del temporizador 1 */
 void intTemporizador1() {
-	tiempo_sonido_moneda++;
-	ajustarSonido(tiempo_sonido_moneda);
-}
-
-
-void resetearSonido()
-{
-	tiempo_sonido_moneda = 0;
+	ajustarSonido();
 }
