@@ -11,6 +11,12 @@ extern void cargarSonido();
 /* Reproduce el sonido de moneda pulsada */
 extern void sonidoMoneda();
 /* Ajusta el sonido conforme pasa el tiempo */
-extern void ajustarSonido();
+extern void ajustarSonidoMoneda();
+
+/* Reproduce el sonido de la cuenta atrás */
+extern void sonidoCuenta( uint16 frecuencia );
+/* Reduce gradualmente el volumen del sonido de la cuenta atrás */
+extern void ajustarSonidoCuenta();
+
 
 #endif // SONIDO_H

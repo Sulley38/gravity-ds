@@ -5,6 +5,7 @@
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
 #include "fondos.h"
+#include "sonido.h"
 #include "temporizadores.h"
 
 /* Ficheros de cabecera de cada texto por fondos */
@@ -33,6 +34,7 @@ void InicializarCuentaAtras() {
 	bgSetCenter(Fondo2, -128, -32);
 	bgShow(Fondo2);
 	bgUpdate();
+	sonidoCuenta(5000);
 
 	// Inicia el temporizador para hacer la animación
 	iniciarTemporizador(0);
@@ -48,6 +50,7 @@ void HacerCuentaAtras() {
 	// Animación de la cuenta atrás
 	FactorEscala += 1 << 2;
 	bgSetScale(Fondo2, FactorEscala, FactorEscala);
+	ajustarSonidoCuenta();
 	// Establece la posición y pasa al siguiente número cada segundo
 	switch( Cuenta ) {
 	case 3:
@@ -56,6 +59,7 @@ void HacerCuentaAtras() {
 			cargarFondo(CuentaAtras2Bitmap, Fondo2, CuentaAtras2BitmapLen);
 			bgSetCenter(Fondo2, -128, -32);
 			FactorEscala = 1 << 7;
+			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
 		}
@@ -66,6 +70,7 @@ void HacerCuentaAtras() {
 			cargarFondo(CuentaAtras1Bitmap, Fondo2, CuentaAtras1BitmapLen);
 			bgSetCenter(Fondo2, -128, -32);
 			FactorEscala = 1 << 7;
+			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
 		}
@@ -76,6 +81,7 @@ void HacerCuentaAtras() {
 			cargarFondo(CuentaAtrasGoBitmap, Fondo2, CuentaAtrasGoBitmapLen);
 			bgSetCenter(Fondo2, -128, -32);
 			FactorEscala = 1 << 7;
+			sonidoCuenta(7500);
 			resetearTiempo();
 			Cuenta--;
 		}
@@ -89,6 +95,7 @@ void HacerCuentaAtras() {
 		if( obtenerTiempo() >= 1 ) {
 			bgHide(Fondo2);
 			pararTemporizador(0);
+			sonidoCuenta(0);
 			resetearTiempo();
 			// Pasar al siguiente estado
 			ESTADO = AVANZAR_PERSONAJE;

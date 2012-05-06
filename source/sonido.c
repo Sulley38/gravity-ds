@@ -9,21 +9,25 @@
 
 
 // Variable que guarda el canal de reproducción del sonido
-int sonido_moneda;
+int sonido_moneda, sonido_cuenta;
 // Variable para controlar el progreso del sonido
-uint8 tiempo_sonido_moneda = 0;
+uint8 tiempo_sonido_moneda = 0, volumen_sonido_cuenta;
 
 /* Inicializa el sistema y el sonido de la moneda */
 void cargarSonido() {
 	/* Pone en marcha el sistema de sonido */
 	soundEnable();
 	/* Genera el sonido de la moneda */
-	sonido_moneda = soundPlayPSG(DutyCycle_50, 7000, 127,64);
+	sonido_moneda = soundPlayPSG(DutyCycle_50, 7000, 127, 64);
+	soundPause(sonido_moneda);
+	sonido_cuenta = soundPlayPSG(DutyCycle_50, 5000, volumen_sonido_cuenta, 64);
 	soundPause(sonido_moneda);
 }
 
 
-/* Reproduce el sonido de moneda pulsada */
+/**
+ * Reproduce el sonido de moneda pulsada.
+ */
 void sonidoMoneda() {
 	soundResume(sonido_moneda);
 	iniciarTemporizador(1);
@@ -33,7 +37,7 @@ void sonidoMoneda() {
  * Ajusta el sonido conforme pasa el tiempo.
  * Esta función la llama el temporizador cada vez que interrumpe.
  */
-void ajustarSonido() {
+void ajustarSonidoMoneda() {
 	tiempo_sonido_moneda++;
 	if(tiempo_sonido_moneda == 1) {
 		soundSetFreq(sonido_moneda, 10500);
@@ -46,3 +50,29 @@ void ajustarSonido() {
 		tiempo_sonido_moneda = 0;
 	}
 }
+
+
+/**
+ * Reproduce el sonido de la cuenta atrás.
+ * Si la frecuencia que se le pasa es 0, detiene el sonido.
+ */
+void sonidoCuenta( uint16 frecuencia ) {
+	if( frecuencia > 0 ) {
+		volumen_sonido_cuenta = 80;
+		soundSetVolume(sonido_cuenta, volumen_sonido_cuenta);
+		soundSetFreq(sonido_cuenta, frecuencia);
+		soundResume(sonido_cuenta);
+	} else {
+		soundPause(sonido_cuenta);
+	}
+}
+
+/**
+ * Reduce gradualmente el volumen del sonido de la cuenta atrás.
+ * Se llama una vez cada frame desde la función de la cuenta atrás.
+ */
+void ajustarSonidoCuenta() {
+	(volumen_sonido_cuenta > 3) ? (volumen_sonido_cuenta -= 3) : (volumen_sonido_cuenta = 0);
+	soundSetVolume(sonido_cuenta, volumen_sonido_cuenta);
+}
+

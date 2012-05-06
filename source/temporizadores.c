@@ -119,5 +119,5 @@ void intTemporizador0()
 
 /* Rutina de atención a la interrupción del temporizador 1 */
 void intTemporizador1() {
-	ajustarSonido();
+	ajustarSonidoMoneda();
 }
