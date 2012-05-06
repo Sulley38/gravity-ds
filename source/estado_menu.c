@@ -9,45 +9,42 @@
 #include "pantalla.h"
 
 
-/* Variables de control de la animación del menú */
-uint8 DesplazamientoAnimacion_Menu = 0;
-int8 EstadoMenu_Menu = -1;
+/* Variables de control del menú */
+uint8 DesplazamientoAnimacion_Menu, BotonPulsado_Menu;
+
+/* Carga los elementos del menú */
+void CargarMenu() {
+	// Muestra los botones
+	dibujar_botonJugar(60, 20);
+	dibujar_botonSalir(60, 110);
+	// Inicializa las variables
+	DesplazamientoAnimacion_Menu = 0;
+	BotonPulsado_Menu = 0;
+}
 
 /**
  * Muestra un par de botones con las opciones de jugar o salir.
- * Funciona por subestados:
- * - Estado 1: Dibuja los botones
- * - Estado 2: Espera a que se pulse la pantalla
- * - Estado 3: Hace la animación y pasa al juego o sale
+ * Espera una respuesta táctil válida y hace una animación cuando la recibe.
  */
 void MostrarMenu() {
-	if( EstadoMenu_Menu < 0 ) {
-		// Muestra los botones
-		dibujar_botonJugar(60, 20);
-		dibujar_botonSalir(60, 110);
-		EstadoMenu_Menu = 0;
-	} else if( EstadoMenu_Menu == 0 ) {
-		// Espera una entrada táctil del usuario
-		EstadoMenu_Menu = pantallaEncuestaMenu();
-	} else {
-		DesplazamientoAnimacion_Menu += 5;
-		dibujar_botonJugar(60, 20 - DesplazamientoAnimacion_Menu);
-		dibujar_botonSalir(60, 110 + DesplazamientoAnimacion_Menu);
-		if( DesplazamientoAnimacion_Menu == 80 && EstadoMenu_Menu == 1 ) {
-			// Reestablece la animación
-			EstadoMenu_Menu = -1;
-			DesplazamientoAnimacion_Menu = 0;
-			 // Elimina los botones
-			oamClear(&oamMain,120,2);
-			oamClear(&oamMain,124,2);
-			// Cambio de estado: inicializa las variables y pasa al juego
-			InicializarCuentaAtras();
-			InicializarVariablesJuego();
-			ESTADO = CUENTA_ATRAS;
-		} else if( DesplazamientoAnimacion_Menu == 80 && EstadoMenu_Menu == 2 ) {
-			// Fin del juego
-			ESTADO = FIN;
-		}
+	// Espera una entrada táctil del usuario
+	if( !BotonPulsado_Menu )
+		BotonPulsado_Menu = pantallaEncuestaMenu();
+	// Hace la animación del menú
+	DesplazamientoAnimacion_Menu += 5;
+	dibujar_botonJugar(60, 20 - DesplazamientoAnimacion_Menu);
+	dibujar_botonSalir(60, 110 + DesplazamientoAnimacion_Menu);
+	if( DesplazamientoAnimacion_Menu == 80 && BotonPulsado_Menu == 1 ) {
+		 // Elimina los botones
+		oamClear(&oamMain,120,2);
+		oamClear(&oamMain,124,2);
+		// Cambio de estado: inicializa las variables y pasa al juego
+		InicializarCuentaAtras();
+		InicializarVariablesJuego();
+		ESTADO = CUENTA_ATRAS;
+	} else if( DesplazamientoAnimacion_Menu == 80 && BotonPulsado_Menu == 2 ) {
+		// Fin del juego
+		ESTADO = FIN;
 	}
 }
 

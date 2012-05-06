@@ -3,10 +3,20 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
+#include "estado_pausa.h"
 #include "graficos.h"
 #include "sprites.h"
 #include "temporizadores.h"
+#include "sonido.h"
 
+
+
+/* Variables Globales*/
+int PUNTOS_TOTALES=0;
+int ESTADO=3;
+
+/* Variables de estado de las monedas */
+int posiciones_moneda[9][3]={{260,151,0}, {290,48,0}, {320,213,0}, {350,208,0}, {380,122,0}, {410,159,0}, {440,208,0}, {470,71,1}, {500,214,1}};
 
 /* Variables de estado del personaje */
 uint16 DistanciaRecorrida;
@@ -56,6 +66,7 @@ void EncuestaTeclado() {
 		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
 			PosicionPersonaje[2] = !PosicionPersonaje[2];
 	} else if( ESTADO == AVANZAR_PERSONAJE && !TecladoActivo && TECLA_PULSADA(START) ) {
+		CargarPausa();
 		ESTADO = PAUSA; // Entra en el menú de pausa
 	}
 	TecladoActivo = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
@@ -66,6 +77,12 @@ void EncuestaTeclado() {
  * Esta función se llama desde el bucle principal, una vez por frame.
  */
 void ActualizarPantalla() {
+
+	//Dibuja las monedas en la pantalla
+	dibujar_monedas();
+	//Va actualizando la posicion de las monedas y comprueban si se han tocado
+	limpiar_monedas();
+
 	// Limpia los bloques que hubiera anteriormente
 	limpiar_bloques();
 	// Dibuja los nuevos bloques que se vean en pantalla
@@ -195,4 +212,60 @@ uint8 Colision() {
 		}
 	}
 	return 0;
+}
+
+/*Dibuja las monedas en la pantalla*/
+void dibujar_monedas(){
+	int i;
+	for (i=0;i<9;i++){
+		oamSet(&oamMain,
+				i+60, // OAM Index
+				posiciones_moneda[i][0],posiciones_moneda[i][1], // Posición X e Y
+				1, // Prioridad (menor -> arriba)
+				2, // Índice de paleta
+				SpriteSize_16x16, SpriteColorFormat_256Color,
+				Moneda, // Puntero al sprite
+				-1, FALSE, !posiciones_moneda[i][2], FALSE, FALSE, FALSE
+				);
+	}
+}
+
+
+/*Con esta función comprobamos si se ha tocado una moneda de la pantalla*/
+uint8 tocar(uint8 x, uint8 y){
+
+	uint8 tocado = 0;
+	touchPosition pos_pantalla;
+	touchRead(&pos_pantalla);
+
+if (pos_pantalla.px >= x && pos_pantalla.px <= x+16){
+	if (pos_pantalla.py >= y && pos_pantalla.py <= y+16){
+		tocado=1;
+		sonidoMoneda();
+	}
+}
+return tocado;
+}
+
+/* Va actualizando la posicion de las monedas en la pantalla, comprueva si
+ * las monedas han llegado al final de la pantalla, en ese caso vuelve
+ * a actualizar la posición de la moneda poniendola en una posición aleatoria
+ * de la pantalla. También comprueva si alguna moneda se ha tocado, en ese caso
+ * sumará los puntos correspondientes ha cojer una moneda y la hará desaparecer.*/
+void limpiar_monedas(){
+	int i;
+	for (i=0;i<9;i++){
+		posiciones_moneda[i][0] -= 1;
+		if (posiciones_moneda[i][0]<-26){
+			posiciones_moneda[i][0] = 270;
+			posiciones_moneda[i][1] = ((posiciones_moneda[i][1]*1397+123)%150)+20;
+			posiciones_moneda[i][2] = 1;
+		}
+		if (tocar(posiciones_moneda[i][0],posiciones_moneda[i][1]) == 1){
+			PUNTOS_TOTALES+= 50;
+			posiciones_moneda[i][2]=0;
+		}
+	}
+
+
 }

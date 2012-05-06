@@ -39,6 +39,7 @@ int main(void){
 
 	/* Bucle principal */
 	uint8 CurrentFrame;
+	CargarEstadoInicial();
 	while( ESTADO != FIN ) {
 		switch( ESTADO ) {
 		case FONDO_PUMA:

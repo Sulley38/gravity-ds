@@ -5,7 +5,10 @@ estado_fondopuma.h
 #ifndef E_FONDOPUMA_H
 #define E_FONDOPUMA_H
 
-/* Muestra las imágenes de Puma Corporation y el logo del juego, y espera 3 segundos */
+/* Carga la situación inicial antes de entrar al bucle principal */
+extern void CargarEstadoInicial();
+
+/* Muestra la imagen de Puma Corporation con un efecto de transparencia */
 extern void mostrarPantallaInicio();
 
 #endif // E_FONDOPUMA_H
