@@ -20,6 +20,9 @@ int8 EstadoMenu_Pausa = -1;
  */
 void Pausar() {
 	if( EstadoMenu_Pausa < 0 ) {
+		// Pone una transparencia
+		REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
+		REG_BLDY = 8;
 		// Muestra los botones
 		dibujar_botonContinuar(60, 20);
 		dibujar_botonSalir(60, 110);
@@ -33,15 +36,15 @@ void Pausar() {
 		dibujar_botonSalir(60 + DesplazamientoAnimacion_Pausa, 110);
 		if( DesplazamientoAnimacion_Pausa == 160 ) {
 			 if( EstadoMenu_Pausa == 1 ) {
-				// Elimina los botones
-				 oamClear(&oamMain,122,4);
 				 ESTADO = AVANZAR_PERSONAJE;
 			 } else {
-				 // Elimina los botones y los elementos del juego
-				 oamClear(&oamMain,0,51);
-				 oamClear(&oamMain,122,4);
 				 ESTADO = MENU;
+				 // Elimina los elementos del juego
+				 oamClear(&oamMain,0,51);
 			 }
+			 // Elimina los botones y la transparencia
+			 oamClear(&oamMain,122,4);
+			 REG_BLDCNT = 0;
 			 // Reestablece la animación
 			 DesplazamientoAnimacion_Pausa = 0;
 			 EstadoMenu_Pausa = -1;
