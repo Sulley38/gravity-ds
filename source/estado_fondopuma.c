@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "fondos.h"
 #include "estado_fondopuma.h"
+#include "estado_menu.h"
 #include "temporizadores.h"
 
 
@@ -13,29 +14,39 @@
 #include "FondoPuma.h"
 #include "FondoPuntuacion.h"
 
-uint8 Transparencia = 16;
+// Variable para controlar la transparencia del fondo
+uint8 Transparencia = 32;
 
 /**
- * Muestra las imágenes de Puma Corporation y el logo del juego, y espera 3 segundos antes de pasar al menú.
+ * Carga la situación inicial antes de entrar al bucle principal.
+ */
+void CargarEstadoInicial() {
+	// Carga la imagen de Puma Corp. y el logo del juego
+	cargarFondo(FondoPumaBitmap, Fondo3, FondoPumaBitmapLen);
+	cargarFondo(FondoLogoBitmap, FondoSub3, FondoLogoBitmapLen);
+
+	// Hace transparente el fondo
+	REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
+	REG_BLDY = 16;
+
+	// Muestra el fondo durante 3 segundos con efecto de transparencia
+	iniciarTemporizador(0);
+}
+
+/**
+ * Muestra la imagen de Puma Corporation con un efecto de transparencia.
+ * La transparencia cambia una vez cada dos frames.
+ * Tras cuatro segundos, pasa al siguiente estado.
  */
 void mostrarPantallaInicio() {
-	if( REG_BLDCNT == 0 ) {
-		// Carga la imagen de Puma Corp. y el logo del juego
-		cargarFondo(FondoPumaBitmap, Fondo3, FondoPumaBitmapLen);
-		cargarFondo(FondoLogoBitmap, FondoSub3, FondoLogoBitmapLen);
-		// Hace transparente el fondo
-		REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
-
-		// Muestra el fondo durante 3 segundos con efecto de transparencia
-		iniciarTemporizador(0);
-	} else if( obtenerTiempo() < 2 ) {
+	if( obtenerTiempo() < 3 ) {
 		// Ir mostrando el fondo poco a poco
-		if( Transparencia > 0 )
-			Transparencia--;
-	} else if( obtenerTiempo() < 3 ) {
+		if( Transparencia > 0 ) Transparencia--;
+		REG_BLDY = Transparencia/2;
+	} else if( obtenerTiempo() < 4 ) {
 		// Ir quitando el fondo poco a poco
-		if( Transparencia < 16 )
-			Transparencia++;
+		if( Transparencia < 32 ) Transparencia++;
+		REG_BLDY = Transparencia/2;
 	} else {
 		// Detener el temporizador
 		pararTemporizador(0);
@@ -47,7 +58,7 @@ void mostrarPantallaInicio() {
 		cargarFondo(FondoPuntuacionBitmap, FondoSub3, FondoPuntuacionBitmapLen);
 
 		// Pasa al menú
+		CargarMenu();
 		ESTADO = MENU;
 	}
-	REG_BLDY = Transparencia;
 }

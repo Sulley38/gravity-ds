@@ -3,6 +3,7 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
+#include "estado_pausa.h"
 #include "graficos.h"
 #include "sprites.h"
 #include "temporizadores.h"
@@ -56,6 +57,7 @@ void EncuestaTeclado() {
 		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
 			PosicionPersonaje[2] = !PosicionPersonaje[2];
 	} else if( ESTADO == AVANZAR_PERSONAJE && !TecladoActivo && TECLA_PULSADA(START) ) {
+		CargarPausa();
 		ESTADO = PAUSA; // Entra en el menú de pausa
 	}
 	TecladoActivo = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);

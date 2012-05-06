@@ -1,12 +1,8 @@
-/*---------------------------------------------------------------------------------
 
-    Simple console print demo
-    -- dovoto
-
----------------------------------------------------------------------------------*/
 #include <nds.h>
 #include <stdio.h>
 #include "fondos.h"
+#include "graficos.h"
 
 #include "Teclado.h"
 
@@ -21,7 +17,7 @@ int main(void) {
 			 {'z','x','c','v','b','n','m',',','$','$'},
 			 {'$','$',' ',' ',' ',' ',' ',' ','$','$'}};
 
-    powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();
+    powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();
     cargarFondo(TecladoBitmap, Fondo3, TecladoBitmapLen);
 
     consoleDemoInit();  //setup the sub screen for printing
