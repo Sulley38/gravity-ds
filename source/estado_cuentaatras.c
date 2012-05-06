@@ -2,6 +2,7 @@
 
 #include <nds.h>
 #include "defines.h"
+#include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
 #include "fondos.h"
 #include "temporizadores.h"
@@ -16,6 +17,7 @@
 /* Variable de control de la cuenta atrás */
 uint8 Cuenta;
 s32 FactorEscala;
+float DesplazamientoSuperior;
 
 /**
  * Carga la situación inicial para hacer la cuenta atrás e inicia el temporizador.
@@ -23,7 +25,8 @@ s32 FactorEscala;
 void InicializarCuentaAtras() {
 	// Inicializar variables
 	Cuenta = 3;
-	FactorEscala = floatToFixed(0.5,8);
+	FactorEscala = 1 << 7; // 0.5 en representación 24.8
+	DesplazamientoSuperior = 1;
 
 	// Cargar primer número
 	cargarFondo(CuentaAtras3Bitmap, Fondo2, CuentaAtras3BitmapLen);
@@ -45,48 +48,57 @@ void HacerCuentaAtras() {
 	// Animación de la cuenta atrás
 	FactorEscala += 1 << 2;
 	bgSetScale(Fondo2, FactorEscala, FactorEscala);
-	bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
-	if( Cuenta == 3 ) {
-		// Pasa al siguiente número
+	// Establece la posición y pasa al siguiente número cada segundo
+	switch( Cuenta ) {
+	case 3:
+		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtras2Bitmap, Fondo2, CuentaAtras2BitmapLen);
 			bgSetCenter(Fondo2, -128, -32);
-			FactorEscala = floatToFixed(0.5,8);
+			FactorEscala = 1 << 7;
 			resetearTiempo();
 			Cuenta--;
 		}
-	} else if( Cuenta == 2 ) {
-		// Pasa al siguiente número
+	  break;
+	case 2:
+		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtras1Bitmap, Fondo2, CuentaAtras1BitmapLen);
 			bgSetCenter(Fondo2, -128, -32);
-			FactorEscala = floatToFixed(0.5,8);
+			FactorEscala = 1 << 7;
 			resetearTiempo();
 			Cuenta--;
 		}
-	} else if( Cuenta == 1 ) {
-		// Pasa al siguiente número
+	  break;
+	case 1:
+		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
 			cargarFondo(CuentaAtrasGoBitmap, Fondo2, CuentaAtrasGoBitmapLen);
-			bgSetCenter(Fondo2, 8, -16);
-			bgSetScale(Fondo2, intToFixed(1,8), intToFixed(1,8));
+			bgSetCenter(Fondo2, -128, -32);
+			FactorEscala = 1 << 7;
 			resetearTiempo();
 			Cuenta--;
+		}
+	  break;
+	case 0:
+		// Permite empezar a jugar y desplaza el fondo hacia arriba
+		Avanzar();
+		EncuestaTeclado();
+		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2) - DesplazamientoSuperior);
+		DesplazamientoSuperior *= 1.15;
+		if( obtenerTiempo() >= 1 ) {
+			bgHide(Fondo2);
+			pararTemporizador(0);
+			resetearTiempo();
 			// Pasar al siguiente estado
 			ESTADO = AVANZAR_PERSONAJE;
 		}
+	  break;
+	default:
+		ESTADO = FIN; // En caso de error, salir
+	  break;
 	}
 
 	// Actualiza los cambios de tamaño y posición de los fondos
 	bgUpdate();
-}
-
-/**
- * Termina la cuenta atrás quitando el GO! de la pantalla.
- * Se llama desde el estado 'Avanzar personaje'
- */
-void terminarCuentaAtras() {
-	bgHide(Fondo2);
-	pararTemporizador(0);
-	resetearTiempo();
 }

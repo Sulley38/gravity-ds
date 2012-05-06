@@ -10,32 +10,33 @@
 
 
 /* Variables de control de la animación del menú */
-uint8 DesplazamientoAnimacion = 0;
-uint8 Animar = 0;
-int pantallaPulsada = 0;
+uint8 DesplazamientoAnimacion_Menu = 0;
+int8 EstadoMenu_Menu = -1;
 
 /**
  * Muestra un par de botones con las opciones de jugar o salir.
- * Cambia de estado según lo que se haya pulsado.
- * Al pulsar "Jugar", se crea un efecto de desplazamiento del menú.
+ * Funciona por subestados:
+ * - Estado 1: Dibuja los botones
+ * - Estado 2: Espera a que se pulse la pantalla
+ * - Estado 3: Hace la animación y pasa al juego o sale
  */
 void MostrarMenu() {
-
-	touchPosition pos_pantalla;
-	touchRead(&pos_pantalla);
-
-	dibujar_botonJugar(60,20-DesplazamientoAnimacion);
-	dibujar_botonSalir(60,110+DesplazamientoAnimacion);
-
-	if( !Animar ) {
-		// Esperar una entrada táctil del usuario
-		Animar = pantallaEncuesta();
+	if( EstadoMenu_Menu < 0 ) {
+		// Muestra los botones
+		dibujar_botonJugar(60, 20);
+		dibujar_botonSalir(60, 110);
+		EstadoMenu_Menu = 0;
+	} else if( EstadoMenu_Menu == 0 ) {
+		// Espera una entrada táctil del usuario
+		EstadoMenu_Menu = pantallaEncuestaMenu();
 	} else {
-		DesplazamientoAnimacion += 5;
-		if( DesplazamientoAnimacion == 80 && Animar==1) {
+		DesplazamientoAnimacion_Menu += 5;
+		dibujar_botonJugar(60, 20 - DesplazamientoAnimacion_Menu);
+		dibujar_botonSalir(60, 110 + DesplazamientoAnimacion_Menu);
+		if( DesplazamientoAnimacion_Menu == 80 && EstadoMenu_Menu == 1 ) {
 			// Reestablece la animación
-			Animar = 0;
-			DesplazamientoAnimacion = 0;
+			EstadoMenu_Menu = -1;
+			DesplazamientoAnimacion_Menu = 0;
 			 // Elimina los botones
 			oamClear(&oamMain,120,2);
 			oamClear(&oamMain,124,2);
@@ -43,8 +44,10 @@ void MostrarMenu() {
 			InicializarCuentaAtras();
 			InicializarVariablesJuego();
 			ESTADO = CUENTA_ATRAS;
+		} else if( DesplazamientoAnimacion_Menu == 80 && EstadoMenu_Menu == 2 ) {
+			// Fin del juego
+			ESTADO = FIN;
 		}
-		else if( DesplazamientoAnimacion == 80 && Animar==2)			ESTADO = FIN;
 	}
 }
 

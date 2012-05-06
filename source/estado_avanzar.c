@@ -3,7 +3,6 @@
 #include <nds.h>
 #include "defines.h"
 #include "estado_avanzar.h"
-#include "estado_cuentaatras.h"
 #include "graficos.h"
 #include "sprites.h"
 #include "temporizadores.h"
@@ -41,23 +40,25 @@ void InicializarVariablesJuego() {
 
 
 /**
- * Avanza un paso.
- * Aumenta la distancia recorrida y hace la encuesta de teclado.
- * Se guarda una variable de control para evitar detecciones múltiples de una tecla pulsada.
+ * Avanza un paso aumentando la distancia recorrida.
  */
 void Avanzar() {
+	DistanciaRecorrida += VelocidadHorizontal;
+}
+
+/**
+ * Realiza la encuesta de teclado.
+ * Se guarda una variable de control para evitar detecciones múltiples de una tecla pulsada.
+ */
+void EncuestaTeclado() {
 	// Encuesta de teclado
 	if( !TecladoActivo && (TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO)) ) {
 		if( EnPlataforma() ) // Cambia el sentido de la gravedad cuando se está apoyado en una plataforma
 			PosicionPersonaje[2] = !PosicionPersonaje[2];
-	} else if( !TecladoActivo && TECLA_PULSADA(START) ) {
-		terminarCuentaAtras();
+	} else if( ESTADO == AVANZAR_PERSONAJE && !TecladoActivo && TECLA_PULSADA(START) ) {
 		ESTADO = PAUSA; // Entra en el menú de pausa
 	}
 	TecladoActivo = TECLA_PULSADA(A) || TECLA_PULSADA(B) || TECLA_PULSADA(ARRIBA) || TECLA_PULSADA(ABAJO);
-
-	// Avanza un poco la distancia recorrida del mapa
-	DistanciaRecorrida += VelocidadHorizontal;
 }
 
 /**
@@ -65,10 +66,6 @@ void Avanzar() {
  * Esta función se llama desde el bucle principal, una vez por frame.
  */
 void ActualizarPantalla() {
-	// Elimina el cartel GO! si ha pasado un segundo
-	if( obtenerTiempo() >= 1 )
-		terminarCuentaAtras();
-
 	// Limpia los bloques que hubiera anteriormente
 	limpiar_bloques();
 	// Dibuja los nuevos bloques que se vean en pantalla

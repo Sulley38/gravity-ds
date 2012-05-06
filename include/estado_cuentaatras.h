@@ -15,7 +15,4 @@ extern void InicializarCuentaAtras();
 /* Muestra unas imágenes de 3, 2, 1, YA! */
 extern void HacerCuentaAtras();
 
-/* Termina la cuenta atrás quitando el GO! de la pantalla */
-extern void TerminarCuentaAtras();
-
 #endif // E_CUENTAATRAS_H

@@ -53,6 +53,7 @@ int main(void){
 		  break;
 		case AVANZAR_PERSONAJE:
 			Avanzar();
+			EncuestaTeclado();
 			ActualizarPantalla();
 		  break;
 		case PAUSA:

@@ -13,8 +13,11 @@ estado_avanzar.h
 
 /* Inicializa las variables de la partida */
 extern void InicializarVariablesJuego();
-/* Avanza un paso */
+
+/* Avanza un paso aumentando la distancia recorrida */
 extern void Avanzar();
+/* Realiza la encuesta de teclado */
+extern void EncuestaTeclado();
 /* Actualiza convenientemente los sprites que se muestran en pantalla */
 extern void ActualizarPantalla();
 
