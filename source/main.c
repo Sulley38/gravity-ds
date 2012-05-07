@@ -4,6 +4,8 @@
  */
 
 #include <nds.h>
+#include <stdlib.h>
+#include <time.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
@@ -33,6 +35,9 @@ int main(void){
 	initFondos();
 	cargarSprites();
 	cargarSonido();
+
+	/* Semilla para generar los números aleatorios */
+	srand( time(0) );
 
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();

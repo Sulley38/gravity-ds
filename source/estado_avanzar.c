@@ -1,6 +1,7 @@
 // Estado 'Avanzar personaje' definido en el autómata
 
 #include <nds.h>
+#include <stdlib.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_pausa.h"
@@ -191,14 +192,12 @@ void dibujar_monedas() {
  * Reduce la distancia restante para la próxima moneda, y si toca, la añade a la lista.
  */
 void actualizar_monedas() {
-	// Limpia los 10 espacios asignados a monedas
-	oamClear(&oamMain,31,10);
 
 	// Comprueba si se ha pulsado la moneda y actualiza sus posiciones
 	uint8 i;
 	for( i = 0; i < NumeroMonedas; i++ ) {
 		Monedas[i][0] -= VelocidadHorizontal;
-		if( pantallaEncuestaMoneda(Monedas[i][0], Monedas[i][1]) ) {
+		if( Monedas[i][2] && pantallaEncuestaMoneda(Monedas[i][0], Monedas[i][1]) ) {
 			sonidoMoneda();
 			MonedasRecogidas++;
 			Monedas[i][2] = 0;
@@ -222,15 +221,18 @@ void actualizar_monedas() {
 	if( SiguienteMoneda < 0 ) {
 		// Limita el máximo de monedas en pantalla a 10 (pulsadas o no)
 		if( NumeroMonedas < 10 ) {
-			// Añadir moneda
+			// Añadir moneda en un Y aleatorio (entre 10 y 162)
 			Monedas[NumeroMonedas][0] = 256;
-			Monedas[NumeroMonedas][1] = rand() % 176;
+			Monedas[NumeroMonedas][1] = (rand() % 153) + 10;
 			Monedas[NumeroMonedas][2] = 1;
 			NumeroMonedas++;
 		}
 		// Calcula aleatoriamente cuándo saldrá la siguiente moneda (entre 200 y 600)
 		SiguienteMoneda = (rand() % 401) + 200;
 	}
+
+	// Limpia los 10 espacios asignados a monedas
+	oamClear(&oamMain,31,10);
 }
 
 

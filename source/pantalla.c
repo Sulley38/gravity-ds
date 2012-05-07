@@ -36,8 +36,8 @@ uint8 pantallaEncuestaMoneda( int16 X, int16 Y ) {
 	uint8 tocado = 0;
 
 	touchRead(&pos_pantalla);
-	if(pos_pantalla.px >= X && pos_pantalla.px <= X + 16)
-		if(pos_pantalla.py >= Y && pos_pantalla.py <= Y + 16)
+	if(pos_pantalla.px > X - 10 && pos_pantalla.px <= X + 25)
+		if(pos_pantalla.py >= Y - 10 && pos_pantalla.py <= Y + 25)
 			tocado = 1 ;
 
 	return tocado;

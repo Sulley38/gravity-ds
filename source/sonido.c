@@ -11,17 +11,17 @@
 // Variables que guardan el canal de reproducción de los sonidos
 int sonido_moneda, sonido_cuenta;
 // Variables para controlar el progreso de los sonidos
-uint8 tiempo_sonido_moneda = 0, volumen_sonido_cuenta;
+uint8 tiempo_sonido_moneda, volumen_sonido_cuenta;
 
 /* Inicializa el sistema y el sonido de la moneda */
 void cargarSonido() {
 	/* Pone en marcha el sistema de sonido */
 	soundEnable();
 	/* Genera el sonido de la moneda */
-	sonido_moneda = soundPlayPSG(DutyCycle_50, 7000, 127, 64);
+	sonido_moneda = soundPlayPSG(DutyCycle_50, 6000, 120, 64);
 	soundPause(sonido_moneda);
 	sonido_cuenta = soundPlayPSG(DutyCycle_50, 5000, volumen_sonido_cuenta, 64);
-	soundPause(sonido_moneda);
+	soundPause(sonido_cuenta);
 }
 
 
@@ -29,6 +29,9 @@ void cargarSonido() {
  * Reproduce el sonido de moneda pulsada.
  */
 void sonidoMoneda() {
+	tiempo_sonido_moneda = 0;
+	soundSetVolume(sonido_moneda, 120);
+	soundSetFreq(sonido_moneda, 6000);
 	soundResume(sonido_moneda);
 	iniciarTemporizador(1);
 }
@@ -39,15 +42,28 @@ void sonidoMoneda() {
  */
 void ajustarSonidoMoneda() {
 	tiempo_sonido_moneda++;
-	if( tiempo_sonido_moneda == 1 ) {
-		soundSetFreq(sonido_moneda, 10500);
-	} else if( tiempo_sonido_moneda == 4 ) {
+
+	switch( tiempo_sonido_moneda ) {
+	case 1:
+		soundSetFreq(sonido_moneda, 9000);
+		soundSetVolume(sonido_moneda, 105);
+	  break;
+	case 2:
+		soundSetVolume(sonido_moneda, 90);
+	  break;
+	case 3:
+		soundSetVolume(sonido_moneda, 75);
+	  break;
+	case 4:
 		soundSetVolume(sonido_moneda, 60);
-	} else if( tiempo_sonido_moneda == 5 ) {
-		pararTemporizador(1);
+	  break;
+	case 5:
 		soundPause(sonido_moneda);
-		soundSetFreq(sonido_moneda, 7000);
-		tiempo_sonido_moneda = 0;
+		pararTemporizador(1);
+	  break;
+	default:
+		soundPause(sonido_moneda);
+	  break;
 	}
 }
 
