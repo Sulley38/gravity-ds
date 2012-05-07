@@ -9,6 +9,6 @@ pantalla.h
 extern uint8 pantallaEncuestaMenu();
 
 /* Devuelve un 1 si se ha pulsado la moneda situada en la posición (X,Y) */
-extern uint8 pantallaEncuestaMoneda( uint16 X, uint16 Y );
+extern uint8 pantallaEncuestaMoneda( int16 X, int16 Y );
 
 #endif // PANTALLA_H

@@ -8,9 +8,9 @@
 #include "temporizadores.h"
 
 
-// Variable que guarda el canal de reproducción del sonido
+// Variables que guardan el canal de reproducción de los sonidos
 int sonido_moneda, sonido_cuenta;
-// Variable para controlar el progreso del sonido
+// Variables para controlar el progreso de los sonidos
 uint8 tiempo_sonido_moneda = 0, volumen_sonido_cuenta;
 
 /* Inicializa el sistema y el sonido de la moneda */
@@ -39,11 +39,11 @@ void sonidoMoneda() {
  */
 void ajustarSonidoMoneda() {
 	tiempo_sonido_moneda++;
-	if(tiempo_sonido_moneda == 1) {
+	if( tiempo_sonido_moneda == 1 ) {
 		soundSetFreq(sonido_moneda, 10500);
-	} else if(tiempo_sonido_moneda == 4) {
+	} else if( tiempo_sonido_moneda == 4 ) {
 		soundSetVolume(sonido_moneda, 60);
-	} else if(tiempo_sonido_moneda == 5) {
+	} else if( tiempo_sonido_moneda == 5 ) {
 		pararTemporizador(1);
 		soundPause(sonido_moneda);
 		soundSetFreq(sonido_moneda, 7000);

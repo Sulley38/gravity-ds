@@ -31,7 +31,7 @@ uint8 pantallaEncuestaMenu() {
 /**
  * Devuelve un 1 si se ha pulsado la moneda situada en la posición (X,Y)
  */
-uint8 pantallaEncuestaMoneda( uint16 X, uint16 Y ) {
+uint8 pantallaEncuestaMoneda( int16 X, int16 Y ) {
 	touchPosition pos_pantalla;
 	uint8 tocado = 0;
 

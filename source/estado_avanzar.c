@@ -21,10 +21,11 @@ uint16 BloqueExtremoIzq, BloqueExtremoDer;
 static const uint16 Bloques[CANTIDAD_BLOQUES][2] = {{0, 0}, {0, 176}, {64, 0}, {64, 176}, {78, 86}, {128, 0}, {128, 176}, {142, 86} , {150, 160}, {168, 16}, {188, 144}, {194, 32}, {206, 86}, {300, 172}, {362, 172}, {400, 106}, {470, 76}, {472, 160}, {536, 40}, {536, 160}, {608, 5}, {672, 5}, {736, 5}, {800, 5}, {879, 112}, {949, 6}, {1044, 170}, {1046, 50}, {1108, 154},{1110, 68}, {1172, 170}, {1174, 82}, {1238, 170}, {1300, 170}, {1322, 84}, {1364, 170}, {1386, 84}, {1398, 154}, {1430, 170}, {1450, 84}, {1476, 100}, {1492, 170}, {1514, 84}, {1524, 154}, {1556, 170}, {1578, 84}, {1604, 100}, {1620, 170}, {1642, 84}, {1652, 154}, {1684, 170}, {1706, 84}, {1732, 100}, {1750, 170}, {1770, 84}, {1780, 154}, {1812, 170}, {1834, 84}, {1860, 100}, {1972, 4}, {2036, 4}, {2100, 4}, {2164, 4}, {2228, 4}, {2292, 4}};
 
 /* Variables de estado de las monedas */
-static int16 Monedas[CANTIDAD_MONEDAS][3] = {{260,151,0}, {290,48,0}, {320,213,0}, {350,208,0}, {380,122,0}, {410,159,0}, {440,208,0}, {470,71,1}, {500,214,1}, {530,112,1}};
-
-/* Variable de puntuación */
+static int16 Monedas[10][3];
+int16 SiguienteMoneda;
+uint8 NumeroMonedas;
 uint8 MonedasRecogidas;
+
 /* Variable de control de la encuesta de teclado */
 uint32 TecladoActivo;
 
@@ -40,7 +41,10 @@ void InicializarVariablesJuego() {
 	BloqueExtremoIzq = 0;
 	BloqueExtremoDer = 0;
 
+	NumeroMonedas = 0;
+	SiguienteMoneda = (rand() % 401) + 600;
 	MonedasRecogidas = 0;
+
 	TecladoActivo = 0;
 }
 
@@ -80,7 +84,7 @@ void ActualizarPantalla() {
 	dibujar_bloques();
 
 	// Actualiza la posicion de las monedas y comprueban si se han tocado
-	limpiar_monedas();
+	actualizar_monedas();
 	// Dibuja las monedas en la pantalla
 	dibujar_monedas();
 
@@ -167,7 +171,7 @@ void limpiar_bloques() {
  */
 void dibujar_monedas() {
 	uint8 i;
-	for( i = 0; i < CANTIDAD_MONEDAS; i++ ) {
+	for( i = 0; i < NumeroMonedas; i++ ) {
 		oamSet(&oamMain,
 			i + 31, // OAM Index
 			Monedas[i][0], Monedas[i][1], // Posición X e Y
@@ -180,27 +184,52 @@ void dibujar_monedas() {
 	}
 }
 
-/* Va actualizando la posicion de las monedas en la pantalla, comprueba si
- * las monedas han llegado al final de la pantalla, en ese caso vuelve
- * a actualizar la posición de la moneda poniendola en una posición aleatoria
- * de la pantalla. También comprueva si alguna moneda se ha tocado, en ese caso
- * sumará los puntos correspondientes a coger una moneda y la hará desaparecer.*/
-void limpiar_monedas() {
-	// Limpiar los 10 espacios asignados a monedas
+/**
+ * Limpia las monedas de la pantalla y recalcula su posición.
+ * ** OAM Index: se liberan del 31 hasta el 40
+ * Hace invisible la moneda que se ha pulsado y actualiza la puntuación.
+ * Reduce la distancia restante para la próxima moneda, y si toca, la añade a la lista.
+ */
+void actualizar_monedas() {
+	// Limpia los 10 espacios asignados a monedas
 	oamClear(&oamMain,31,10);
-	// Recalcula las posiciones de las monedas
+
+	// Comprueba si se ha pulsado la moneda y actualiza sus posiciones
 	uint8 i;
-	for( i = 0; i < CANTIDAD_MONEDAS; i++ ) {
+	for( i = 0; i < NumeroMonedas; i++ ) {
 		Monedas[i][0] -= VelocidadHorizontal;
-		if( Monedas[i][0] < -26 ) {
-			Monedas[i][0] = 270;
-			Monedas[i][1] = ((Monedas[i][1]*1397+123)%150)+20;
-			Monedas[i][2] = 1;
-		} else if( pantallaEncuestaMoneda(Monedas[i][0], Monedas[i][1]) ) {
+		if( pantallaEncuestaMoneda(Monedas[i][0], Monedas[i][1]) ) {
 			sonidoMoneda();
 			MonedasRecogidas++;
 			Monedas[i][2] = 0;
 		}
+	}
+
+	// Comprueba si la primera moneda se va de la pantalla
+	if( NumeroMonedas > 0 && Monedas[0][0] < -16 ) {
+		for( i = 1; i < NumeroMonedas; i++ ) {
+			// Desplaza los elementos de la lista hacia la izquierda
+			Monedas[i-1][0] = Monedas[i][0];
+			Monedas[i-1][1] = Monedas[i][1];
+			Monedas[i-1][2] = Monedas[i][2];
+		}
+		NumeroMonedas--;
+	}
+
+	// Actualiza la distancia restante para la siguiente moneda
+	SiguienteMoneda -= VelocidadHorizontal;
+	// En caso de que venga una nueva moneda
+	if( SiguienteMoneda < 0 ) {
+		// Limita el máximo de monedas en pantalla a 10 (pulsadas o no)
+		if( NumeroMonedas < 10 ) {
+			// Añadir moneda
+			Monedas[NumeroMonedas][0] = 256;
+			Monedas[NumeroMonedas][1] = rand() % 176;
+			Monedas[NumeroMonedas][2] = 1;
+			NumeroMonedas++;
+		}
+		// Calcula aleatoriamente cuándo saldrá la siguiente moneda (entre 200 y 600)
+		SiguienteMoneda = (rand() % 401) + 200;
 	}
 }
 
