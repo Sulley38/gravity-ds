@@ -5,8 +5,9 @@ estado_avanzar.h
 #ifndef E_AVANZAR_H
 #define E_AVANZAR_H
 
-/* Número de bloques que hay en el nivel */
+/* Número de bloques y monedas que hay en el nivel */
 #define CANTIDAD_BLOQUES 65
+#define CANTIDAD_MONEDAS 10
 
 /* Macro para comprobar si una tecla ha sido pulsada */
 #define TECLA_PULSADA(n) !(TECLAS_DAT & (1 << 10 | 1 << n))

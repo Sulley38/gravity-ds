@@ -29,11 +29,16 @@ uint8 pantallaEncuestaMenu() {
 }
 
 /**
- * DANI: Hazte una función que te diga si has pulsado una moneda
+ * Devuelve un 1 si se ha pulsado la moneda situada en la posición (X,Y)
  */
-uint16 pantallaEncuestaMoneda() {
-	// DANI: Implementa aquí
-	// Sugerencia: puedes hacer que devuelva 0 si no se ha pulsado una moneda o no se ha pulsado nada,
-	// o si se ha pulsado moneda, devuelva su posición o su índice
-	return 0;
+uint8 pantallaEncuestaMoneda( uint16 X, uint16 Y ) {
+	touchPosition pos_pantalla;
+	uint8 tocado = 0;
+
+	touchRead(&pos_pantalla);
+	if(pos_pantalla.px >= X && pos_pantalla.px <= X + 16)
+		if(pos_pantalla.py >= Y && pos_pantalla.py <= Y + 16)
+			tocado = 1 ;
+
+	return tocado;
 }
