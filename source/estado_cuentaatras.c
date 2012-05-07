@@ -94,6 +94,7 @@ void HacerCuentaAtras() {
 		DesplazamientoSuperior *= 1.15;
 		if( obtenerTiempo() >= 1 ) {
 			bgHide(Fondo2);
+			bgSetCenter(Fondo2, 0, 0);
 			pararTemporizador(0);
 			sonidoCuenta(0);
 			resetearTiempo();

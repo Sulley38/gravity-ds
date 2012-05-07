@@ -141,7 +141,7 @@ void dibujar_bloques() {
 		oamSet(&oamMain,
 			oam, // OAM Index
 			Bloques[i][0] - DistanciaRecorrida, Bloques[i][1], // Posición X e Y
-			2, // Prioridad (menor -> arriba)
+			3, // Prioridad (menor -> arriba)
 			1, // Índice de paleta
 			SpriteSize_64x32, SpriteColorFormat_256Color,
 			Bloque, // Puntero al sprite
@@ -176,7 +176,7 @@ void dibujar_monedas() {
 		oamSet(&oamMain,
 			i + 31, // OAM Index
 			Monedas[i][0], Monedas[i][1], // Posición X e Y
-			1, // Prioridad (menor -> arriba)
+			2, // Prioridad (menor -> arriba)
 			2, // Índice de paleta
 			SpriteSize_16x16, SpriteColorFormat_256Color,
 			Moneda, // Puntero al sprite
