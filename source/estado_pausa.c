@@ -51,7 +51,7 @@ void Pausar() {
 			 // Elimina los elementos del juego
 			 oamClear(&oamMain,0,41);
 			 CargarMenu();
-			 ESTADO = MENU;
+			 ESTADO = PUNTUACION;
 		 }
 	}
 
