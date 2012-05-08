@@ -30,12 +30,15 @@ void initSpriteMem() {
 	oamInit(&oamMain, SpriteMapping_1D_64, TRUE);
 	oamInit(&oamSub, SpriteMapping_1D_32, FALSE);
 
+	/*Creamos la matriz de rotación*/
+	oamAffineTransformation	(&oamMain,0,0,256,-256,0);
+
 	/* Reserva de memoria para cada sprite que quiera incluirse en la pantalla */
 	Corredor[0] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	Corredor[1] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	Corredor[2] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 	Corredor[3] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
-	Bloque = oamAllocateGfx(&oamMain, SpriteSize_64x32, SpriteColorFormat_256Color);
+	Bloque = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	Moneda = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
 	botonJugar[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonJugar[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
