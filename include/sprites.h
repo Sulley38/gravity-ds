@@ -5,12 +5,6 @@ sprites.h
 #ifndef SPRITES_H
 #define SPRITES_H
 
-/* Constantes de tamaño de los sprites */
-#define ANCHURA_PERSONAJE 32
-#define ALTURA_PERSONAJE 32
-#define ANCHURA_BLOQUE 64
-#define ALTURA_BLOQUE 16
-
 /* Direcciones de memoria en las que están guardados los sprites */
 extern u16* Corredor[4];
 extern u16* Bloque;

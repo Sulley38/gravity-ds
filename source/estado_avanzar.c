@@ -145,7 +145,7 @@ void dibujar_bloques() {
 			3, // Índice de paleta
 			SpriteSize_64x64, SpriteColorFormat_256Color,
 			Bloque, // Puntero al sprite
-			Bloques[i][2]-1, FALSE, FALSE, FALSE, FALSE, FALSE
+			Bloques[i][2] - 1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);
 		oam++;
 	}
@@ -160,7 +160,7 @@ void limpiar_bloques() {
 	// Limpiar los 30 espacios asignados a bloques
 	oamClear(&oamMain,1,30);
 	// Buscar los bloques que entrarán en la pantalla
-	while( Bloques[BloqueExtremoIzq][0] + ANCHURA_BLOQUE < DistanciaRecorrida && BloqueExtremoIzq != CANTIDAD_BLOQUES )
+	while( Bloques[BloqueExtremoIzq][0] + ANCHURA_BLOQUE(Bloques[BloqueExtremoIzq][2]) < DistanciaRecorrida && BloqueExtremoIzq != CANTIDAD_BLOQUES )
 		BloqueExtremoIzq++; // Ya no se ve
 	while( Bloques[BloqueExtremoDer][0] < DistanciaRecorrida + SCREEN_WIDTH && BloqueExtremoDer != CANTIDAD_BLOQUES - 1 )
 		BloqueExtremoDer++;  // Ahora se ve
@@ -245,8 +245,8 @@ uint8 EnPlataforma() {
 		if( !PosicionPersonaje[2] ) {
 			// Buscar por debajo
 			if( (Bloques[i][1] <= PosicionPersonaje[1] + ALTURA_PERSONAJE) && (Bloques[i][1] + VelocidadVertical > PosicionPersonaje[1] + ALTURA_PERSONAJE) && (
-				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
-				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE > PosicionPersonaje[0] + DistanciaRecorrida))
+				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
+				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + DistanciaRecorrida))
 				) ) {
 				PosicionPersonaje[1] = Bloques[i][1] - ALTURA_PERSONAJE; // Corrige la posición Y si ha bajado demasiado y ha traspasado un bloque
 				return 1;
@@ -254,11 +254,11 @@ uint8 EnPlataforma() {
 
 		} else {
 			// Buscar por encima
-			if( (Bloques[i][1] + ALTURA_BLOQUE >= PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE - VelocidadVertical < PosicionPersonaje[1]) && (
-				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
-				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE > PosicionPersonaje[0] + DistanciaRecorrida))
+			if( (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) >= PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) - VelocidadVertical < PosicionPersonaje[1]) && (
+				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
+				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + DistanciaRecorrida))
 				) ) {
-				PosicionPersonaje[1] = Bloques[i][1] + ALTURA_BLOQUE;  // Corrige la posición Y si ha subido demasiado y ha traspasado un bloque
+				PosicionPersonaje[1] = Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]);  // Corrige la posición Y si ha subido demasiado y ha traspasado un bloque
 				return 1;
 			}
 
@@ -275,7 +275,7 @@ uint8 Colision() {
 	for( i = BloqueExtremoIzq; i <= BloqueExtremoDer; i++ ) {
 		if( (Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida ) && (Bloques[i][0] + VelocidadHorizontal > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (
 			 ((Bloques[i][1] > PosicionPersonaje[1]) && (Bloques[i][1] < PosicionPersonaje[1] + ALTURA_PERSONAJE)) ||
-			 ((Bloques[i][1] + ALTURA_BLOQUE > PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE < PosicionPersonaje[1] + ALTURA_PERSONAJE))
+			 ((Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) < PosicionPersonaje[1] + ALTURA_PERSONAJE))
 			) ) {
 			PosicionPersonaje[0] = Bloques[i][0] - ANCHURA_PERSONAJE - DistanciaRecorrida; // Corrige la posición X si ha avanzado demasiado y ha traspasado un bloque
 			return 1;
