@@ -4,16 +4,22 @@
 #include "defines.h"
 #include "estado_menu.h"
 #include "estado_pausa.h"
+#include "fondos.h"
 #include "pantalla.h"
 
+// Fichero de cabecera del fondo negro para la transparencia
+#include "Negro.h"
 
 /* Variables de control del menú pausa */
 uint8 DesplazamientoAnimacion_Pausa, BotonPulsado_Pausa;
 
 void CargarPausa() {
 	// Pone una transparencia
-	REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
-	REG_BLDY = 8;
+	cargarFondoPaleta(Fondo2, NegroBitmap, NegroBitmapLen, NegroPal, NegroPalLen);
+	//cargarFondoPaleta(Fondo2, (void*) 0x01, 49152, (void*) 0x00, 512);
+	bgShow(Fondo2);
+	REG_BLDCNT = BLEND_ALPHA | BLEND_SRC_BG2 | BLEND_DST_BG3 | BLEND_DST_SPRITE;
+	REG_BLDALPHA = 3 << 1 | 1 << 10;
 	// Muestra los botones
 	dibujar_botonContinuar(60, 20);
 	dibujar_botonSalir(60, 110);
@@ -37,6 +43,7 @@ void Pausar() {
 	if( DesplazamientoAnimacion_Pausa == 160 ) {
 		 // Elimina los botones y la transparencia
 		 oamClear(&oamMain,122,4);
+		 bgHide(Fondo2);
 		 REG_BLDCNT = 0;
 		 if( BotonPulsado_Pausa == 1 ) {
 			 ESTADO = AVANZAR_PERSONAJE;

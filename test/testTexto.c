@@ -4,7 +4,7 @@
 #include "fondos.h"
 #include "graficos.h"
 
-#include "Teclado.h"
+//#include "Teclado.h"
 
 int ESTADO;
 //---------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ int main(void) {
 			 {'$','$',' ',' ',' ',' ',' ',' ','$','$'}};
 
     powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();
-    cargarFondoBitmap(Fondo3, TecladoBitmap, TecladoBitmapLen);
+    //cargarFondoBitmap(Fondo3, TecladoBitmap, TecladoBitmapLen);
 
     consoleDemoInit();  //setup the sub screen for printing
 

@@ -8,6 +8,12 @@ estado_avanzar.h
 /* Número de bloques y monedas que hay en el nivel */
 #define CANTIDAD_BLOQUES 67
 
+/* Definiciones de tamaño de los sprites */
+#define ANCHURA_PERSONAJE 32
+#define ALTURA_PERSONAJE 32
+#define ANCHURA_BLOQUE(n) (64 - 48*n)
+#define ALTURA_BLOQUE(n) (16 + 48*n)
+
 /* Macro para comprobar si una tecla ha sido pulsada */
 #define TECLA_PULSADA(n) !(TECLAS_DAT & (1 << 10 | 1 << n))
 

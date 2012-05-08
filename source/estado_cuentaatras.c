@@ -32,8 +32,8 @@ void InicializarCuentaAtras() {
 	// Cargar primer número
 	cargarFondoPaleta(Fondo2, CuentaAtras3Bitmap, CuentaAtras3BitmapLen, CuentaAtras3Pal, CuentaAtras3PalLen);
 	bgSetCenter(Fondo2, 0, -32);
-	bgShow(Fondo2);
 	bgUpdate();
+	bgShow(Fondo2);
 	sonidoCuenta(5000);
 
 	// Inicia el temporizador para hacer la animación
@@ -91,7 +91,8 @@ void HacerCuentaAtras() {
 		DesplazamientoSuperior *= 1.15;
 		if( obtenerTiempo() >= 1 ) {
 			bgHide(Fondo2);
-			bgSet(Fondo2, 0, 0, 0, 0, 0, 0, 0);
+			bgSetCenter(Fondo2, 0, 0);
+			bgSetScale(Fondo2, 0, 0);
 			pararTemporizador(0);
 			sonidoCuenta(0);
 			resetearTiempo();
