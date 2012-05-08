@@ -142,7 +142,7 @@ void dibujar_bloques() {
 			oam, // OAM Index
 			Bloques[i][0] - DistanciaRecorrida, Bloques[i][1], // Posición X e Y
 			3, // Prioridad (menor -> arriba)
-			1, // Índice de paleta
+			3, // Índice de paleta
 			SpriteSize_64x64, SpriteColorFormat_256Color,
 			Bloque, // Puntero al sprite
 			Bloques[i][2]-1, FALSE, FALSE, FALSE, FALSE, FALSE
