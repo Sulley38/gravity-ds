@@ -18,7 +18,7 @@ int main(void) {
 			 {'$','$',' ',' ',' ',' ',' ',' ','$','$'}};
 
     powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();
-    cargarFondo(TecladoBitmap, Fondo3, TecladoBitmapLen);
+    cargarFondoBitmap(Fondo3, TecladoBitmap, TecladoBitmapLen);
 
     consoleDemoInit();  //setup the sub screen for printing
 

@@ -22,8 +22,8 @@ uint8 Transparencia = 32;
  */
 void CargarEstadoInicial() {
 	// Carga la imagen de Puma Corp. y el logo del juego
-	cargarFondo(FondoPumaBitmap, Fondo3, FondoPumaBitmapLen);
-	cargarFondo(FondoLogoBitmap, FondoSub3, FondoLogoBitmapLen);
+	cargarFondoBitmap(Fondo3, FondoPumaBitmap, FondoPumaBitmapLen);
+	cargarFondoBitmap(FondoSub3, FondoLogoBitmap, FondoLogoBitmapLen);
 
 	// Hace transparente el fondo
 	REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
@@ -54,8 +54,8 @@ void mostrarPantallaInicio() {
 		REG_BLDCNT = 0;
 
 		// Carga los fondos principales del juego
-		cargarFondo(FondoAzulBitmap, Fondo3, FondoAzulBitmapLen);
-		cargarFondo(FondoPuntuacionBitmap, FondoSub3, FondoPuntuacionBitmapLen);
+		cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
+		cargarFondoBitmap(FondoSub3, FondoPuntuacionBitmap, FondoPuntuacionBitmapLen);
 
 		// Pasa al menú
 		CargarMenu();

@@ -26,12 +26,12 @@ float DesplazamientoSuperior;
 void InicializarCuentaAtras() {
 	// Inicializar variables
 	Cuenta = 3;
-	FactorEscala = 1 << 7; // 0.5 en representación 24.8
+	FactorEscala = 1 << 8; // 1.0 en representación 24.8
 	DesplazamientoSuperior = 1;
 
 	// Cargar primer número
-	cargarFondo(CuentaAtras3Bitmap, Fondo2, CuentaAtras3BitmapLen);
-	bgSetCenter(Fondo2, -128, -32);
+	cargarFondoPaleta(Fondo2, CuentaAtras3Bitmap, CuentaAtras3BitmapLen, CuentaAtras3Pal, CuentaAtras3PalLen);
+	bgSetCenter(Fondo2, 0, -32);
 	bgShow(Fondo2);
 	bgUpdate();
 	sonidoCuenta(5000);
@@ -56,9 +56,8 @@ void HacerCuentaAtras() {
 	case 3:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondo(CuentaAtras2Bitmap, Fondo2, CuentaAtras2BitmapLen);
-			bgSetCenter(Fondo2, -128, -32);
-			FactorEscala = 1 << 7;
+			cargarFondoPaleta(Fondo2, CuentaAtras2Bitmap, CuentaAtras2BitmapLen, CuentaAtras2Pal, CuentaAtras2PalLen);
+			FactorEscala = 1 << 8;
 			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
@@ -67,9 +66,8 @@ void HacerCuentaAtras() {
 	case 2:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondo(CuentaAtras1Bitmap, Fondo2, CuentaAtras1BitmapLen);
-			bgSetCenter(Fondo2, -128, -32);
-			FactorEscala = 1 << 7;
+			cargarFondoPaleta(Fondo2, CuentaAtras1Bitmap, CuentaAtras1BitmapLen, CuentaAtras1Pal, CuentaAtras1PalLen);
+			FactorEscala = 1 << 8;
 			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
@@ -78,9 +76,8 @@ void HacerCuentaAtras() {
 	case 1:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondo(CuentaAtrasGoBitmap, Fondo2, CuentaAtrasGoBitmapLen);
-			bgSetCenter(Fondo2, -128, -32);
-			FactorEscala = 1 << 7;
+			cargarFondoPaleta(Fondo2, CuentaAtrasGoBitmap, CuentaAtrasGoBitmapLen, CuentaAtrasGoPal, CuentaAtrasGoPalLen);
+			FactorEscala = 1 << 8;
 			sonidoCuenta(7500);
 			resetearTiempo();
 			Cuenta--;
@@ -94,7 +91,7 @@ void HacerCuentaAtras() {
 		DesplazamientoSuperior *= 1.15;
 		if( obtenerTiempo() >= 1 ) {
 			bgHide(Fondo2);
-			bgSetCenter(Fondo2, 0, 0);
+			bgSet(Fondo2, 0, 0, 0, 0, 0, 0, 0);
 			pararTemporizador(0);
 			sonidoCuenta(0);
 			resetearTiempo();
