@@ -12,6 +12,7 @@ extern int Fondo2, Fondo3, FondoSub3;
 extern void initFondos(); 
 
 /* Copia 'imagen' de 'longitud' bytes en la dirección de memoria de 'fondo' */
-extern void cargarFondo(const void * imagen, int fondo, uint32 longitud);
+extern void cargarFondoBitmap(int fondo, const void * imagen, uint32 longitud_imagen );
+extern void cargarFondoPaleta(int fondo, const void * imagen, uint32 longitud_imagen, const void * paleta, uint32 longitud_paleta );
 
 #endif // FONDOS_H
