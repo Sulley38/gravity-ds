@@ -9,28 +9,7 @@
 
 int ESTADO = AVANZAR_PERSONAJE;
 
-int main(){
-	int i=0;
-
-	/*  COPIAPEGA DEL PRINCIPAL */
-	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();
-	cargarSprites();
-	cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
-
-	// Pasa al menú
-	/*Empieza lo mio*/
-	while(1){
-
-		imprimir_numero(120,100,i/5,5);
-		imprimir_numero(120,120,10000,10);
-		swiWaitForVBlank();
-		oamUpdate(&oamMain);
-		i++;
-	}
-	return 0;
-}
-
-void imprimir_numero(int x, int y, int n,int oam_base){
+void imprimir_numero(int x, int y, int n,int oam_base) {
 	int i,x_centrado;
 	int log=0;
 	for (i=n;i!=0;i /=10){
@@ -50,4 +29,24 @@ void imprimir_numero(int x, int y, int n,int oam_base){
 			);
 		n /= 10;
 	}
+}
+
+int main(){
+	int i=0;
+
+	/*  COPIAPEGA DEL PRINCIPAL */
+	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();
+	cargarSprites();
+	cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
+
+	// Pasa al menú
+	/*Empieza lo mio*/
+	while(1){
+		imprimir_numero(120,100,i/5,5);
+		imprimir_numero(120,120,10000,10);
+		swiWaitForVBlank();
+		oamUpdate(&oamMain);
+		i++;
+	}
+	return 0;
 }
