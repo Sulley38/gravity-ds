@@ -21,13 +21,13 @@ uint8 Transparencia = 32;
  * Carga la situación inicial antes de entrar al bucle principal.
  */
 void CargarEstadoInicial() {
-	// Carga la imagen de Puma Corp. y el logo del juego
-	cargarFondoBitmap(Fondo3, FondoPumaBitmap, FondoPumaBitmapLen);
-	cargarFondoBitmap(FondoSub3, FondoLogoBitmap, FondoLogoBitmapLen);
-
 	// Hace transparente el fondo
 	REG_BLDCNT = BLEND_FADE_BLACK | BLEND_SRC_BG3;
 	REG_BLDY = 16;
+
+	// Carga la imagen de Puma Corp. y el logo del juego
+	cargarFondoBitmap(Fondo3, FondoPumaBitmap, FondoPumaBitmapLen);
+	cargarFondoBitmap(FondoSub3, FondoLogoBitmap, FondoLogoBitmapLen);
 
 	// Muestra el fondo durante 3 segundos con efecto de transparencia
 	iniciarTemporizador(0);

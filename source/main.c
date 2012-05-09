@@ -19,7 +19,7 @@
 #include "sonido.h"
 #include "sprites.h"
 
-
+// Definición e inicialización de la variable global de estado
 int ESTADO = FONDO_PUMA;
 
 //---------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ int main(void){
 //---------------------------------------------------------------------------------
 
 	/*
-	*  Establecer la pantalla inferior como principal e inicializa los sistemas de
+	*  Establece la pantalla inferior como principal e inicializa los sistemas de
 	*  gráficos (fondos y sprites) y sonido.
 	*/
 	lcdMainOnBottom();
