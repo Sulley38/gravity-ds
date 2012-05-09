@@ -54,7 +54,7 @@ uint8 pantallaEncuestaPuntuacion() {
 	while( !boton ) {
 		touchRead(&pos_pantalla);
 		if( pos_pantalla.py >= 160 && pos_pantalla.py <= 190 && !pre ) {
-			if( pos_pantalla.px > 40 && pos_pantalla.px <= 120 )
+			if( pos_pantalla.px > 5 && pos_pantalla.px <= 120 )
 				boton = 1;
 			else if( pos_pantalla.px > 140 && pos_pantalla.px <= 220 )
 				boton = 2;

@@ -4,8 +4,8 @@
 #include "interrupciones.h"
 #include "sprites.h"
 #include "fondos.h"
-#include "FondoScore.h"
 
+#include "FondoScore.h"
 #include "FondoAzul.h"
 
 int ESTADO = AVANZAR_PERSONAJE;
