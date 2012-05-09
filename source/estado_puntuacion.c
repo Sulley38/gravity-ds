@@ -50,12 +50,12 @@ void CargarPuntuacion() {
 	oamIndex = 41;
 
 	// Imprime las monedas recogidas en la pantalla.
-	imprimir_numeros(168, 65, MonedasRecogidas);
+	imprimir_numeros(140, 67, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(168, 98, DistanciaRecorrida/10);
+	imprimir_numeros(150, 96, DistanciaRecorrida/10);
 	// Imprime los puntos totales obtenidos del jugador
 	// (Distancia recorrida / 10) + 2 * las monedas que se hayan recogido
-	imprimir_numeros(168, 130, (MonedasRecogidas*2) + DistanciaRecorrida/10);
+	imprimir_numeros(130, 129, (MonedasRecogidas*2) + DistanciaRecorrida/10);
 }
 
 /*
