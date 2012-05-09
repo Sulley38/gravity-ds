@@ -44,5 +44,7 @@ defines.h
 
 // Variable global de estado
 extern int ESTADO;
+extern uint8 MonedasRecogidas;
+extern uint16 DistanciaRecorrida;
 
 #endif // DEFINES_H

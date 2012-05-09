@@ -13,7 +13,7 @@ int Fondo2, Fondo3, FondoSub3;
 void initFondos() {
 	// Fondo 2 de la pantalla principal (cuenta atrás y transparencia, alta prioridad)
 	Fondo2 = bgInit(2, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
-	bgSetPriority(Fondo2, 0);
+	bgSetPriority(Fondo2, 1);
 	// Fondo 3 de la pantalla principal (imágen estática, baja prioridad)
 	Fondo3 = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 4, 0);
 	bgSetPriority(Fondo3, 3);

@@ -4,6 +4,7 @@
 #include "interrupciones.h"
 #include "sprites.h"
 #include "fondos.h"
+#include "FondoScore.h"
 
 #include "FondoAzul.h"
 
@@ -37,13 +38,19 @@ int main(){
 	/*  COPIAPEGA DEL PRINCIPAL */
 	powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();rellenarTablaInt();
 	cargarSprites();
-	cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
 
 	// Pasa al menú
 	/*Empieza lo mio*/
+
+	cargarFondoBitmap(Fondo3,FondoAzulBitmap,FondoAzulBitmapLen);
+	bgShow(Fondo3);
+
+	cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
+	bgShow(Fondo2);
 	while(1){
-		imprimir_numero(120,100,i/5,5);
-		imprimir_numero(120,120,10000,10);
+		imprimir_numero(168,65,100,5);
+
+
 		swiWaitForVBlank();
 		oamUpdate(&oamMain);
 		i++;

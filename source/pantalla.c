@@ -36,9 +36,29 @@ uint8 pantallaEncuestaMoneda( int16 X, int16 Y ) {
 	uint8 tocado = 0;
 
 	touchRead(&pos_pantalla);
-	if(pos_pantalla.px > X - 10 && pos_pantalla.px <= X + 25)
+	if(pos_pantalla.px >= X - 10 && pos_pantalla.px <= X + 25)
 		if(pos_pantalla.py >= Y - 10 && pos_pantalla.py <= Y + 25)
 			tocado = 1 ;
 
 	return tocado;
 }
+
+/* Devuelve un 1 si se ha pulsado en la zona de volver al menu
+en el estado de puntuación*/
+uint8 pantallaEncuestaPuntuacion(){
+	touchPosition pos_pantalla;
+	uint8 tocado = 0;
+	uint16 pre = 1;
+
+		while(!tocado){
+		touchRead(&pos_pantalla);
+		if(pos_pantalla.px > 140 && pos_pantalla.px <= 220 && !pre){
+			if(pos_pantalla.py >= 160 && pos_pantalla.py <= 192){
+				tocado=1;}
+		}
+		pre= pos_pantalla.px;
+		}
+
+		return tocado;
+}
+
