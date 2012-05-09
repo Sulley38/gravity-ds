@@ -43,22 +43,25 @@ uint8 pantallaEncuestaMoneda( int16 X, int16 Y ) {
 	return tocado;
 }
 
-/* Devuelve un 1 si se ha pulsado en la zona de volver al menu
-en el estado de puntuación*/
-uint8 pantallaEncuestaPuntuacion(){
+/**
+ * Devuelve un 1 si se ha pulsado en volver a jugar, o un 2 si se ha pulsado en ir al menú.
+ */
+uint8 pantallaEncuestaPuntuacion() {
 	touchPosition pos_pantalla;
-	uint8 tocado = 0;
+	uint8 boton = 0;
 	uint16 pre = 1;
 
-		while(!tocado){
+	while( !boton ) {
 		touchRead(&pos_pantalla);
-		if(pos_pantalla.px > 140 && pos_pantalla.px <= 220 && !pre){
-			if(pos_pantalla.py >= 160 && pos_pantalla.py <= 192){
-				tocado=1;}
+		if( pos_pantalla.py >= 160 && pos_pantalla.py <= 190 && !pre ) {
+			if( pos_pantalla.px > 40 && pos_pantalla.px <= 120 )
+				boton = 1;
+			else if( pos_pantalla.px > 140 && pos_pantalla.px <= 220 )
+				boton = 2;
 		}
-		pre= pos_pantalla.px;
-		}
+		pre = pos_pantalla.px;
+	}
 
-		return tocado;
+	return boton;
 }
 

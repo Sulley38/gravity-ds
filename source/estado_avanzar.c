@@ -14,7 +14,7 @@
 
 
 /* Variables de estado del personaje */
-uint16 DistanciaRecorrida=0;
+uint16 DistanciaRecorrida;
 uint8 VelocidadHorizontal, VelocidadVertical;
 int16 PosicionPersonaje[3]; // [0] = X; [1] = Y; [2] = 0 hacia abajo, 1 hacia arriba
 
@@ -26,7 +26,7 @@ static const uint16 Bloques[CANTIDAD_BLOQUES][3] = {{0, 176, 0}, {0, 0, 0}, {64,
 static int16 Monedas[10][3];
 int16 SiguienteMoneda;
 uint8 NumeroMonedas;
-uint8 MonedasRecogidas=0;
+uint8 MonedasRecogidas;
 
 /* Variable de control de la encuesta de teclado */
 uint32 TecladoActivo;
@@ -43,8 +43,8 @@ void InicializarVariablesJuego() {
 	BloqueExtremoIzq = 0;
 	BloqueExtremoDer = 0;
 
-	NumeroMonedas = 0;
 	SiguienteMoneda = (rand() % 401) + 600;
+	NumeroMonedas = 0;
 	MonedasRecogidas = 0;
 
 	TecladoActivo = 0;

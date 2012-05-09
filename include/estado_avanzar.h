@@ -17,6 +17,10 @@ estado_avanzar.h
 /* Macro para comprobar si una tecla ha sido pulsada */
 #define TECLA_PULSADA(n) !(TECLAS_DAT & (1 << 10 | 1 << n))
 
+/* Variables de puntuación */
+extern uint16 DistanciaRecorrida;
+extern uint8 MonedasRecogidas;
+
 /* Inicializa las variables de la partida */
 extern void InicializarVariablesJuego();
 
