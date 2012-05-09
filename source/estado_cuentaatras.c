@@ -56,8 +56,10 @@ void HacerCuentaAtras() {
 	case 3:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondoPaleta(Fondo2, CuentaAtras2Bitmap, CuentaAtras2BitmapLen, CuentaAtras2Pal, CuentaAtras2PalLen);
 			FactorEscala = 1 << 8;
+			bgSetScale(Fondo2, FactorEscala, FactorEscala);
+			bgSetCenter(Fondo2, 0, -32);
+			cargarFondoPaleta(Fondo2, CuentaAtras2Bitmap, CuentaAtras2BitmapLen, CuentaAtras2Pal, CuentaAtras2PalLen);
 			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
@@ -66,8 +68,10 @@ void HacerCuentaAtras() {
 	case 2:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondoPaleta(Fondo2, CuentaAtras1Bitmap, CuentaAtras1BitmapLen, CuentaAtras1Pal, CuentaAtras1PalLen);
 			FactorEscala = 1 << 8;
+			bgSetScale(Fondo2, FactorEscala, FactorEscala);
+			bgSetCenter(Fondo2, 0, -32);
+			cargarFondoPaleta(Fondo2, CuentaAtras1Bitmap, CuentaAtras1BitmapLen, CuentaAtras1Pal, CuentaAtras1PalLen);
 			sonidoCuenta(5000);
 			resetearTiempo();
 			Cuenta--;
@@ -76,8 +80,10 @@ void HacerCuentaAtras() {
 	case 1:
 		bgSetCenter(Fondo2, (SCREEN_WIDTH/2) - (DIMENSION_ESCALADA/2), (SCREEN_HEIGHT/2) - (DIMENSION_ESCALADA/2));
 		if( obtenerTiempo() >= 1 ) {
-			cargarFondoPaleta(Fondo2, CuentaAtrasGoBitmap, CuentaAtrasGoBitmapLen, CuentaAtrasGoPal, CuentaAtrasGoPalLen);
 			FactorEscala = 1 << 8;
+			bgSetScale(Fondo2, FactorEscala, FactorEscala);
+			bgSetCenter(Fondo2, 0, -32);
+			cargarFondoPaleta(Fondo2, CuentaAtrasGoBitmap, CuentaAtrasGoBitmapLen, CuentaAtrasGoPal, CuentaAtrasGoPalLen);
 			sonidoCuenta(7500);
 			resetearTiempo();
 			Cuenta--;
@@ -92,7 +98,7 @@ void HacerCuentaAtras() {
 		if( obtenerTiempo() >= 1 ) {
 			bgHide(Fondo2);
 			bgSetCenter(Fondo2, 0, 0);
-			bgSetScale(Fondo2, 0, 0);
+			bgSetScale(Fondo2, 1 << 8, 1 << 8);
 			pararTemporizador(0);
 			sonidoCuenta(0);
 			resetearTiempo();

@@ -66,7 +66,7 @@ int main(void){
 			Pausar();
 		  break;
 		case PUNTUACION:
-			PedirPuntuacion();
+			MostrarPuntuacion();
 		  break;
 		default:
 		  break;

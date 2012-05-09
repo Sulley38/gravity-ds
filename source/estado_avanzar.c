@@ -5,6 +5,7 @@
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_pausa.h"
+#include "estado_puntuacion.h"
 #include "graficos.h"
 #include "pantalla.h"
 #include "sonido.h"
@@ -107,6 +108,7 @@ void ActualizarPantalla() {
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > SCREEN_HEIGHT || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
 		oamClear(&oamMain,0,41);
+		CargarPuntuacion();
 		ESTADO = PUNTUACION;
 	}
 }

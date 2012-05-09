@@ -7,7 +7,6 @@ estado_menu.h
 
 /* Dibuja los botones del menú */
 extern void CargarMenu();
-
 /* Muestra un par de botones con las opciones de jugar o salir */
 extern void MostrarMenu();
 

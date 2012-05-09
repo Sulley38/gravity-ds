@@ -4,7 +4,7 @@
 #include "fondos.h"
 #include "graficos.h"
 
-//#include "Teclado.h"
+#include "FondoScore.h"
 
 int ESTADO;
 //---------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ int main(void) {
 			 {'$','$',' ',' ',' ',' ',' ',' ','$','$'}};
 
     powerOn(POWER_ALL_2D);lcdMainOnBottom();initVideo();initFondos();
-    //cargarFondoBitmap(Fondo3, TecladoBitmap, TecladoBitmapLen);
+    cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
 
     consoleDemoInit();  //setup the sub screen for printing
 

@@ -6,16 +6,28 @@
 #include "estado_puntuacion.h"
 #include "fondos.h"
 
+/* Cabecera del fondo para la tabla de puntuación */
 #include "FondoScore.h"
 
-
-void PedirPuntuacion() {
-
-	cargarFondoBitmap(Fondo3, FondoScoreBitmap, FondoScoreBitmapLen);
-	bgSetCenter(Fondo2, 75, 75);
+/**
+ * Dibuja los elementos de la tabla de puntuaciones.
+ */
+void CargarPuntuacion() {
+	/* Carga la tabla como fondo */
+	cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
 	bgShow(Fondo2);
-	bgUpdate();
 
+	// TODO: rellenar tabla con la puntuación
+
+}
+
+/*
+ * Muestra la puntuación total de la partida.
+ * Da la opción de volver a jugar o regresar al menú principal.
+ */
+void MostrarPuntuacion() {
+
+	// TODO: esperar botón pulsado o tecla pulsada
 	while(1){
 
 	}

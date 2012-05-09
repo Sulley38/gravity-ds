@@ -30,8 +30,8 @@ void initSpriteMem() {
 	oamInit(&oamMain, SpriteMapping_1D_64, TRUE);
 	oamInit(&oamSub, SpriteMapping_1D_32, FALSE);
 
-	/*Creamos la matriz de rotación*/
-	oamAffineTransformation	(&oamMain,0,0,256,-256,0);
+	/* Matriz de rotación de los bloques verticales */
+	oamAffineTransformation(&oamMain, 0, 0, 256, -256, 0);
 
 	/* Reserva de memoria para cada sprite que quiera incluirse en la pantalla */
 	Corredor[0] = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);

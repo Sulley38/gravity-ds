@@ -29,6 +29,9 @@ void initFondos() {
  * Los parámetros 'imagen' y 'longitud_imagen' los genera grit en los ficheros de cabecera.
  */
 void cargarFondoBitmap(int fondo, const void * imagen, uint32 longitud_imagen ) {
+	// Limpia el fondo anterior
+	dmaFillHalfWords(0x0000, bgGetGfxPtr(fondo), 65536 );
+	// Copia el nuevo fondo
 	dmaCopy(imagen, /* Variable generada automáticamente, contiene los datos de la imagen */
 	    	bgGetGfxPtr(fondo), /* Dirección del fondo */
 	        longitud_imagen); /* Longitud de la imagen (en bytes) generada automáticamente */
@@ -40,10 +43,22 @@ void cargarFondoBitmap(int fondo, const void * imagen, uint32 longitud_imagen ) 
  * Los parámetros 'imagen', 'paleta' y las longitudes los genera grit en los ficheros de cabecera.
  */
 void cargarFondoPaleta(int fondo, const void * imagen, uint32 longitud_imagen, const void * paleta, uint32 longitud_paleta ) {
+	// Limpia los datos anteriores
+	dmaFillHalfWords(0x0000, bgGetGfxPtr(fondo), 65536 );
+	dmaFillHalfWords(0x0000, BG_PALETTE, 512 );
+	// Copia los nuevos datos
 	dmaCopy(imagen, /* Variable generada automáticamente, contiene los datos de la imagen */
 	    	bgGetGfxPtr(fondo), /* Dirección del fondo 3 principal */
 	        longitud_imagen); /* Longitud de la imagen (en bytes) generada automáticamente */
-	dmaCopy( paleta,  /* Variable generada automáticamente, contiene los datos de la paleta */
+	dmaCopy(paleta,  /* Variable generada automáticamente, contiene los datos de la paleta */
 			BG_PALETTE, /* Dirección de la paleta de fondos */
 			longitud_paleta );  /* Longitud de la paleta (en bytes) generada automáticamente */
+}
+
+/**
+ * Carga una imagen completamente negra de tamaño 256x256 en el fondo indicado.
+ */
+void cargarFondoNegro(int fondo) {
+	dmaFillHalfWords(0x0101, bgGetGfxPtr(fondo), 65536);
+	dmaFillHalfWords(0x0000, BG_PALETTE, 512);
 }
