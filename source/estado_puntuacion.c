@@ -32,6 +32,7 @@ void MostrarPuntuacion() {
 
 	}
 
+	oamClear(&oamMain,0,41);
 	CargarMenu();
 	ESTADO = MENU;
 }

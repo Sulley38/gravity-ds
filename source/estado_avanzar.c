@@ -107,7 +107,6 @@ void ActualizarPantalla() {
 
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > SCREEN_HEIGHT || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
-		oamClear(&oamMain,0,41);
 		CargarPuntuacion();
 		ESTADO = PUNTUACION;
 	}
@@ -245,7 +244,7 @@ uint8 EnPlataforma() {
 	uint16 i;
 	for( i = BloqueExtremoIzq; i <= BloqueExtremoDer; i++ ) {
 		if( !PosicionPersonaje[2] ) {
-			// Buscar por debajo
+			// Plataforma por debajo
 			if( (Bloques[i][1] <= PosicionPersonaje[1] + ALTURA_PERSONAJE) && (Bloques[i][1] + VelocidadVertical > PosicionPersonaje[1] + ALTURA_PERSONAJE) && (
 				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
 				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + DistanciaRecorrida))
@@ -255,7 +254,7 @@ uint8 EnPlataforma() {
 			}
 
 		} else {
-			// Buscar por encima
+			// Plataforma por encima
 			if( (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) >= PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) - VelocidadVertical < PosicionPersonaje[1]) && (
 				((Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida)) ||
 				((Bloques[i][0] <= PosicionPersonaje[0] + DistanciaRecorrida) && (Bloques[i][0] + ANCHURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[0] + DistanciaRecorrida))
@@ -275,12 +274,24 @@ uint8 EnPlataforma() {
 uint8 Colision() {
 	uint16 i;
 	for( i = BloqueExtremoIzq; i <= BloqueExtremoDer; i++ ) {
-		if( (Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida ) && (Bloques[i][0] + VelocidadHorizontal > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (
-			 ((Bloques[i][1] > PosicionPersonaje[1]) && (Bloques[i][1] < PosicionPersonaje[1] + ALTURA_PERSONAJE)) ||
-			 ((Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) < PosicionPersonaje[1] + ALTURA_PERSONAJE))
-			) ) {
-			PosicionPersonaje[0] = Bloques[i][0] - ANCHURA_PERSONAJE - DistanciaRecorrida; // Corrige la posición X si ha avanzado demasiado y ha traspasado un bloque
-			return 1;
+		if( !Bloques[i][2] ) {
+			// Bloque horizontal
+			if( (Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida ) && (Bloques[i][0] + VelocidadHorizontal > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (
+				 ((Bloques[i][1] > PosicionPersonaje[1]) && (Bloques[i][1] < PosicionPersonaje[1] + ALTURA_PERSONAJE)) ||
+				 ((Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) > PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) < PosicionPersonaje[1] + ALTURA_PERSONAJE))
+				) ) {
+				PosicionPersonaje[0] = Bloques[i][0] - ANCHURA_PERSONAJE - DistanciaRecorrida; // Corrige la posición X si ha avanzado demasiado y ha traspasado un bloque
+				return 1;
+			}
+		} else {
+			// Bloque vertical
+			if( (Bloques[i][0] <= PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida ) && (Bloques[i][0] + VelocidadHorizontal > PosicionPersonaje[0] + ANCHURA_PERSONAJE + DistanciaRecorrida) && (
+				 ((Bloques[i][1] < PosicionPersonaje[1] + ALTURA_PERSONAJE) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) >= PosicionPersonaje[1] + ALTURA_PERSONAJE)) ||
+				 ((Bloques[i][1] < PosicionPersonaje[1]) && (Bloques[i][1] + ALTURA_BLOQUE(Bloques[i][2]) >= PosicionPersonaje[1] ))
+				) ) {
+				PosicionPersonaje[0] = Bloques[i][0] - ANCHURA_PERSONAJE - DistanciaRecorrida; // Corrige la posición X si ha avanzado demasiado y ha traspasado un bloque
+				return 1;
+			}
 		}
 	}
 	return 0;
