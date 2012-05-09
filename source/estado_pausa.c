@@ -13,9 +13,9 @@ uint8 DesplazamientoAnimacion_Pausa, BotonPulsado_Pausa;
 
 void CargarPausa() {
 	// Pone una transparencia
+	cargarFondoNegro(Fondo2);
 	REG_BLDCNT = BLEND_ALPHA | BLEND_SRC_BG2 | BLEND_DST_BG3 | BLEND_DST_SPRITE;
 	REG_BLDALPHA = 3 << 1 | 1 << 10;
-	cargarFondoNegro(Fondo2);
 	bgShow(Fondo2);
 	// Muestra los botones
 	dibujar_botonContinuar(60, 20);
