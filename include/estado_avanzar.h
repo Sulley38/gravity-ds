@@ -46,6 +46,8 @@ void limpiar_bloques();
 void actualizar_monedas();
 /* Recalcula la posición de las nubes */
 void actualizar_nubes();
+/* Actualiza los contadores de la pantalla secundaria */
+void actualizar_puntuacion();
 
 /* Devuelve 1 si está apoyado en una plataforma, 0 de lo contrario */
 uint8 EnPlataforma();

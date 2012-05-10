@@ -47,7 +47,8 @@ void Pausar() {
 			 ESTADO = AVANZAR_PERSONAJE;
 		 } else {
 			 // Elimina los elementos del juego
-			 oamClear(&oamMain,0,41);
+			oamClear(&oamMain,0,127);
+			oamClear(&oamSub,0,127);
 			 CargarMenu();
 			 ESTADO = MENU;
 		 }

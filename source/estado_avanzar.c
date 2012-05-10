@@ -110,8 +110,7 @@ void ActualizarPantalla() {
 	// Actualiza el sprite del personaje para crear la animación
 	dibujar_personaje();
 	// Actualiza la puntuación en la pantalla superior
-	imprimir_numeros_sub(100, 170, DistanciaRecorrida/100, 100);
-	imprimir_numeros_sub(200, 170, MonedasRecogidas, 110);
+	actualizar_puntuacion();
 
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > SCREEN_HEIGHT || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
@@ -275,6 +274,15 @@ void actualizar_nubes() {
 			Nubes[i][1] = rand() % 50; // Valor discutible. iván propone: 120
 		}
 	}
+}
+
+/**
+ * Actualiza los contadores de la pantalla secundaria.
+ * ** OAM Index Sub: se reservan del 100 al 114
+ */
+void actualizar_puntuacion() {
+	imprimir_numeros_sub(100, 165, DistanciaRecorrida/100, 100);
+	imprimir_numeros_sub(200, 165, MonedasRecogidas, 110);
 }
 
 
