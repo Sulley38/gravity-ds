@@ -1,6 +1,8 @@
 // Estado 'Puntuación' definido en el autómata
 
 #include <nds.h>
+#include <fat.h>
+#include <stdio.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
@@ -12,8 +14,95 @@
 
 // Cabecera del fondo para la tabla de puntuación
 #include "FondoScore.h"
+
 // Variable de índices de los sprites números
 uint8 oamIndex;
+int PuntuacionTotal;
+int Puntuaciones[10];
+
+/**
+ * Lee el fichero de puntuaciones "gravityds-scores.txt" y rellena el vector de puntuaciones.
+ * Si el fichero no existe o no llega a 10 números, se llenan los huecos restantes con ceros.
+ */
+void LeerFicheroPuntuaciones() {
+	fatInitDefault();
+	// Abre el archivo y lee las puntuaciones guardadas (si las hay)
+	uint8 i = 0;
+	FILE* archivo = fopen("./gravityds-scores.txt", "r");
+	if(archivo != NULL) {
+		while( !feof(archivo) ) {
+			fscanf(archivo, "%d", &Puntuaciones[i]);
+			i++;
+		}
+		fclose(archivo);
+	}
+	// Rellena las puntuaciones restantes con ceros
+	while( i < 10 ) {
+		Puntuaciones[i] = 0;
+		i++;
+	}
+}
+
+
+/**
+ * Imprime en la pantalla secundaria las puntuaciones leídas.
+ * ** OAM Index Sub: se reservan del 0 al 99
+ */
+void ImprimirPuntuaciones() {
+	uint8 i;
+	for( i = 0; i < 10; ++i ) {
+		if( i < 5 ) imprimir_numeros_sub( 65, 50 + 20*i, Puntuaciones[i], i*10 );
+		else imprimir_numeros_sub( 185, 50 + 20*(i-5), Puntuaciones[i], i*10 );
+	}
+}
+
+/**
+ * Dibuja los elementos de la tabla de puntuaciones.
+ * ** OAM Index: se reservan del 51 al 80
+ */
+void CargarPuntuacion() {
+	/* Carga la tabla como fondo */
+	cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
+	bgShow(Fondo2);
+
+	/* Índice OAM inicial */
+	oamIndex = 51;
+
+	// Puntuación: (Distancia recorrida / 100) + 2 * Monedas recogidas
+	PuntuacionTotal = (MonedasRecogidas*2) + (DistanciaRecorrida/100);
+	// Imprime las monedas recogidas en la pantalla.
+	imprimir_numeros(160, 68, MonedasRecogidas);
+	// Imprime la distancia recorrida en la pantalla.
+	imprimir_numeros(160, 96, DistanciaRecorrida/100);
+	// Imprime los puntos totales obtenidos del jugador
+	imprimir_numeros(160, 130, PuntuacionTotal);
+}
+
+/*
+ * Muestra la puntuación total de la partida.
+ * Da la opción de volver a jugar o regresar al menú principal.
+ * ** OAM Index: se liberan todos los índices
+ */
+void MostrarTablaPuntuacion() {
+	// Espera que se pulse un botón
+	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
+	// Limpiar la pantalla
+	bgHide(Fondo2);
+	oamClear(&oamMain,0,127);
+	oamClear(&oamSub,0,127);
+	if( BotonPulsado == 1 ) {
+		// Pasar al estado Cuenta atrás
+		ImprimirPuntuaciones();
+		InicializarCuentaAtras();
+		InicializarVariablesJuego();
+		ESTADO = CUENTA_ATRAS;
+	} else {
+		// Pasar al estado Menu
+		CargarMenu();
+		ESTADO = MENU;
+	}
+}
+
 
 /* Imprime el número indicado en las coordenadas indicadas (X,Y) */
 void imprimir_numeros(uint8 x, uint8 y, int n) {
@@ -56,50 +145,20 @@ void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
 	}
 }
 
-
-/**
- * Dibuja los elementos de la tabla de puntuaciones.
- * ** OAM Index: se reservan del 51 al 80
- */
-void CargarPuntuacion() {
-	/* Carga la tabla como fondo */
-	cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
-	bgShow(Fondo2);
-
-	/* Índice OAM inicial */
-	oamIndex = 51;
-
-	// Imprime las monedas recogidas en la pantalla.
-	imprimir_numeros(160, 67, MonedasRecogidas);
-	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(160, 96, DistanciaRecorrida/100);
-	// Imprime los puntos totales obtenidos del jugador
-	// (Distancia recorrida / 100) + 2 * Monedas recogidas
-	imprimir_numeros(160, 129, (MonedasRecogidas*2) + DistanciaRecorrida/100);
-}
-
-/*
- * Muestra la puntuación total de la partida.
- * Da la opción de volver a jugar o regresar al menú principal.
- * ** OAM Index: se liberan todos los índices
- */
-void MostrarPuntuacion() {
-	// Espera que se pulse un botón
-	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
-	// Limpiar la pantalla
-	bgHide(Fondo2);
-	oamClear(&oamMain,0,127);
-	oamClear(&oamSub,0,127);
-	if( BotonPulsado == 1 ) {
-		// Pasar al estado Cuenta atrás
-		InicializarCuentaAtras();
-		InicializarVariablesJuego();
-		ESTADO = CUENTA_ATRAS;
-	} else {
-		// Pasar al estado Menu
-		CargarMenu();
-		ESTADO = MENU;
+/*Inserta en el array la puntuación del jugador si supera la puntuación de almenos el
+ *  décimo jugador con puntuacion más baja que se muestra en la pantalla secuandaria*/
+void InsertarPuntuacion(int x, int vector[10]) {
+	int k=0;
+	int i=0;
+	while (k<9){
+		if (x >= vector[i]){
+			i++;}
+	k++;
 	}
+	if (i!=0){
+		vector[i-1]=x;
+	}
+
 }
 
 

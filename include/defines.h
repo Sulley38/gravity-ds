@@ -45,4 +45,5 @@ defines.h
 // Variable global de estado
 extern int ESTADO;
 
+
 #endif // DEFINES_H

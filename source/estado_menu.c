@@ -5,6 +5,7 @@
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
 #include "estado_menu.h"
+#include "estado_puntuacion.h"
 #include "fondos.h"
 #include "sprites.h"
 #include "pantalla.h"
@@ -54,6 +55,7 @@ void MostrarMenu() {
 			oamClear(&oamMain,120,2);
 			oamClear(&oamMain,124,2);
 			// Cambio de estado: inicializa las variables y pasa al juego
+			ImprimirPuntuaciones();
 			InicializarCuentaAtras();
 			InicializarVariablesJuego();
 			ESTADO = CUENTA_ATRAS;

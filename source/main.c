@@ -42,6 +42,9 @@ int main(void){
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
 
+	/* Carga las puntuaciones desde fichero */
+	LeerFicheroPuntuaciones();
+
 	/* Bucle principal */
 	uint8 CurrentFrame;
 	CargarEstadoInicial();
@@ -66,7 +69,7 @@ int main(void){
 			Pausar();
 		  break;
 		case PUNTUACION:
-			MostrarPuntuacion();
+			MostrarTablaPuntuacion();
 		  break;
 		default:
 		  break;
