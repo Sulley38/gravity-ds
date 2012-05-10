@@ -35,6 +35,8 @@ extern void ActualizarPantalla();
 void dibujar_personaje();
 /* Dibuja las plataformas que correspondan en pantalla */
 void dibujar_bloques();
+/* Dibuja las nubes que correspondan en pantalla */
+void dibujar_nubes();
 /* Limpia todas las plataformas de la pantalla y recalcula los bloques que pueden aparecer */
 void limpiar_bloques();
 /* Dibuja las monedas en la pantalla */
