@@ -17,8 +17,9 @@
 
 // Variable de índices de los sprites números
 uint8 oamIndex;
+// Variables de puntuaciones
 int PuntuacionTotal;
-int Puntuaciones[10];
+static int Puntuaciones[10];
 
 /**
  * Lee el fichero de puntuaciones "gravityds-scores.txt" y rellena el vector de puntuaciones.
@@ -43,6 +44,12 @@ void LeerFicheroPuntuaciones() {
 	}
 }
 
+/**
+ * Escribe el fichero "gravityds-scores.txt" con los valores del vector de puntuaciones.
+ */
+void EscribirFicheroPuntuaciones() {
+	// STUB
+}
 
 /**
  * Imprime en la pantalla secundaria las puntuaciones leídas.
@@ -76,6 +83,10 @@ void CargarPuntuacion() {
 	imprimir_numeros(160, 96, DistanciaRecorrida/100);
 	// Imprime los puntos totales obtenidos del jugador
 	imprimir_numeros(160, 130, PuntuacionTotal);
+
+	// Guarda la puntuación en el vector y actualiza la pantalla secundaria
+	InsertarPuntuacion();
+	ImprimirPuntuaciones();
 }
 
 /*
@@ -88,19 +99,35 @@ void MostrarTablaPuntuacion() {
 	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
 	// Limpiar la pantalla
 	bgHide(Fondo2);
-	oamClear(&oamMain,0,127);
-	oamClear(&oamSub,0,127);
 	if( BotonPulsado == 1 ) {
 		// Pasar al estado Cuenta atrás
-		ImprimirPuntuaciones();
 		InicializarCuentaAtras();
 		InicializarVariablesJuego();
+		oamClear(&oamMain,0,128);
+		oamClear(&oamSub,0,128);
+		ImprimirPuntuaciones();
 		ESTADO = CUENTA_ATRAS;
 	} else {
 		// Pasar al estado Menu
+		oamClear(&oamMain,0,128);
+		oamClear(&oamSub,0,128);
 		CargarMenu();
 		ESTADO = MENU;
 	}
+}
+
+/**
+ * Inserta la puntuación obtenida en el vector de puntuaciones.
+ * Si no se supera la décima mejor puntuación, no se hace nada.
+ */
+void InsertarPuntuacion() {
+	uint8 i = 10, j;
+	// Buscar la posición en la que toca insertar
+	while( i > 0 && PuntuacionTotal > Puntuaciones[i-1] ) i--;
+	// Desplazar los elementos por debajo una posición más, desechando el último
+	for( j = 9; j > i; --j ) Puntuaciones[j] = Puntuaciones[j-1];
+	// Insertar la puntuación
+	if( i < 10 ) Puntuaciones[i] = PuntuacionTotal;
 }
 
 
@@ -125,7 +152,7 @@ void imprimir_numeros(uint8 x, uint8 y, int n) {
 	}
 }
 
-/* Imprime el número indicado en la pantalla secundaria en las coordenadas indicadas (X,Y) */
+/* Imprime en la pantalla secundaria el número indicado en las coordenadas indicadas (X,Y) */
 void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
 	int i, x_centrado, numdigitos = 0;
 	for( i = n; i != 0; i /= 10 ) numdigitos++;
@@ -144,21 +171,3 @@ void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
 		n /= 10;
 	}
 }
-
-/*Inserta en el array la puntuación del jugador si supera la puntuación de almenos el
- *  décimo jugador con puntuacion más baja que se muestra en la pantalla secuandaria*/
-void InsertarPuntuacion(int x, int vector[10]) {
-	int k=0;
-	int i=0;
-	while (k<9){
-		if (x >= vector[i]){
-			i++;}
-	k++;
-	}
-	if (i!=0){
-		vector[i-1]=x;
-	}
-
-}
-
-
