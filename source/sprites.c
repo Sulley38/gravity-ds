@@ -16,6 +16,7 @@ u16* botonJugar[2];
 u16* botonContinuar[2];
 u16* botonSalir[2];
 u16* Numeros[10];
+u16* NumerosSub[10];
 
 /* Función principal para cargar lo relacionado con sprites */
 void cargarSprites(){
@@ -48,16 +49,25 @@ void initSpriteMem() {
 	botonSalir[0] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	botonSalir[1] = oamAllocateGfx(&oamMain, SpriteSize_64x64, SpriteColorFormat_256Color);
 	Numeros[0] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[0] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[1] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[1] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[2] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[2] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[3] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[3] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[4] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[4] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[5] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[5] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[6] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[6] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[7] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[7] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[8] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
+	NumerosSub[8] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 	Numeros[9] = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_256Color);
-
+	NumerosSub[9] = oamAllocateGfx(&oamSub, SpriteSize_16x16, SpriteColorFormat_256Color);
 }
 
 /* Define la paleta de colores extendida para todos los sprites del juego.
@@ -215,15 +225,24 @@ void guardarSpritesEnMemoria(){
 		Moneda[i] = bitsMoneda[i*2] | (bitsMoneda[(i*2)+1]<<8);
 
 		Numeros[0][i] = bitsNumerosA[i*2] | (bitsNumerosA[(i*2)+1]<<8);
+		NumerosSub[0][i] = bitsNumerosA[i*2] | (bitsNumerosA[(i*2)+1]<<8);
 		Numeros[1][i] = bitsNumerosB[i*2] | (bitsNumerosB[(i*2)+1]<<8);
+		NumerosSub[1][i] = bitsNumerosB[i*2] | (bitsNumerosB[(i*2)+1]<<8);
 		Numeros[2][i] = bitsNumerosC[i*2] | (bitsNumerosC[(i*2)+1]<<8);
+		NumerosSub[2][i] = bitsNumerosC[i*2] | (bitsNumerosC[(i*2)+1]<<8);
 		Numeros[3][i] = bitsNumerosD[i*2] | (bitsNumerosD[(i*2)+1]<<8);
+		NumerosSub[3][i] = bitsNumerosD[i*2] | (bitsNumerosD[(i*2)+1]<<8);
 		Numeros[4][i] = bitsNumerosE[i*2] | (bitsNumerosE[(i*2)+1]<<8);
+		NumerosSub[4][i] = bitsNumerosE[i*2] | (bitsNumerosE[(i*2)+1]<<8);
 		Numeros[5][i] = bitsNumerosF[i*2] | (bitsNumerosF[(i*2)+1]<<8);
+		NumerosSub[5][i] = bitsNumerosF[i*2] | (bitsNumerosF[(i*2)+1]<<8);
 		Numeros[6][i] = bitsNumerosG[i*2] | (bitsNumerosG[(i*2)+1]<<8);
+		NumerosSub[6][i] = bitsNumerosG[i*2] | (bitsNumerosG[(i*2)+1]<<8);
 		Numeros[7][i] = bitsNumerosH[i*2] | (bitsNumerosH[(i*2)+1]<<8);
+		NumerosSub[7][i] = bitsNumerosH[i*2] | (bitsNumerosH[(i*2)+1]<<8);
 		Numeros[8][i] = bitsNumerosI[i*2] | (bitsNumerosI[(i*2)+1]<<8);
+		NumerosSub[8][i] = bitsNumerosI[i*2] | (bitsNumerosI[(i*2)+1]<<8);
 		Numeros[9][i] = bitsNumerosJ[i*2] | (bitsNumerosJ[(i*2)+1]<<8);
-
+		NumerosSub[9][i] = bitsNumerosJ[i*2] | (bitsNumerosJ[(i*2)+1]<<8);
 	}
 }
