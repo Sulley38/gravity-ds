@@ -8,12 +8,12 @@
 #include "sonido.h"
 #include "temporizadores.h"
 
-/* Ficheros de cabecera de cada texto por fondos */
+/* Ficheros de cabecera de cada fondo */
 #include "CuentaAtras1.h"
 #include "CuentaAtras2.h"
 #include "CuentaAtras3.h"
 #include "CuentaAtrasGo.h"
-
+#include "FondoPuntuacion.h"
 
 /* Variable de control de la cuenta atrás */
 uint8 Cuenta;
@@ -28,14 +28,14 @@ void InicializarCuentaAtras() {
 	Cuenta = 3;
 	FactorEscala = 1 << 8; // 1.0 en representación 24.8
 	DesplazamientoSuperior = 1;
-
+	// Cargar fondo superior de puntuación
+	cargarFondoBitmap(FondoSub3, FondoPuntuacionBitmap, FondoPuntuacionBitmapLen);
 	// Cargar primer número
 	cargarFondoPaleta(Fondo2, CuentaAtras3Bitmap, CuentaAtras3BitmapLen, CuentaAtras3Pal, CuentaAtras3PalLen);
 	bgSetCenter(Fondo2, 0, -32);
 	bgUpdate();
 	bgShow(Fondo2);
 	sonidoCuenta(5000);
-
 	// Inicia el temporizador para hacer la animación
 	iniciarTemporizador(0);
 }

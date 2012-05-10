@@ -35,16 +35,17 @@ extern void ActualizarPantalla();
 void dibujar_personaje();
 /* Dibuja las plataformas que correspondan en pantalla */
 void dibujar_bloques();
-/* Dibuja las nubes que correspondan en pantalla */
-void dibujar_nubes();
-/* Recalcula la posición de las nubes */
-void actualizar_nubes();
-/* Limpia todas las plataformas de la pantalla y recalcula los bloques que pueden aparecer */
-void limpiar_bloques();
 /* Dibuja las monedas en la pantalla */
 void dibujar_monedas();
+/* Dibuja las nubes que correspondan en pantalla */
+void dibujar_nubes();
+
+/* Limpia todas las plataformas de la pantalla y recalcula los bloques que pueden aparecer */
+void limpiar_bloques();
 /* Limpia las monedas de la pantalla y recalcula su posición */
 void actualizar_monedas();
+/* Recalcula la posición de las nubes */
+void actualizar_nubes();
 
 /* Devuelve 1 si está apoyado en una plataforma, 0 de lo contrario */
 uint8 EnPlataforma();

@@ -59,7 +59,7 @@ void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
 
 /**
  * Dibuja los elementos de la tabla de puntuaciones.
- * ** OAM Index: se reservan del 41 al 70
+ * ** OAM Index: se reservan del 51 al 80
  */
 void CargarPuntuacion() {
 	/* Carga la tabla como fondo */
@@ -67,21 +67,21 @@ void CargarPuntuacion() {
 	bgShow(Fondo2);
 
 	/* Índice OAM inicial */
-	oamIndex = 41;
+	oamIndex = 51;
 
 	// Imprime las monedas recogidas en la pantalla.
-	imprimir_numeros(140, 67, MonedasRecogidas);
+	imprimir_numeros(160, 67, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(150, 96, DistanciaRecorrida/100);
+	imprimir_numeros(160, 96, DistanciaRecorrida/100);
 	// Imprime los puntos totales obtenidos del jugador
-	// (Distancia recorrida / 10) + 2 * las monedas que se hayan recogido
-	imprimir_numeros(130, 129, (MonedasRecogidas*2) + DistanciaRecorrida/100);
+	// (Distancia recorrida / 100) + 2 * Monedas recogidas
+	imprimir_numeros(160, 129, (MonedasRecogidas*2) + DistanciaRecorrida/100);
 }
 
 /*
  * Muestra la puntuación total de la partida.
  * Da la opción de volver a jugar o regresar al menú principal.
- * ** OAM Index: se liberan del 0 al 70
+ * ** OAM Index: se liberan todos los índices
  */
 void MostrarPuntuacion() {
 	// Espera que se pulse un botón
@@ -89,6 +89,7 @@ void MostrarPuntuacion() {
 	// Limpiar la pantalla
 	bgHide(Fondo2);
 	oamClear(&oamMain,0,127);
+	oamClear(&oamSub,0,127);
 	if( BotonPulsado == 1 ) {
 		// Pasar al estado Cuenta atrás
 		InicializarCuentaAtras();

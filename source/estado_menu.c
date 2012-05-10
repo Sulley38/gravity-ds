@@ -5,8 +5,12 @@
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
 #include "estado_menu.h"
+#include "fondos.h"
 #include "sprites.h"
 #include "pantalla.h"
+
+// Cabeceras de los fondos
+#include "FondoLogo2.h"
 
 
 /* Variables de control del menú */
@@ -15,14 +19,16 @@ int escalaBoton;
 
 /* Carga los elementos del menú */
 void CargarMenu() {
-	escalaBoton = 2048;
-	oamAffineTransformation(&oamMain, 1, escalaBoton,0,0,escalaBoton);
-	// Muestra los botones
-	dibujar_botonJugar(60, 20);
-	dibujar_botonSalir(60, 110);
 	// Inicializa las variables
 	DesplazamientoAnimacion_Menu = 0;
 	BotonPulsado_Menu = 0;
+	escalaBoton = 2048;
+	oamAffineTransformation(&oamMain, 1, escalaBoton, 0, 0,  escalaBoton);
+	// Carga el fondo del logotipo
+	cargarFondoBitmap(FondoSub3, FondoLogo2Bitmap, FondoLogo2BitmapLen);
+	// Muestra los botones
+	dibujar_botonJugar(60, 20);
+	dibujar_botonSalir(60, 110);
 }
 
 /**
@@ -30,13 +36,12 @@ void CargarMenu() {
  * Espera una respuesta táctil válida y hace una animación cuando la recibe.
  */
 void MostrarMenu() {
-	if(escalaBoton>256){
+	if(escalaBoton > 256) {
 		escalaBoton = (escalaBoton*933)/1000;
-		oamAffineTransformation(&oamMain, 1, escalaBoton,0,0,escalaBoton);
+		oamAffineTransformation(&oamMain, 1, escalaBoton, 0, 0, escalaBoton);
 		dibujar_botonJugar(60, 20);
 		dibujar_botonSalir(60, 110);
-	}
-	else{
+	} else {
 		// Espera una entrada táctil del usuario
 		if( !BotonPulsado_Menu )
 			BotonPulsado_Menu = pantallaEncuestaMenu();
@@ -65,8 +70,7 @@ void MostrarMenu() {
  * ** OAM Index: se reservan el 120 y el 121
  */
 void dibujar_botonJugar(int X, int Y) {
-	int x_corrector;
-	x_corrector =(64-((64*256)/escalaBoton))/2;
+	int x_corrector = (64-((64*256)/escalaBoton))/2;
 	oamSet(&oamMain,
 		120, // OAM Index
 		X+x_corrector + 1, Y, // Posición X e Y
@@ -119,9 +123,7 @@ void dibujar_botonContinuar(int X, int Y) {
  * ** OAM Index: se reservan el 124 y el 125
  */
 void dibujar_botonSalir(int X, int Y) {
-	int x_corrector;
-	x_corrector =(64-((64*256)/escalaBoton))/2;
-
+	int x_corrector = (64-((64*256)/escalaBoton))/2;
 	oamSet(&oamMain,
 		124, // OAM Index
 		X + x_corrector + 1, Y, // Posición X e Y

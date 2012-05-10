@@ -7,12 +7,10 @@
 #include "estado_menu.h"
 #include "temporizadores.h"
 
-
-/* Cabeceras específicas de cada fondo */
+// Cabeceras específicas de cada fondo
 #include "FondoAzul.h"
 #include "FondoLogo.h"
 #include "FondoPuma.h"
-#include "FondoPuntuacion.h"
 
 // Variable para controlar la transparencia del fondo
 uint8 Transparencia = 32;
@@ -53,11 +51,8 @@ void mostrarPantallaInicio() {
 		resetearTiempo();
 		REG_BLDCNT = 0;
 
-		// Carga los fondos principales del juego
-		cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
-		cargarFondoBitmap(FondoSub3, FondoPuntuacionBitmap, FondoPuntuacionBitmapLen);
-
 		// Pasa al menú
+		cargarFondoBitmap(Fondo3, FondoAzulBitmap, FondoAzulBitmapLen);
 		CargarMenu();
 		ESTADO = MENU;
 	}
