@@ -108,6 +108,9 @@ void ActualizarPantalla() {
 
 	// Actualiza el sprite del personaje para crear la animación
 	dibujar_personaje();
+	// Actualiza la puntuación en la pantalla superior
+	imprimir_numeros_sub(100, 170, DistanciaRecorrida/100, 100);
+	imprimir_numeros_sub(200, 170, MonedasRecogidas, 110);
 
 	// Comprueba si el personaje ha muerto
 	if( PosicionPersonaje[1] + ALTURA_PERSONAJE < 0 || PosicionPersonaje[1] > SCREEN_HEIGHT || PosicionPersonaje[0] + ANCHURA_PERSONAJE < 0 ) {
@@ -219,7 +222,6 @@ void dibujar_monedas() {
  * Reduce la distancia restante para la próxima moneda, y si toca, la añade a la lista.
  */
 void actualizar_monedas() {
-
 	// Comprueba si se ha pulsado la moneda y actualiza sus posiciones
 	uint8 i;
 	for( i = 0; i < NumeroMonedas; i++ ) {

@@ -14,6 +14,7 @@ extern u16* botonContinuar[2];
 extern u16* botonSalir[2];
 extern u16* Numeros[10];
 extern u16* Nube;
+extern u16* NumerosSub[10];
 
 /* Función principal para cargar lo relacionado con sprites */
 extern void cargarSprites();
