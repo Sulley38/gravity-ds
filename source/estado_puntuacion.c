@@ -30,7 +30,7 @@ void LeerFicheroPuntuaciones() {
 	// Abre el archivo y lee las puntuaciones guardadas (si las hay)
 	uint8 i = 0;
 	FILE* archivo = fopen("./gravityds-scores.txt", "r");
-	if(archivo != NULL) {
+	if( archivo != NULL ) {
 		while( !feof(archivo) ) {
 			fscanf(archivo, "%d", &Puntuaciones[i]);
 			i++;
@@ -45,10 +45,17 @@ void LeerFicheroPuntuaciones() {
 }
 
 /**
- * Escribe el fichero "gravityds-scores.txt" con los valores del vector de puntuaciones.
+ * Escribe en el fichero "gravityds-scores.txt" los valores del vector de puntuaciones.
+ * Si el fichero no existe, lo crea.
  */
 void EscribirFicheroPuntuaciones() {
-	// STUB
+	uint8 i;
+	FILE* archivo = fopen("./gravityds-scores.txt", "w");
+	if( archivo != NULL ) {
+		for( i = 0; i < 10; ++i )
+			fprintf( archivo, "%d\n", Puntuaciones[i] );
+		fclose(archivo);
+	}
 }
 
 /**
@@ -99,18 +106,16 @@ void MostrarTablaPuntuacion() {
 	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
 	// Limpiar la pantalla
 	bgHide(Fondo2);
+	oamClear(&oamMain,0,128);
+	oamClear(&oamSub,0,128);
 	if( BotonPulsado == 1 ) {
 		// Pasar al estado Cuenta atrás
 		InicializarCuentaAtras();
 		InicializarVariablesJuego();
-		oamClear(&oamMain,0,128);
-		oamClear(&oamSub,0,128);
 		ImprimirPuntuaciones();
 		ESTADO = CUENTA_ATRAS;
 	} else {
 		// Pasar al estado Menu
-		oamClear(&oamMain,0,128);
-		oamClear(&oamSub,0,128);
 		CargarMenu();
 		ESTADO = MENU;
 	}
