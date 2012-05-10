@@ -78,9 +78,9 @@ void CargarPuntuacion() {
 	// Puntuación: (Distancia recorrida / 100) + 2 * Monedas recogidas
 	PuntuacionTotal = (MonedasRecogidas*2) + (DistanciaRecorrida/100);
 	// Imprime las monedas recogidas en la pantalla.
-	imprimir_numeros(160, 68, MonedasRecogidas);
+	imprimir_numeros(160, 69, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(160, 96, DistanciaRecorrida/100);
+	imprimir_numeros(160, 98, DistanciaRecorrida/100);
 	// Imprime los puntos totales obtenidos del jugador
 	imprimir_numeros(160, 130, PuntuacionTotal);
 

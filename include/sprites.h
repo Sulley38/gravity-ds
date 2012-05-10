@@ -7,13 +7,13 @@ sprites.h
 
 /* Direcciones de memoria en las que están guardados los sprites */
 extern u16* Corredor[4];
+extern u16* Nube;
 extern u16* Bloque;
 extern u16* Moneda;
 extern u16* botonJugar[2];
 extern u16* botonContinuar[2];
 extern u16* botonSalir[2];
 extern u16* Numeros[10];
-extern u16* Nube;
 extern u16* NumerosSub[10];
 
 /* Función principal para cargar lo relacionado con sprites */
