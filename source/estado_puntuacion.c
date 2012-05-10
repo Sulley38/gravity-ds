@@ -36,6 +36,26 @@ void imprimir_numeros(uint8 x, uint8 y, int n) {
 	}
 }
 
+/* Imprime el número indicado en la pantalla secundaria en las coordenadas indicadas (X,Y) */
+void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
+	int i, x_centrado, numdigitos = 0;
+	for( i = n; i != 0; i /= 10 ) numdigitos++;
+	// Para centrarlo
+	x_centrado = x + numdigitos*5;
+	for( i = 0; n != 0 || i == 0; i++ ) {
+		oamSet(&oamSub,
+			oamBase + i, // OAM Index
+			x_centrado - 10*i, y, // Posición X e Y
+			0, // Prioridad (menor -> arriba)
+			0, // Índice de paleta
+			SpriteSize_16x16, SpriteColorFormat_256Color,
+			NumerosSub[n%10], // Puntero al sprite
+			-1, FALSE, FALSE, FALSE, FALSE, FALSE
+			);
+		n /= 10;
+	}
+}
+
 
 /**
  * Dibuja los elementos de la tabla de puntuaciones.
@@ -52,10 +72,10 @@ void CargarPuntuacion() {
 	// Imprime las monedas recogidas en la pantalla.
 	imprimir_numeros(140, 67, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(150, 96, DistanciaRecorrida/10);
+	imprimir_numeros(150, 96, DistanciaRecorrida/100);
 	// Imprime los puntos totales obtenidos del jugador
 	// (Distancia recorrida / 10) + 2 * las monedas que se hayan recogido
-	imprimir_numeros(130, 129, (MonedasRecogidas*2) + DistanciaRecorrida/10);
+	imprimir_numeros(130, 129, (MonedasRecogidas*2) + DistanciaRecorrida/100);
 }
 
 /*
