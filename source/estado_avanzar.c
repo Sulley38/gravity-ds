@@ -22,7 +22,7 @@ int16 PosicionPersonaje[3]; // [0] = X; [1] = Y; [2] = 0 hacia abajo, 1 hacia ar
 uint16 BloqueExtremoIzq, BloqueExtremoDer;
 static const uint16 Bloques[CANTIDAD_BLOQUES][3] = {{0, 176, 0}, {0, 0, 0}, {64, 176, 0}, {64, 0, 0}, {78, 86, 0}, {128, 176, 0}, {128, 0, 0}, {142, 86, 0}, {151, 160, 0}, {168, 16, 0}, {187, 144, 0}, {195, 32, 0}, {206, 86, 0}, {299, 172, 0}, {363, 172, 0}, {400, 116, 0}, {471, 76, 0}, {496, 173, 0}, {535, 40, 0}, {560, 173, 0}, {609, 5, 0}, {673, 5, 0}, {737, 5, 0}, {801, 5, 0}, {879, 112, 0}, {949, 6, 0}, {1045, 171, 0}, {1046, 51, 0}, {1109, 155, 0}, {1110, 67, 0}, {1173, 171, 0}, {1174, 83, 0}, {1237, 171, 0}, {1301, 171, 0}, {1322, 85, 0}, {1365, 171, 0}, {1386, 85, 0}, {1397, 155, 0}, {1429, 171, 0}, {1450, 85, 0}, {1476, 101, 0}, {1493, 171, 0}, {1514, 85, 0}, {1525, 155, 0}, {1557, 171, 0}, {1578, 85, 0}, {1604, 101, 0}, {1621, 171, 0}, {1642, 85, 0}, {1653, 155, 0}, {1685, 171, 0}, {1706, 85, 0}, {1732, 101, 0}, {1749, 171, 0}, {1770, 85, 0}, {1781, 155, 0}, {1813, 171, 0}, {1834, 85, 0}, {1860, 101, 0}, {1973, 5, 0}, {2037, 5, 0}, {2101, 5, 0}, {2165, 5, 0}, {2229, 5, 0}, {2293, 5, 0},{2358, 23, 1}, {2374, 23, 1}};
 
-static int16 Nubes[3][3] = {{150,-10,0},{250,20,0},{350,10,0}};
+static int16 Nubes[3][3] = {{100,-10,0},{200,50,0},{300,20,0}};
 
 /* Variables de estado de las monedas */
 static int16 Monedas[10][3];
@@ -58,6 +58,7 @@ void InicializarVariablesJuego() {
  */
 void Avanzar() {
 	DistanciaRecorrida += VelocidadHorizontal;
+	actualizar_nubes();
 }
 
 /**
@@ -137,6 +138,38 @@ void dibujar_personaje() {
 		-1, FALSE, FALSE, FALSE, PosicionPersonaje[2], FALSE
 		);
 }
+/**
+ * Dibuja las nubes que correspondan en pantalla
+ * ** OAM Index: se reservan del 100 hasta el 110
+ */
+
+void dibujar_nubes() {
+	uint8 oam = 100;
+	uint16 i;
+	for( i = 0; i <3; i++) {
+		oamSet(&oamMain,
+			oam, // OAM Index
+			Nubes[i][0],Nubes[i][1], // Posición X e Y
+			3, // Prioridad (menor -> arriba)
+			5, // Índice de paleta
+			SpriteSize_32x32, SpriteColorFormat_256Color,
+			Nube, // Puntero al sprite
+			-1, FALSE, FALSE, FALSE, FALSE, FALSE
+			);
+		oam++;
+	}
+}
+
+void actualizar_nubes(){
+	uint8 i;
+	for (i=0;i<3;i++){
+		Nubes[i][0] -= VelocidadHorizontal/3;
+		if (Nubes[i][0]<-40){
+			Nubes[i][0] += 300;
+			Nubes[i][1] = rand()%50;
+		}
+	}
+}
 
 /**
  * Dibuja las plataformas que correspondan en pantalla
@@ -154,27 +187,6 @@ void dibujar_bloques() {
 			SpriteSize_64x64, SpriteColorFormat_256Color,
 			Bloque, // Puntero al sprite
 			Bloques[i][2] - 1, FALSE, FALSE, FALSE, FALSE, FALSE
-			);
-		oam++;
-	}
-}
-/**
- * Dibuja las nubes que correspondan en pantalla
- * ** OAM Index: se reservan del 100 hasta el 110
- */
-
-void dibujar_nubes() {
-	uint8 oam = 100;
-	uint16 i;
-	for( i = 0; i <3; i++) {
-		oamSet(&oamMain,
-			oam, // OAM Index
-			Nubes[i][0],0, // Posición X e Y
-			3, // Prioridad (menor -> arriba)
-			5, // Índice de paleta
-			SpriteSize_32x32, SpriteColorFormat_256Color,
-			Nube, // Puntero al sprite
-			-1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);
 		oam++;
 	}

@@ -37,6 +37,8 @@ void dibujar_personaje();
 void dibujar_bloques();
 /* Dibuja las nubes que correspondan en pantalla */
 void dibujar_nubes();
+/* Recalcula la posición de las nubes */
+void actualizar_nubes();
 /* Limpia todas las plataformas de la pantalla y recalcula los bloques que pueden aparecer */
 void limpiar_bloques();
 /* Dibuja las monedas en la pantalla */

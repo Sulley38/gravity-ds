@@ -88,7 +88,7 @@ void MostrarPuntuacion() {
 	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
 	// Limpiar la pantalla
 	bgHide(Fondo2);
-	oamClear(&oamMain,0,71);
+	oamClear(&oamMain,0,127);
 	if( BotonPulsado == 1 ) {
 		// Pasar al estado Cuenta atrás
 		InicializarCuentaAtras();
