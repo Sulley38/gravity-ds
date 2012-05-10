@@ -83,8 +83,5 @@ int main(void){
 		oamUpdate(&oamSub);
 	}
 
-	/* Guarda las 10 mejores puntuaciones en el fichero de texto */
-	EscribirFicheroPuntuaciones();
-
 	return 0;
 }

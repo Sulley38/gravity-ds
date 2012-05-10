@@ -29,7 +29,7 @@ void LeerFicheroPuntuaciones() {
 	fatInitDefault();
 	// Abre el archivo y lee las puntuaciones guardadas (si las hay)
 	uint8 i = 0;
-	FILE* archivo = fopen("./gravityds-scores.txt", "r");
+	FILE* archivo = fopen("/NDS/gravityds-scores.txt", "r");
 	if( archivo != NULL ) {
 		while( !feof(archivo) ) {
 			fscanf(archivo, "%d", &Puntuaciones[i]);
@@ -50,7 +50,7 @@ void LeerFicheroPuntuaciones() {
  */
 void EscribirFicheroPuntuaciones() {
 	uint8 i;
-	FILE* archivo = fopen("./gravityds-scores.txt", "w");
+	FILE* archivo = fopen("/NDS/gravityds-scores.txt", "w");
 	if( archivo != NULL ) {
 		for( i = 0; i < 10; ++i )
 			fprintf( archivo, "%d\n", Puntuaciones[i] );
@@ -91,9 +91,10 @@ void CargarPuntuacion() {
 	// Imprime los puntos totales obtenidos del jugador
 	imprimir_numeros(160, 130, PuntuacionTotal);
 
-	// Guarda la puntuación en el vector y actualiza la pantalla secundaria
+	// Guarda la puntuación en el vector, actualiza la pantalla secundaria y guarda el fichero
 	InsertarPuntuacion();
 	ImprimirPuntuaciones();
+	EscribirFicheroPuntuaciones();
 }
 
 /*
