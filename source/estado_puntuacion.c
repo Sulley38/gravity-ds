@@ -1,6 +1,8 @@
 // Estado 'Puntuación' definido en el autómata
 
 #include <nds.h>
+#include <stdio.h>
+#include <fat.h>
 #include "defines.h"
 #include "estado_avanzar.h"
 #include "estado_cuentaatras.h"
@@ -14,6 +16,9 @@
 #include "FondoScore.h"
 // Variable de índices de los sprites números
 uint8 oamIndex;
+
+int puntuaciones[10];
+int TOTAL_PUNTOS=0;
 
 /* Imprime el número indicado en las coordenadas indicadas (X,Y) */
 void imprimir_numeros(uint8 x, uint8 y, int n) {
@@ -73,9 +78,10 @@ void CargarPuntuacion() {
 	imprimir_numeros(160, 67, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
 	imprimir_numeros(160, 96, DistanciaRecorrida/100);
+	TOTAL_PUNTOS =(MonedasRecogidas*2) + DistanciaRecorrida/100;
 	// Imprime los puntos totales obtenidos del jugador
 	// (Distancia recorrida / 100) + 2 * Monedas recogidas
-	imprimir_numeros(160, 129, (MonedasRecogidas*2) + DistanciaRecorrida/100);
+	imprimir_numeros(160, 129, TOTAL_PUNTOS);
 }
 
 /*
@@ -101,5 +107,43 @@ void MostrarPuntuacion() {
 		ESTADO = MENU;
 	}
 }
+/*Inserta en el array la puntuación del jugador si supera la puntuación de almenos el
+ *  décimo jugador con puntuacion más baja que se muestra en la pantalla secuandaria*/
+void Insertar_Puntuacion(int x, int vector[10]){
+	int k=0;
+	int i=0;
+	while (k<9){
+		if (x >= vector[i]){
+			i++;}
+	k++;
+	}
+	if (i!=0){
+		vector[i-1]=x;
+	}
 
+}
+
+
+void Actualizar_High_Scores(){
+	fatInitDefault();
+	consoleDemoInit();
+
+
+	int i=0;
+
+	FILE* test = fopen ("/app_data/Puntuaciones.txt", "r");
+
+	if (test != 0){
+
+		while(!feof(test)){
+		fscanf(test,"%d",&puntuaciones[i]);
+		i++;
+		}
+	}
+	Insertar_Puntuacion(TOTAL_PUNTOS ,puntuaciones[10]);
+
+	fprintf(test,"%d",puntuaciones[10]);
+
+	fclose(test);
+}
 
