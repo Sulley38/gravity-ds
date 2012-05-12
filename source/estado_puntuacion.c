@@ -15,11 +15,12 @@
 // Cabecera del fondo para la tabla de puntuación
 #include "FondoScore.h"
 
-// Variable de índices de los sprites números
+// Variables de los sprites de números
 uint8 oamIndex;
+static const uint8 Ancho[10] = {13,11,12,12,12,13,11,11,10,10};
 // Variables de puntuaciones
 int PuntuacionTotal;
-static int Puntuaciones[10];
+static uint32 Puntuaciones[10];
 // Variable de control del menú puntuacion
 uint8 BotonPulsado_Puntuacion;
 
@@ -67,8 +68,8 @@ void EscribirFicheroPuntuaciones() {
 void ImprimirPuntuaciones() {
 	uint8 i;
 	for( i = 0; i < 10; ++i ) {
-		if( i < 5 ) imprimir_numeros_sub( 65, 50 + 20*i, Puntuaciones[i], i*10 );
-		else imprimir_numeros_sub( 185, 50 + 20*(i-5), Puntuaciones[i], i*10 );
+		if( i < 5 ) imprimir_numeros_sub( 30, 50 + 20*i, Puntuaciones[i], i*10 );
+		else imprimir_numeros_sub( 150, 50 + 20*(i-5), Puntuaciones[i], i*10 );
 	}
 }
 
@@ -88,11 +89,11 @@ void CargarPuntuacion() {
 	// Puntuación: (Distancia recorrida / 100) + 2 * Monedas recogidas
 	PuntuacionTotal = (MonedasRecogidas*2) + (DistanciaRecorrida/100);
 	// Imprime las monedas recogidas en la pantalla.
-	imprimir_numeros(160, 69, MonedasRecogidas);
+	imprimir_numeros(150, 69, MonedasRecogidas);
 	// Imprime la distancia recorrida en la pantalla.
-	imprimir_numeros(160, 98, DistanciaRecorrida/100);
+	imprimir_numeros(150, 98, DistanciaRecorrida/100);
 	// Imprime los puntos totales obtenidos del jugador
-	imprimir_numeros(160, 130, PuntuacionTotal);
+	imprimir_numeros(150, 130, PuntuacionTotal);
 
 	// Guarda la puntuación en el vector, actualiza la pantalla secundaria y guarda el fichero
 	InsertarPuntuacion();
@@ -144,42 +145,48 @@ void InsertarPuntuacion() {
 
 
 /* Imprime el número indicado en las coordenadas indicadas (X,Y) */
-void imprimir_numeros(uint8 x, uint8 y, int n) {
-	int i, x_centrado, numdigitos = 0;
-	for( i = n; i != 0; i /= 10 ) numdigitos++;
-	// Para centrarlo
-	x_centrado = x + numdigitos*5;
-	for( i = 0; n != 0 || i == 0; i++ ) {
+void imprimir_numeros(uint8 X, uint8 Y, uint32 N) {
+	uint8 ancho_total = 0;
+	// Cálculo del ancho que va a ocupar el número
+	uint32 i;
+	for( i = N; i >= 10; i /= 10 ) ancho_total += Ancho[i%10];
+	// Imprimir de derecha a izquierda
+	int16 X_Actual = X + ancho_total;
+	for( i = 0; N != 0 || i == 0; i++ ) {
 		oamSet(&oamMain,
 			oamIndex, // OAM Index
-			x_centrado - 10*i, y, // Posición X e Y
+			X_Actual, Y, // Posición X e Y
 			0, // Prioridad (menor -> arriba)
 			4, // Índice de paleta
 			SpriteSize_16x16, SpriteColorFormat_256Color,
-			Numeros[n%10], // Puntero al sprite
+			Numeros[N%10], // Puntero al sprite
 			-1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);
 		oamIndex++;
-		n /= 10;
+		N /= 10;
+		X_Actual -= Ancho[N%10];
 	}
 }
 
 /* Imprime en la pantalla secundaria el número indicado en las coordenadas indicadas (X,Y) */
-void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase) {
-	int i, x_centrado, numdigitos = 0;
-	for( i = n; i != 0; i /= 10 ) numdigitos++;
-	// Para centrarlo
-	x_centrado = x + numdigitos*5;
-	for( i = 0; n != 0 || i == 0; i++ ) {
+void imprimir_numeros_sub(uint8 X, uint8 Y, uint32 N, int oamBase) {
+	uint8 ancho_total = 0;
+	// Cálculo del ancho que va a ocupar el número
+	uint32 i;
+	for( i = N; i >= 10; i /= 10 ) ancho_total += Ancho[i%10];
+	// Imprimir de derecha a izquierda
+	int16 X_Actual = X + ancho_total;
+	for( i = 0; N != 0 || i == 0; i++ ) {
 		oamSet(&oamSub,
 			oamBase + i, // OAM Index
-			x_centrado - 10*i, y, // Posición X e Y
+			X_Actual, Y, // Posición X e Y
 			0, // Prioridad (menor -> arriba)
 			0, // Índice de paleta
 			SpriteSize_16x16, SpriteColorFormat_256Color,
-			NumerosSub[n%10], // Puntero al sprite
+			NumerosSub[N%10], // Puntero al sprite
 			-1, FALSE, FALSE, FALSE, FALSE, FALSE
 			);
-		n /= 10;
+		N /= 10;
+		X_Actual -= Ancho[N%10];
 	}
 }

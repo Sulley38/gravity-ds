@@ -281,8 +281,8 @@ void actualizar_nubes() {
  * ** OAM Index Sub: se reservan del 100 al 114
  */
 void actualizar_puntuacion() {
-	imprimir_numeros_sub(100, 165, DistanciaRecorrida/100, 100);
-	imprimir_numeros_sub(200, 165, MonedasRecogidas, 110);
+	imprimir_numeros_sub(58, 165, DistanciaRecorrida/100, 100);
+	imprimir_numeros_sub(205, 165, MonedasRecogidas, 110);
 }
 
 

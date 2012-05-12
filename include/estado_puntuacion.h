@@ -24,7 +24,7 @@ extern void MostrarTablaPuntuacion();
 void InsertarPuntuacion();
 
 /* Imprime el número indicado en las coordenadas indicadas (X,Y) */
-extern void imprimir_numeros(uint8 x, uint8 y, int n);
-extern void imprimir_numeros_sub(uint8 x, uint8 y, int n, int oamBase);
+extern void imprimir_numeros(uint8 X, uint8 Y, uint32 N);
+extern void imprimir_numeros_sub(uint8 X, uint8 Y, uint32 N, int oamBase);
 
 #endif // E_PUNTUACION_H
