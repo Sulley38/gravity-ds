@@ -20,6 +20,8 @@ uint8 oamIndex;
 // Variables de puntuaciones
 int PuntuacionTotal;
 static int Puntuaciones[10];
+// Variable de control del menú puntuacion
+uint8 BotonPulsado_Puntuacion;
 
 /**
  * Lee el fichero de puntuaciones "gravityds-scores.txt" y rellena el vector de puntuaciones.
@@ -75,12 +77,13 @@ void ImprimirPuntuaciones() {
  * ** OAM Index: se reservan del 51 al 80
  */
 void CargarPuntuacion() {
-	/* Carga la tabla como fondo */
+	// Carga la tabla como fondo
 	cargarFondoPaleta(Fondo2, FondoScoreBitmap, FondoScoreBitmapLen, FondoScorePal, FondoScorePalLen);
 	bgShow(Fondo2);
 
-	/* Índice OAM inicial */
+	// Inicializa variables
 	oamIndex = 51;
+	BotonPulsado_Puntuacion = 0;
 
 	// Puntuación: (Distancia recorrida / 100) + 2 * Monedas recogidas
 	PuntuacionTotal = (MonedasRecogidas*2) + (DistanciaRecorrida/100);
@@ -101,24 +104,27 @@ void CargarPuntuacion() {
  * Muestra la puntuación total de la partida.
  * Da la opción de volver a jugar o regresar al menú principal.
  * ** OAM Index: se liberan todos los índices
+ * ** OAM Index: se liberan del 100 al 114
  */
 void MostrarTablaPuntuacion() {
-	// Espera que se pulse un botón
-	uint8 BotonPulsado = pantallaEncuestaPuntuacion();
-	// Limpiar la pantalla
-	bgHide(Fondo2);
-	oamClear(&oamMain,0,128);
-	oamClear(&oamSub,0,128);
-	if( BotonPulsado == 1 ) {
-		// Pasar al estado Cuenta atrás
-		InicializarCuentaAtras();
-		InicializarVariablesJuego();
-		ImprimirPuntuaciones();
-		ESTADO = CUENTA_ATRAS;
+	if( !BotonPulsado_Puntuacion ) {
+		// Espera que se pulse un botón
+		BotonPulsado_Puntuacion = pantallaEncuestaPuntuacion();
 	} else {
-		// Pasar al estado Menu
-		CargarMenu();
-		ESTADO = MENU;
+		// Limpiar la pantalla
+		bgHide(Fondo2);
+		oamClear(&oamMain,0,128);
+		oamClear(&oamSub,100,15);
+		if( BotonPulsado_Puntuacion == 1 ) {
+			// Pasar al estado Cuenta atrás
+			InicializarVariablesJuego();
+			ESTADO = CUENTA_ATRAS;
+		} else {
+			// Pasar al estado Menu
+			oamClear(&oamSub,0,100);
+			CargarMenu();
+			ESTADO = MENU;
+		}
 	}
 }
 
