@@ -42,7 +42,7 @@ int main(void){
 	/* Llena la tabla de interrupciones con las rutinas correspondientes para manejarlas */
 	rellenarTablaInt();
 
-	/* Carga las puntuaciones desde fichero */
+	/* Carga las 10 mejores puntuaciones desde el fichero de texto */
 	LeerFicheroPuntuaciones();
 
 	/* Bucle principal */

@@ -271,7 +271,7 @@ void actualizar_nubes() {
 		Nubes[i][0] -= VelocidadHorizontal/3;
 		if( Nubes[i][0] < -40 ) {
 			Nubes[i][0] += 300;
-			Nubes[i][1] = rand() % 50; // Valor discutible. iván propone: 120
+			Nubes[i][1] = rand() % 120;
 		}
 	}
 }

@@ -15,8 +15,8 @@ void HabilitarIntTemp()
 	//Para ello primero se deshabilitan todas las interrupciones
 	DisableInts();
 
-	//Escribir un 1 en el bit correspondiente al temporizador del REG_IE
-	IE = IE | 1 << 3 | 1<<4;
+	//Escribir un 1 en los bits correspondientes a los temporizadores 1 y 2 del REG_IE
+	IE = IE | 3 << 3;
 
 	//Para acabar, se habilitan todas las interrupciones
 	EnableInts();
@@ -28,8 +28,8 @@ void DeshabilitarIntTemp()
 	//Para ello primero se deshabilitan todas las interrupciones
 	DisableInts();
 
-	//Escribir un 0 en el bit correspondiente al remporizador del REG_IE
-	IE = IE & ~(1 << 3);
+	//Escribir un 0 en los bits correspondientes a los temporizadores 1 y 2 del REG_IE
+	IE = IE & ~(3 << 3);
 
 	//Para acabar, se habilitan todas las interrupciones
 	EnableInts();
@@ -60,12 +60,11 @@ void prepararTemporizador(uint8 id, uint16 frecuencia)
 
 	if( latch < 0 ) {
 		// No se puede contar a la frecuencia indicada: no se activa el temporizador
-		DeshabilitarIntTemp();
 		TEMP_CONTROL(id) = 0;
 	} else {
 		// Establece los registros
 		TEMP_DATOS(id) = latch;
-		TEMP_CONTROL(id) = divisor | 1 << 6; // bits 0, 1 y 6 encendidos
+		TEMP_CONTROL(id) = divisor | 1 << 6; // bits 0 y 1 ajustados, bit 6 encendido
 	}
 }
 
