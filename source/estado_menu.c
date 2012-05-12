@@ -55,8 +55,8 @@ void MostrarMenu() {
 			oamClear(&oamMain,120,2);
 			oamClear(&oamMain,124,2);
 			// Cambio de estado: inicializa las variables y pasa al juego
-			ImprimirPuntuaciones();
 			InicializarVariablesJuego();
+			ImprimirPuntuaciones();
 			ESTADO = CUENTA_ATRAS;
 		} else if( DesplazamientoAnimacion_Menu == 80 && BotonPulsado_Menu == 2 ) {
 			// Fin del juego

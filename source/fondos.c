@@ -63,4 +63,7 @@ void cargarFondoPaleta(int fondo, const void * imagen, uint32 longitud_imagen, c
 void cargarFondoNegro(int fondo) {
 	dmaFillHalfWords(0x0101, bgGetGfxPtr(fondo), 65536);
 	dmaFillHalfWords(0x0000, BG_PALETTE, 512);
+	// Limpia los datos anteriores
+	bgSet(fondo, 0, 1 << 8, 1 << 8, 0, 0, 0, 0);
+	bgUpdate();
 }
