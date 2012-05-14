@@ -81,6 +81,7 @@ int main(void){
 		// Actualiza las pantallas
 		oamUpdate(&oamMain);
 		oamUpdate(&oamSub);
+		bgUpdate();
 	}
 
 	return 0;

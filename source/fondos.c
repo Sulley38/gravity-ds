@@ -47,7 +47,6 @@ void cargarFondoPaleta(int fondo, const void * imagen, uint32 longitud_imagen, c
 	dmaFillHalfWords(0x0000, bgGetGfxPtr(fondo), 65536 );
 	dmaFillHalfWords(0x0000, BG_PALETTE, 512 );
 	bgSet(fondo, 0, 1 << 8, 1 << 8, 0, 0, 0, 0);
-	bgUpdate();
 	// Copia los nuevos datos
 	dmaCopy(imagen, /* Variable generada automáticamente, contiene los datos de la imagen */
 	    	bgGetGfxPtr(fondo), /* Dirección del fondo 3 principal */
@@ -61,9 +60,9 @@ void cargarFondoPaleta(int fondo, const void * imagen, uint32 longitud_imagen, c
  * Carga una imagen completamente negra de tamaño 256x256 en el fondo indicado.
  */
 void cargarFondoNegro(int fondo) {
-	dmaFillHalfWords(0x0101, bgGetGfxPtr(fondo), 65536);
-	dmaFillHalfWords(0x0000, BG_PALETTE, 512);
 	// Limpia los datos anteriores
 	bgSet(fondo, 0, 1 << 8, 1 << 8, 0, 0, 0, 0);
-	bgUpdate();
+	// Copia los nuevos datos
+	dmaFillHalfWords(0x0101, bgGetGfxPtr(fondo), 65536);
+	dmaFillHalfWords(0x0000, BG_PALETTE, 512);
 }

@@ -115,7 +115,4 @@ void HacerCuentaAtras() {
 		}
 	}
 
-	// Actualiza los cambios de tamaño y posición de los fondos
-	bgUpdate();
-
 }

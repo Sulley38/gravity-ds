@@ -19,7 +19,7 @@
 uint8 oamIndex;
 static const uint8 Ancho[10] = {13,11,12,12,12,13,11,11,10,10};
 // Variables de puntuaciones
-int PuntuacionTotal;
+uint32 PuntuacionTotal;
 static uint32 Puntuaciones[10];
 // Variable de control del menú puntuacion
 uint8 BotonPulsado_Puntuacion;
