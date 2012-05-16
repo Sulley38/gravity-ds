@@ -15,7 +15,7 @@
 
 /* Variables de estado del personaje */
 uint16 DistanciaRecorrida;
-uint8 VelocidadHorizontal, VelocidadVertical;
+uint8 VelocidadHorizontal, VelocidadVertical, VelocidadRecuperacion;
 int16 PosicionPersonaje[3]; // [0] = X; [1] = Y; [2] = 0 hacia abajo, 1 hacia arriba
 
 /* Variables de estado de los bloques */
@@ -38,6 +38,7 @@ void InicializarVariablesJuego() {
 	DistanciaRecorrida = 0;
 	VelocidadHorizontal = 3;
 	VelocidadVertical = 3;
+	VelocidadRecuperacion = 1;
 	PosicionPersonaje[0] = 128;
 	PosicionPersonaje[1] = 104;
 	PosicionPersonaje[2] = 0;
@@ -103,9 +104,11 @@ void ActualizarPantalla() {
 			PosicionPersonaje[1] -= VelocidadVertical;
 	}
 
-	// Comprueba si hay choque con una plataforma
+	// Comprueba si hay choque con una plataforma, si no lo hay y está retrasado (como Intxi) recupera la posición
 	if( Colision() )
 		PosicionPersonaje[0] -= VelocidadHorizontal;
+	else if( PosicionPersonaje[0] < 128 )
+		PosicionPersonaje[0] += VelocidadRecuperacion;
 
 	// Actualiza el sprite del personaje para crear la animación
 	dibujar_personaje();
