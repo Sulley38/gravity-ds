@@ -6,7 +6,7 @@ estado_avanzar.h
 #define E_AVANZAR_H
 
 /* Número de bloques y monedas que hay en el nivel */
-#define CANTIDAD_BLOQUES 439
+#define CANTIDAD_BLOQUES 438
 
 /* Definiciones de tamaño de los sprites */
 #define ANCHURA_PERSONAJE 32
