@@ -1,43 +1,28 @@
 
 # Gravity DS #
-## Proyecto de Estructura de Computadores ##
+## Authors: Daniel Franco, Iván Matellanes and Asier Mujika ##
 
-### Autores: Daniel Franco, Iván Matellanes y Asier Mujika ###
+Project developed during the course 'Structure of computers', on April-May 2012.
 
-### Prerrequisitos a instalar ###
-+ EGit: http://download.eclipse.org/egit/updates
-+ devKitPro: http://sourceforge.net/projects/devkitpro/files/Automated%20Installer/devkitProUpdater-1.5.0.exe/download
+Homebrew Nintendo DS game. THe binary file can be found in /bin.
+It runs on NDS emulators like Desmume and no$gba, and also in the original console itself.
 
-### Configuración de EGit ###
-En Window > Preferences > Team > Git > Configuration > Pestaña "User settings", añadir estas 4 entradas:
+Dependencies: devkitARM, libnds, libfat-nds and default-arm7.
+Check [this link](http://devkitpro.org/wiki/Getting_Started/devkitARM) for more info.
 
-1. user.name --> Nombre Apellido
-2. user.email --> Tu e-mail
-3. github.user --> Nombre de cuenta GitHub.com
+License: GNU GPLv3
 
-Guardar los cambios clickando "Apply"
 
-### Configuración SSH ###
-**Esto sólo es necesario en caso de usar el protocolo SSH para los push/pull**  
-En Eclipse, ir a Window > Preferences > General > Network Connections > SSH2, pestaña "Key Management".  
-Pulsar en "Generate RSA Key" y poner una contraseña en Passphrase.  
-*Esta contraseña se te pedirá cada vez que quieras acceder al repositorio*  
-Guardar la clave en la carpeta por defecto clickando "Save Private Key".  
-Copiar la clave que aparece en la caja de texto, y pegarla en [tu cuenta](https://github.com/settings/ssh) pulsando "Add SSH Key".  
-*De esta forma, tu ordenador queda asociado con la cuenta de GitHub por SSH*  
+# Gravity DS #
+## Autores: Daniel Franco, Iván Matellanes y Asier Mujika ##
 
-### Configuración del proyecto ###
-Importar el proyecto a Eclipse desde Git (File > Import > Git > URI - Dirección en GitHub), lanzar el "New Project Wizard" y seleccionar Makefile con código existente en C.   
-En Project > Properties > Path and Symbols > Import Settings, seleccionar el archivo 'config.xml' y aceptar.  
-Botón derecho en la carpeta en el Project Explorer > Index > Rebuild.
+Proyecto desarrollado durante la asignatura 'Estructura de computadores', en Abril-Mayo 2012.
 
-### Trabajar con los repositorios ###
-Como ya sabréis, cada uno de nosotros accede a 2 repositorios: local (en nuestro ordenador, cada uno el suyo) y remoto (en GitHub, común para los tres).  
-Las acciones que vamos a usar son las siguientes:
+Videojuego homebrew para Nintendo DS. El archivo binario está en /bin.
+Se puede jugar en emuladores como Desmume o no$gba, o en la propia consola original.
 
-+ **Add to index**: Cuando queráis añadir un archivo nuevo al repositorio, lo primero es añadirlo al índice.
-+ **Commit**: Es guardar los cambios que has hecho en el repositorio local. Hay que escribir una descripción de lo que se ha hecho. No conviene hacerlo cada 5 minutos, sino cuando terminas de hacer algo.
-+ **Push**: Subir los cambios que has hecho al repositorio remoto, de modo que los demás podamos recibirlos. Hay que asegurarse de que tienes en el local la última versión del remoto, de lo contrario, dará `error: non fast forward` y primero habrá que hacer *pull*.
-+ **Pull**: Bajarse los últimos cambios que hayan hecho los demás en el repositorio remoto al local.
+Dependencias: devkitARM, libnds, libfat-nds y default-arm7.
+Para más información, visitar [este enlace](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Todas ellas se realizan desde Eclipse haciendo click con el botón derecho en la carpeta del Project Explorer > Team.  
+Licencia: GNU GPLv3
+
