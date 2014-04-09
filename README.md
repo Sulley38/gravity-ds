@@ -5,6 +5,8 @@
 Project developed during the course 'Structure of computers', on April-May 2012.
 
 Homebrew Nintendo DS game. The binary file can be found in /bin.
+[Video](http://www.youtube.com/watch?v=cagvJZKQ8U4) showing the gameplay.
+
 It runs on NDS emulators like DeSmuME and no$gba, and also in the original console itself.
 
 Dependencies: devkitARM, libnds, libfat-nds and default-arm7.
@@ -19,6 +21,8 @@ License: GNU GPLv3
 Proyecto desarrollado durante la asignatura 'Estructura de computadores', en Abril-Mayo 2012.
 
 Videojuego homebrew para Nintendo DS. El archivo binario está en /bin.
+[Vídeo](http://www.youtube.com/watch?v=cagvJZKQ8U4) en el que se muestra el juego.
+
 Se puede jugar en emuladores como DeSmuME o no$gba, o en la propia consola original.
 
 Dependencias: devkitARM, libnds, libfat-nds y default-arm7.
